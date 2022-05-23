@@ -1,0 +1,450 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2C0C81E0-3489-3C9D-9C64-8F076EE632AA}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>Chaos-Engine-2</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-ProgrammingBuild\Graphics-Programming\Chaos-Engine-2\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Chaos-Engine-2.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Chaos-Engine-2</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-ProgrammingBuild\Graphics-Programming\Chaos-Engine-2\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Chaos-Engine-2.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Chaos-Engine-2</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-ProgrammingBuild\Graphics-Programming\Chaos-Engine-2\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Chaos-Engine-2.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Chaos-Engine-2</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-ProgrammingBuild\Graphics-Programming\Chaos-Engine-2\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Chaos-Engine-2.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Chaos-Engine-2</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glad\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glfw\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\imgui\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glm;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\STBImage;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glad\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glfw\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\imgui\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glm;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\STBImage;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glad\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glfw\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\imgui\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glm;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\STBImage;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>Copying shaders</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-Programming/Chaos-Engine-2/shaders C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild/Graphics-Programming/Chaos-Engine-2/shaders
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>..\..\common\third-party\glad\Debug\glad.lib;..\..\common\third-party\glfw\src\Debug\glfw3.lib;..\..\common\third-party\imgui\Debug\imgui.lib;..\..\common\third-party\assimp\Debug\assimp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild/Graphics-Programming/Chaos-Engine-2/Debug/Chaos-Engine-2.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild/Graphics-Programming/Chaos-Engine-2/Debug/Chaos-Engine-2.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glad\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glfw\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\imgui\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glm;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\STBImage;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glad\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glfw\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\imgui\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glm;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\STBImage;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glad\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glfw\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\imgui\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glm;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\STBImage;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>Copying shaders</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-Programming/Chaos-Engine-2/shaders C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild/Graphics-Programming/Chaos-Engine-2/shaders
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>..\..\common\third-party\glad\Release\glad.lib;..\..\common\third-party\glfw\src\Release\glfw3.lib;..\..\common\third-party\imgui\Release\imgui.lib;..\..\common\third-party\assimp\Release\assimp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild/Graphics-Programming/Chaos-Engine-2/Release/Chaos-Engine-2.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild/Graphics-Programming/Chaos-Engine-2/Release/Chaos-Engine-2.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glad\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glfw\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\imgui\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glm;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\STBImage;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glad\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glfw\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\imgui\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glm;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\STBImage;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glad\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glfw\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\imgui\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glm;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\STBImage;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>Copying shaders</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-Programming/Chaos-Engine-2/shaders C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild/Graphics-Programming/Chaos-Engine-2/shaders
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>..\..\common\third-party\glad\MinSizeRel\glad.lib;..\..\common\third-party\glfw\src\MinSizeRel\glfw3.lib;..\..\common\third-party\imgui\MinSizeRel\imgui.lib;..\..\common\third-party\assimp\MinSizeRel\assimp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild/Graphics-Programming/Chaos-Engine-2/MinSizeRel/Chaos-Engine-2.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild/Graphics-Programming/Chaos-Engine-2/MinSizeRel/Chaos-Engine-2.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glad\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glfw\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\imgui\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glm;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\STBImage;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glad\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glfw\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\imgui\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glm;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\STBImage;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glad\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glfw\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\imgui\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\glm;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\STBImage;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp\include;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\common\third-party\assimp;C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>Copying shaders</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-Programming/Chaos-Engine-2/shaders C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild/Graphics-Programming/Chaos-Engine-2/shaders
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>..\..\common\third-party\glad\RelWithDebInfo\glad.lib;..\..\common\third-party\glfw\src\RelWithDebInfo\glfw3.lib;..\..\common\third-party\imgui\RelWithDebInfo\imgui.lib;..\..\common\third-party\assimp\RelWithDebInfo\assimp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild/Graphics-Programming/Chaos-Engine-2/RelWithDebInfo/Chaos-Engine-2.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild/Graphics-Programming/Chaos-Engine-2/RelWithDebInfo/Chaos-Engine-2.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-Programming/Chaos-Engine-2/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/1-Projects/1-WIP/1-Important/graphics-programming-2022 -BC:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild --check-stamp-file C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild/Graphics-Programming/Chaos-Engine-2/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-ProgrammingBuild\Graphics-Programming\Chaos-Engine-2\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-Programming/Chaos-Engine-2/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/1-Projects/1-WIP/1-Important/graphics-programming-2022 -BC:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild --check-stamp-file C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild/Graphics-Programming/Chaos-Engine-2/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-ProgrammingBuild\Graphics-Programming\Chaos-Engine-2\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-Programming/Chaos-Engine-2/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/1-Projects/1-WIP/1-Important/graphics-programming-2022 -BC:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild --check-stamp-file C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild/Graphics-Programming/Chaos-Engine-2/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-ProgrammingBuild\Graphics-Programming\Chaos-Engine-2\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-Programming/Chaos-Engine-2/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/1-Projects/1-WIP/1-Important/graphics-programming-2022 -BC:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild --check-stamp-file C:/1-Projects/1-WIP/1-Important/graphics-programming-2022/Graphics-ProgrammingBuild/Graphics-Programming/Chaos-Engine-2/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-ProgrammingBuild\Graphics-Programming\Chaos-Engine-2\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="EditorLayer.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Primitive.cpp" />
+    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="Window.cpp" />
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\camera.h" />
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\main.cpp" />
+    <ClInclude Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\mesh.h" />
+    <ClInclude Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\model.h" />
+    <ClInclude Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\objloader.h" />
+    <ClInclude Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\shader.h" />
+    <ClInclude Include="Debug.h" />
+    <ClInclude Include="EditorLayer.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="Primitive.h" />
+    <ClInclude Include="Transform.h" />
+    <ClInclude Include="UI.h" />
+    <ClInclude Include="Window.h" />
+    <None Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\shaders\bloom.frag">
+    </None>
+    <None Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\shaders\blur.frag">
+    </None>
+    <None Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\shaders\celshading.frag">
+    </None>
+    <None Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\shaders\compose.frag">
+    </None>
+    <None Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\shaders\copy.frag">
+    </None>
+    <None Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\shaders\deferred_shading.frag">
+    </None>
+    <None Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\shaders\deferred_shading.vert">
+    </None>
+    <None Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\shaders\fullscreen.vert">
+    </None>
+    <None Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\shaders\lighting.frag">
+    </None>
+    <None Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\shaders\lighting.vert">
+    </None>
+    <None Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\shaders\outline.frag">
+    </None>
+    <None Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\shaders\shadowmap.frag">
+    </None>
+    <None Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\shaders\shadowmap.vert">
+    </None>
+    <None Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\shaders\skybox.frag">
+    </None>
+    <None Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-Programming\Chaos-Engine-2\shaders\skybox.vert">
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-ProgrammingBuild\ZERO_CHECK.vcxproj">
+      <Project>{A87E1511-7B55-31E4-A36A-6A1149AE8EF1}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-ProgrammingBuild\common\third-party\assimp\assimp.vcxproj">
+      <Project>{EE92F4E2-811B-32E1-A7CC-5FBEB42CA43D}</Project>
+      <Name>assimp</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-ProgrammingBuild\common\third-party\glad\glad.vcxproj">
+      <Project>{1C6038B6-0845-3DB7-AB2D-3359B49E0EB5}</Project>
+      <Name>glad</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-ProgrammingBuild\common\third-party\glfw\src\glfw.vcxproj">
+      <Project>{1B2A6A65-AC5D-34D4-9AD5-AA6C5F5F59FE}</Project>
+      <Name>glfw</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\1-Projects\1-WIP\1-Important\graphics-programming-2022\Graphics-ProgrammingBuild\common\third-party\imgui\imgui.vcxproj">
+      <Project>{76D0FC71-8E83-30F1-8D74-F9454BB9B916}</Project>
+      <Name>imgui</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
