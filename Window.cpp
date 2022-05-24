@@ -93,7 +93,7 @@ void Window::initialize()
 	glfwSetCursorPosCallback(window, callbacks::cursor_input_callback);
 	glfwSetKeyCallback(window, callbacks::key_input_callback);
 	glfwSetScrollCallback(window, callbacks::scroll_callback);
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
@@ -166,6 +166,11 @@ float Window::getLastX()
 float Window::getLastY()
 {
 	return lastY;
+}
+
+GLFWwindow* Window::getWindow()
+{
+	return window;
 }
 
 void Window::setLastX(float x)

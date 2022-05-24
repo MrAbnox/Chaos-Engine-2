@@ -39,6 +39,8 @@ public:
 	float getLastX();
 	float getLastY();
 
+	GLFWwindow* getWindow();
+
 	//TODO:: Pass as Reference
 	void setLastX(float x);
 	void setLastY(float y);

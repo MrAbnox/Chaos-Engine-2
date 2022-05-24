@@ -20,7 +20,7 @@ void Application::run()
 	EditorLayer::instance()->initialize();
 	UI::instance()->initialize();
 
-	while (isRunning)
+	while (isRunning && !glfwWindowShouldClose(Window::instance()->getWindow()))
 	{
 		Window::instance()->clear();
 
