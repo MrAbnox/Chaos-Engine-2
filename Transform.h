@@ -1,8 +1,10 @@
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
-#include "GameObject.h"
 
-class Transform
+#include "GameObject.h"
+#include "Component.h"
+
+class Transform : Component
 {
 public:
 

@@ -2,6 +2,8 @@
 #define GAMEOBJECT_H
 
 #include <string>
+#include <vector>
+#include <memory>
 #include "Transform.h"
 
 class GameObject
@@ -31,6 +33,8 @@ private:
 
 	std::string name;
 	bool isEnabled;
+
+	std::vector<std::shared_ptr<Component>> components;
 
 };
 
