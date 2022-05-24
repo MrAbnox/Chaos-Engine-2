@@ -15,7 +15,6 @@ private:
 public:
 
 	static Input* instance();
-	void cursor_input_callback(GLFWwindow* window, double posX, double posY)
 };
 
 #endif

@@ -24,8 +24,8 @@ void Application::run()
 	{
 		Window::instance()->clear();
 
-		EditorLayer::instance()->run();
-		UI::instance()->run();
+		//EditorLayer::instance()->run();
+		//UI::instance()->run();
 
 		Window::instance()->swapBuffers();
 	}
