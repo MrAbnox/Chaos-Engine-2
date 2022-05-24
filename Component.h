@@ -14,6 +14,11 @@ public:
 	void setGameObject(GameObject* gameObject);
 
 	virtual void update(float deltaTime);
+
+protected:
+	GameObject* gameObject;
+
+	friend class GameObject;
 };
 
 #endif

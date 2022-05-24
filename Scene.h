@@ -19,7 +19,7 @@ public:
 public:
 
 	void saveScene(); //TODO:: Save prefabs and information in the scene
-	void loadPrefabs();
+	void loadScene();
 
 	void createEmpty();
 	void createPrimitive(Primitive& primitive);
