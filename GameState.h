@@ -1,10 +1,7 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
-enum Primitive
-{
-	CUBE, QUAD
-};
+
 
 class GameState
 {
@@ -15,22 +12,14 @@ public:
 
 public:
 
-	void start();
+	void loadScene();
 	void update();
 	void render();
 
-public:
-
-	void createEmpty();
-	void createPrimitive(Primitive& primitive);
-	void duplicateObject();
-	void deleteObject(); //TODO::Add reference
-
 private:
 
-	void loadPrefabs();
-
-	bool isRunning;
+	bool isRunning; //TODO:: Delete this variable either here or gamestate
+	bool isDirty;
 };
 
 #endif

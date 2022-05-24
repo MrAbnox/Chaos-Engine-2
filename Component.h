@@ -14,8 +14,6 @@ public:
 	void setGameObject(GameObject* gameObject);
 
 	virtual void update(float deltaTime);
-
-
 };
 
 #endif
