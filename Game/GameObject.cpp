@@ -15,3 +15,15 @@ GameObject::~GameObject()
 	//delete(transform);
 	//transform = nullptr;
 }
+
+void GameObject::create()
+{
+}
+
+void GameObject::update()
+{
+}
+
+void GameObject::render()
+{
+}

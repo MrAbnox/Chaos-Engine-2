@@ -2,7 +2,7 @@
 #include "Window.h"
 #include "EditorLayer.h"
 #include "UI.h"
-#include "Game/GameState.h"
+#include "Renderer.h"
 
 Application* Application::instance()
 {
@@ -20,7 +20,7 @@ void Application::run()
 	Window::instance()->initialize();
 	EditorLayer::instance()->initialize();
 	UI::instance()->initialize();
-	GameState::instance()->initialize();
+	Renderer::instance()->initialize();
 
 	while (isRunning && !glfwWindowShouldClose(Window::instance()->getWindow()))
 	{
@@ -28,7 +28,7 @@ void Application::run()
 
 		EditorLayer::instance()->run();
 		UI::instance()->run();
-		GameState::instance()->run();
+		Renderer::instance()->run();
 
 		Window::instance()->swapBuffers();
 	}

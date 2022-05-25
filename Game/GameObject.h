@@ -13,9 +13,9 @@ public:
 	~GameObject();
 
 public:
-	void create();
+	void initialize();
 	void update();
-	void draw();
+	void render();
 
 public:
 
