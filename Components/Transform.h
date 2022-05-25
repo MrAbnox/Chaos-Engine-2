@@ -3,6 +3,7 @@
 
 #include "GameObject.h"
 #include "Component.h"
+#include <glm/matrix.hpp>
 
 class Transform : Component
 {
@@ -39,6 +40,9 @@ private:
 private:
 
 	bool isDirty;
+
+	glm::vec3 up;
+	glm::vec3 forward;
 
 };
 

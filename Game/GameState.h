@@ -5,16 +5,27 @@
 
 class GameState
 {
-public:
+private:
 	//TODO: Load file or create a new one
 	GameState();
-	~GameState();
+	GameState(const GameState&);
+	GameState& operator = (GameState&);
 
 public:
 
-	void loadScene();
+	static GameState* instance();
+	
+	void initialize();
+	void run();
+	
+private:
+	
 	void update();
 	void render();
+	
+public:
+	
+	void loadScene();
 
 private:
 

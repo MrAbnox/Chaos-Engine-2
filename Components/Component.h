@@ -13,7 +13,8 @@ public:
 	GameObject* getGameObject();
 	void setGameObject(GameObject* gameObject);
 
-	virtual void update(float deltaTime);
+	virtual void update();
+	virtual void fixedUpdate(float deltaTime);
 
 protected:
 	GameObject* gameObject;

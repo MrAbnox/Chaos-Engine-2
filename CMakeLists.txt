@@ -44,6 +44,16 @@ file(GLOB UTILITY_HEADERS
 file(GLOB UTILITY_SOURCE
     "Utility/*.cpp"
 )
+
+file(GLOB EDITOR_HEADERS
+    "Editor/*.hpp"
+    "Editor/*.h"
+)
+
+file(GLOB EDITOR_SOURCE
+    "Editor/*.cpp"
+)
+
 file(GLOB target_src "*.h" "*.cpp") # look for source files
 file(GLOB target_shaders "shaders/*.vert" "shaders/*.frag") # look for shaders
 add_executable(${subdir} 
@@ -51,7 +61,9 @@ ${GAME_HEADERS} ${GAME_SOURCE}
 ${APPLICATION_HEADERS} ${APPLICATION_SOURCE} 
 ${MISC_HEADERS} ${MISC_SOURCE} 
 ${RAPID_JSON} 
-${UTILITY_HEADERS} ${UTILITY_SOURCE} 
+${COMPONENTS_HEADERS} ${COMPONENTS_SOURCE}
+${UTILITY_HEADERS} ${UTILITY_SOURCE}
+${EDITOR_HEADERS} ${EDITOR_SOURCE}
 ${target_src}
 ${target_shaders}
 
@@ -88,6 +100,8 @@ source_group("Header Files\\Utility" FILES ${UTILITY_HEADERS})
 source_group("Source Files\\Utility" FILES ${UTILITY_SOURCE})
 source_group("Header Files\\Misc" FILES ${MISC_HEADERS})
 source_group("Source Files\\Misc" FILES ${MISC_SOURCE})
+source_group("Header Files\\Editor" FILES ${EDITOR_HEADERS})
+source_group("Source Files\\Editor" FILES ${EDITOR_SOURCE})
 source_group("Header Files\\rapidjson" FILES ${RAPID_JSON})
 
 
