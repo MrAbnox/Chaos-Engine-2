@@ -8,8 +8,14 @@ Renderer* Renderer::instance()
 
 void Renderer::initialize()
 {
-	//TODO: Maybe load all scenes into memory
+	//Load all shaders
 	
+	//Load all Materials into memory
+
+	//TODO: Maybe load all scenes into memory
+
+	//TODO: Remove this, it's temporary
+	currentScene = new Scene();	
 }
 
 void Renderer::run()
@@ -20,24 +26,15 @@ void Renderer::run()
 
 void Renderer::update()
 {
-	for (size_t i = 0; i < currentScene->getSceneObjects().size(); i++)
-	{
-		if (currentScene->getSceneObjects()[i].get()->getIsEnabled())
-		{
-			currentScene->getSceneObjects()[i].get()->update();
-		}
-	}
+	if(!isLoadingScene)
+		currentScene->update();
+	
 }
 
 void Renderer::render()
 {
-	for (size_t i = 0; i < currentScene->getSceneObjects().size(); i++)
-	{
-		if (currentScene->getSceneObjects()[i].get()->getIsEnabled())
-		{
-			currentScene->getSceneObjects()[i].get()->draw();
-		}
-	}	
+	if(!isLoadingScene)
+		currentScene->render();
 }
 
 void Renderer::loadScene()

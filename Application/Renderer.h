@@ -8,7 +8,7 @@ class Renderer
 {
 private:
 	//TODO: Load file or create a new one
-	Renderer();
+	Renderer() {};
 	Renderer(const Renderer&);
 	Renderer& operator = (Renderer&);
 
@@ -30,12 +30,13 @@ public:
 
 private:
 
-	bool isRunning; //TODO:: Delete this variable either here or gamestate
+	bool isRunning = true; //TODO:: Delete this variable either here or scene
 	bool isDirty;
+	bool isLoadingScene = false;
 
 	std::map<std::string, Scene> scenes;
 
 	Scene* currentScene;
 };
-
 #endif
+
