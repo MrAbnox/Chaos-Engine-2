@@ -5,6 +5,6 @@ class Material
 {
 public:
 	Material();
-	~Material();
+	~Material() {};
 };
 #endif

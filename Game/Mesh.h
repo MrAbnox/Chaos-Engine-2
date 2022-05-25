@@ -1,11 +1,36 @@
 #ifndef MESH_H
 #define MESH_H
 
+#include <glm/matrix.hpp>
+#include <vector>
+#include "Material.h"
+
+struct Vertex 
+{
+    glm::vec3 position;
+    glm::vec3 normal;
+    glm::vec2 texCoords;
+    glm::vec3 tangent;
+    glm::vec3 bitangent;
+};
+
 class Mesh
 {
 public:
-	Mesh();
+	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material mat);
 	~Mesh();
+
+public:
+    void draw(); //TODO: Maybe pass shader in here?
+    void setupMesh();
+	
+private:
+
+    std::vector<Vertex> vertices;
+    std::vector<unsigned int> indices;
+    Material mat; //TODO: Maybe make this a pointer?
+    unsigned int VAO, VBO, EBO;
+	
 };
 
 #endif
