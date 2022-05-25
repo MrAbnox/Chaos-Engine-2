@@ -1,16 +1,19 @@
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
 
-#include "GameObject.h"
+#include "../Game/GameObject.h"
 #include "Component.h"
 #include <glm/matrix.hpp>
 
-class Transform : Component
+class Transform : public Component
 {
 public:
 
-	Transform(GameObject* object);
-	~Transform();
+	explicit Transform(GameObject* object);
+	virtual ~Transform() = default;
+
+	void update() override {};
+	void fixedUpdate(float deltaTime) override {};
 
 public:
 

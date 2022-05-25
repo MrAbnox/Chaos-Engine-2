@@ -6,6 +6,8 @@
 #include <memory>
 #include "../Components/Transform.h"
 
+class Component;
+
 class GameObject
 {
 public:
@@ -30,33 +32,48 @@ public:
 public:
 
 	void setIsEnabled(const bool& value);
+	void setShouldDestroy(bool& destroy);
+	
 	bool getIsEnabled() const;
+	bool getShouldDestroy() const;
+	//Transform getTransform();
 
-	Transform getTransform() const;
 
 private:
 
 	std::string name;
 	bool isEnabled;
 	bool shouldDestroy;
+	bool isStatic;
+	bool hastransform = false;
+	//std::shared_ptr<Transform> transform;
 
 	std::vector<std::shared_ptr<Component>> components;
-
+	
 };
 
 template <class T>
 inline std::shared_ptr<T> GameObject::addComponent()
 {
 	auto obj = std::shared_ptr<T>(new T(this));
-	components.push_back(obj);
 
+	auto temp = std::dynamic_pointer_cast<Transform>(obj);
+
+	//TODO: Make sure this works
+	if (temp)
+	{
+		//TRANSFORM FOUND
+		if (!hastransform)
+			hastransform = true;
+		else
+			return nullptr;
+	}
+
+	components.push_back(obj);
 	return obj;
 }
 
 // definition of the template member function addComponent
-// Usage:
-// GameObject* go = something;
-// shared_ptr<SpriteComponent> sc = go->addComponent<SpriteComponent>();
 template <class T>
 inline std::shared_ptr<T> GameObject::getComponent()
 {

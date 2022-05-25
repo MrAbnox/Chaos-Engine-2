@@ -14,6 +14,7 @@ public:
 	Scene();
 
 public:
+	void load();
 	void start();
 	void update();
 	void render();
@@ -25,7 +26,7 @@ public:
 
 
 	void createEmpty(); //Create Empty Object
-	void createPrimitive(Primitive& primitive); //Create Primitive Object
+	void createPrimitive(Primitive primitive, glm::vec3& pos = glm::vec3(0.0f)); //Create Primitive Object
 	void duplicateObject(); //Duplicate Object in the same position
 	void deleteObject(); //TODO::Add reference
 
@@ -35,7 +36,7 @@ public:
 
 private:
 
-	bool isRunning; //TODO:: Delete this variable either here or gamestate
+	bool isRunning; //TODO:: Delete this variable either here or renderer
 
 	std::vector<std::shared_ptr<GameObject>> sceneObjects;
 };

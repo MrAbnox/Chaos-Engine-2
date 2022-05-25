@@ -7,20 +7,24 @@
 
 class MeshRenderer : public Component
 {
-
 public:
 	
-	MeshRenderer();
+	explicit MeshRenderer(GameObject* gameObject);
 	~MeshRenderer();
 
 public:
 
 	void update() override;
+	void render();
 	void fixedUpdate(float deltaTime) override;
+
+	void setMesh(Mesh& mesh);
+	void setMaterial(Material& mat);
+	void setCastShadows(bool castShadows);
 
 private:
 	
-	Mesh mesh;
+	Mesh* mesh;
 	Material mat;
 private:
 	
