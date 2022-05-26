@@ -5,14 +5,14 @@ Primitive::Primitive()
 	buffer = new Buffer();
 }
 
-Primitive::~Primitive()
+Primitive::Primitive(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material mat)
 {
 }
+
 
 void Primitive::setup()
 {
 	mat = new Material();
-	mat->loadShader("default"); //TODO: Make this work
 	//Setup indices
 	indices = { 
 		0,1,
@@ -182,11 +182,11 @@ void Primitive::setup()
 
 void Primitive::draw()
 {
-	mat->getShader().Use();
+	mat->getShader();
 
-	mat->getShader().setUniform("ambient", mat->getAmbient());
+	/*mat->getShader().setUniform("ambient", mat->getAmbient());
 	mat->getShader().setUniform("specular", mat->getSpecular());
-	mat->getShader().setUniform("diffuse", mat->getDiffuse());
+	mat->getShader().setUniform("diffuse", mat->getDiffuse());*/
 
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);

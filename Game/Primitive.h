@@ -3,11 +3,11 @@
 
 #include "Mesh.h"
 
-class Primitive : Mesh
+class Primitive : public Mesh
 {
 public: 
 	Primitive();
-	~Primitive();
+	Primitive(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material mat);
 
 	void setup();
 	void draw();

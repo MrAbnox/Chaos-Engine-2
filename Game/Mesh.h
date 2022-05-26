@@ -20,7 +20,6 @@ class Mesh
 public:
     Mesh() {};
 	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material mat);
-	~Mesh();
 
     void setupVertices(std::vector<Vertex> vertices);
     void setupIndices(std::vector<unsigned int> indices);

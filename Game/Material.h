@@ -8,15 +8,13 @@ class Material
 {
 public:
 	Material();
-	~Material() {};
 
 	void setShader(Shader* shader);
-	void loadShader(std::string shaderID);
 	void loadMaterialFile(std::string name);
 	void sendData();
 	void reset(); //Resets to default
 
-	Shader getShader();
+	Shader* getShader();
 	glm::vec3 getAmbient();
 	glm::vec3 getDiffuse();
 	glm::vec3 getSpecular();
@@ -41,8 +39,5 @@ private:
 	float reflectivity;
 	float transparency;
 	//float refractionIndex;
-
-	static std::map<std::string, Material>* s_materialMap;
-	static std::map<std::string, Shader>* s_shaderMap;
 };
 #endif
