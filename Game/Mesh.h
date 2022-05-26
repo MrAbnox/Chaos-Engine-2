@@ -29,12 +29,13 @@ public:
     void draw(); //TODO: Maybe pass shader in here?
     void setupMesh();
 	
+protected:
+    Material* mat; //TODO: Maybe make this a pointer?
+    unsigned int VAO, VBO, EBO;
 private:
 
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
-    Material mat; //TODO: Maybe make this a pointer?
-    unsigned int VAO, VBO, EBO;
 	
 };
 

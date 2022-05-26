@@ -4,7 +4,7 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Mate
 {
 	this->vertices = vertices;
 	this->indices = indices;
-	this->mat = mat;
+	this->mat = &mat;
 }
 
 void Mesh::draw()
@@ -27,5 +27,5 @@ void Mesh::setupIndices(std::vector<unsigned int> indices)
 }
 void Mesh::setupMaterial(Material mat)
 {
-	this->mat = mat;
+	this->mat = &mat;
 }

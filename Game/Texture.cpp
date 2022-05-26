@@ -1,6 +1,9 @@
 #include "Texture.h"
 #include <string>
 
+//initialize texture map at the very start of the app
+std::map<std::string, Texture>* Texture::s_textureMap = new std::map<std::string, Texture>;
+
 Texture::Texture()
 {
 	
@@ -19,8 +22,9 @@ void Texture::init(int width, int height, unsigned char** data, GLenum textureTa
 
 	if (clam)
 	{
-		glTexParameterf(textureTarget, GL_TEXTURE_WRAP_S, GL_CLAMP);
-		glTexParameterf(textureTarget, GL_TEXTURE_WRAP_T, GL_CLAMP);
+		//TODO:Do something about this?
+		//glTexParameterf(textureTarget, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		//glTexParameterf(textureTarget, GL_TEXTURE_WRAP_T, GL_CLAMP);
 	}
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0);
@@ -67,7 +71,7 @@ void Texture::init(int width, int height, unsigned char** data, GLenum textureTa
 
 			if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 			{
-				std::cerr << "Framebuffer creation failed!" << std::endl;
+				//std::cerr << "Framebuffer creation failed!" << std::endl;
 			}
 
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);

@@ -10,6 +10,11 @@ public:
 	~Primitive();
 
 	void setup();
+
+private:
+	std::vector<GLint> indices;
+	std::vector<GLfloat> vertices;
+	std::vector<GLfloat> normals;
 };
 
 #endif;
