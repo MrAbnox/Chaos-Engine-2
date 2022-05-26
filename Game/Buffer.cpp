@@ -1,6 +1,6 @@
 #include "Buffer.h"
 
-td::map<std::string, Buffer>* Buffer::s_bufferMap = new std::map<std::string, Buffer>;
+std::map<std::string, Buffer>* Buffer::s_bufferMap = new std::map<std::string, Buffer>;
 
 //-------------------------------------------------------------------------------
 //Constructor

@@ -16,6 +16,14 @@ public:
 	void sendData();
 	void reset(); //Resets to default
 
+	Shader getShader();
+	glm::vec3 getAmbient();
+	glm::vec3 getDiffuse();
+	glm::vec3 getSpecular();
+	float getShininess();
+	float getReflectivity();
+	float getTransparency();
+
 private:
 
 	Shader* shader;
@@ -32,7 +40,7 @@ private:
 	float shininess;
 	float reflectivity;
 	float transparency;
-	float refractionIndex;
+	//float refractionIndex;
 
 	static std::map<std::string, Material>* s_materialMap;
 	static std::map<std::string, Shader>* s_shaderMap;

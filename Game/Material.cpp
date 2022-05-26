@@ -51,3 +51,38 @@ void Material::sendData()
 		shader->SetUniform("specular", specular);
 
 }
+
+Shader Material::getShader()
+{
+	return *shader;
+}
+
+glm::vec3 Material::getAmbient()
+{
+	return ambient;
+}
+
+glm::vec3 Material::getDiffuse()
+{
+	return diffuse;
+}
+
+glm::vec3 Material::getSpecular()
+{
+	return specular;
+}
+
+float Material::getShininess()
+{
+	return shininess;
+}
+
+float Material::getReflectivity()
+{
+	return reflectivity;
+}
+
+float Material::getTransparency()
+{
+	return transparency;
+}
