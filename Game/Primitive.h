@@ -1,10 +1,15 @@
 #ifndef PRIMITIVE_H
 #define PRIMITIVE_H
-class Primitive
+
+#include "Mesh.h"
+
+class Primitive : Mesh
 {
 public: 
 	Primitive();
 	~Primitive();
+
+	void setup();
 };
 
 #endif;

@@ -16,3 +16,16 @@ void Mesh::setupMesh()
 {
 
 }
+
+void Mesh::setupVertices(std::vector<Vertex> vertices)
+{
+	this->vertices = vertices;
+}
+void Mesh::setupIndices(std::vector<unsigned int> indices)
+{
+	this->indices = indices;
+}
+void Mesh::setupMaterial(Material mat)
+{
+	this->mat = mat;
+}
