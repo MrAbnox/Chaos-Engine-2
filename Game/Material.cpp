@@ -41,14 +41,14 @@ void Material::loadMaterialFile(std::string name)
 void Material::sendData()
 {
 	if (t_ambient == nullptr)
-		shader->SetUniform("ambient", ambient);
+		shader->setUniform("ambient", ambient);
 	//TODO: Add else
 
 	if (t_diffuse == nullptr)
-		shader->SetUniform("diffuse", diffuse);
+		shader->setUniform("diffuse", diffuse);
 
 	if(t_specular)
-		shader->SetUniform("specular", specular);
+		shader->setUniform("specular", specular);
 
 }
 

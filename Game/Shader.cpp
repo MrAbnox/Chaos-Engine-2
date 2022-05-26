@@ -1,5 +1,5 @@
 #include "Shader.h"
-#include <glad/glad.h>
+
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -85,50 +85,67 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geo
         glDeleteShader(geometry);
 }
 
-void Shader::CreateShader(const char* vertexShader, const char* fragmentShader)
-{
-	
-}
-
 void Shader::Use()
 {
+    glUseProgram(ID);
 }
 
-void Shader::SetUniform(const std::string& name, int value)
+void Shader::setUniform(const std::string& name, bool value) const
+{
+	glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value);
+}
+
+void Shader::setUniform(const std::string& name, int value) const
 {
 	glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
 }
 
-void Shader::SetUniform(const std::string& name, float value)
+void Shader::setUniform(const std::string& name, float value) const
+{
+	glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
+}
+
+void Shader::setUniform(const std::string& name, float x, float y) const
+{
+	glUniform2f(glGetUniformLocation(ID, name.c_str()), x, y);
+}
+
+void Shader::setUniform(const std::string& name, float x, float y, float z) const
+{
+	glUniform3f(glGetUniformLocation(ID, name.c_str()), x, y, z);
+}
+
+void Shader::setUniform(const std::string& name, float x, float y, float z, float w) const
+{
+	glUniform4f(glGetUniformLocation(ID, name.c_str()), x, y, z, w);
+}
+
+void Shader::setUniform(const std::string& name, const glm::vec2& vector) const
+{
+	glUniform2f(glGetUniformLocation(ID, name.c_str()), vector.x, vector.y);
+}
+
+void Shader::setUniform(const std::string& name, const glm::vec3& vector) const
+{
+	glUniform3f(glGetUniformLocation(ID, name.c_str()), vector.x, vector.y, vector.z);
+}
+
+void Shader::setUniform(const std::string& name, const glm::vec4& vector) const
+{
+	glUniform4f(glGetUniformLocation(ID, name.c_str()), vector.x, vector.y, vector.z, vector.w);
+}
+
+void Shader::setUniform(const std::string& name, const glm::mat2& matrix) const
 {
 }
 
-void Shader::SetUniform(const std::string& name, float x, float y)
+void Shader::setUniform(const std::string& name, const glm::mat3& matrix) const
 {
 }
 
-void Shader::SetUniform(const std::string& name, float x, float y, float z)
+void Shader::setUniform(const std::string& name, const glm::mat4& matrix) const
 {
-}
-
-void Shader::SetUniform(const std::string& name, float x, float y, float z, float w)
-{
-}
-
-void Shader::SetUniform(const std::string& name, const glm::vec2& vector)
-{
-}
-
-void Shader::SetUniform(const std::string& name, const glm::vec3& vector)
-{
-}
-
-void Shader::SetUniform(const std::string& name, const glm::vec4& vector)
-{
-}
-
-void Shader::SetUniform(const std::string& name, const glm::mat4& matrix)
-{
+    glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &matrix[0][0]);
 }
 
 // utility function for checking shader compilation/linking errors.

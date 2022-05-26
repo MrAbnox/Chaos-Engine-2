@@ -13,6 +13,7 @@ public:
 	void draw();
 	
 private:
+	
 	std::vector<GLint> indices;
 	std::vector<GLfloat> vertices;
 	std::vector<GLfloat> normals;
