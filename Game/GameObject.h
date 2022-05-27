@@ -62,10 +62,8 @@ inline std::shared_ptr<T> GameObject::addComponent()
 	if (temp)
 	{
 		//TRANSFORM FOUND
-		/*if (transform == nullptr)
-			transform = obj;
-		else
-			return nullptr;*/
+		if (transform != nullptr)
+			return nullptr;
 	}
 
 	components.push_back(obj);

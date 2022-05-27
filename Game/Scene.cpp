@@ -9,6 +9,8 @@ Scene::Scene()
 void Scene::load()
 {
 	//TODO: Read from file and pass string
+	GameObject obj = Renderer::instance()->getObject("Camera");
+	addObjectToScene(obj);
 
 	//TEMP
 	createPrimitive(CUBE);

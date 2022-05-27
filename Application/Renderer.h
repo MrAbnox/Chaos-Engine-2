@@ -30,6 +30,7 @@ private:
 
 public:
 	GameObject getObject(std::string name);
+	Shader getShader(std::string name);
 	
 private:
 
@@ -38,11 +39,11 @@ private:
 	bool isLoadingScene = false;
 
 	Scene* currentScene;
-	Shader* default_Shader;
 	
 	std::map<std::string, Scene> scenes;
 	std::map<std::string, GameObject*> loadedGameObjects;
 	std::map<std::string, Material*> loadedMaterials;
+	std::map<std::string, Shader*> loadedShaders;
 
 };
 #endif

@@ -37,7 +37,6 @@ public:
 	void setDirty(bool& value);
 	void setParent(Transform& parent);
 
-
 private:
 
 	Transform* parent;

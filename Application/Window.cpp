@@ -173,6 +173,11 @@ GLFWwindow* Window::getWindow()
 	return window;
 }
 
+glm::vec2 Window::getScreenSize()
+{
+	return  glm::vec2(screenWidth, screenHeight);
+}
+
 void Window::setLastX(float x)
 {
 	lastX = x;

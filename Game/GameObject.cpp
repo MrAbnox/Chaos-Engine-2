@@ -1,9 +1,11 @@
 #include "GameObject.h"
 #include "../Components/MeshRenderer.h"
+#include "../Editor/Camera.h"
+#include "../Application/Renderer.h"
 
 GameObject::GameObject()
 {
-	addComponent<Transform>();
+	transform = addComponent<Transform>().get();
 }
 
 GameObject::~GameObject()
@@ -43,7 +45,19 @@ void GameObject::render()
 
 			//TODO: Make sure this works
 			if (mr != nullptr)
+			{
 				mr.get()->render();
+				continue;
+			}
+
+			auto cam = std::dynamic_pointer_cast<Camera>(c);
+
+			//TODO: Make sure this works
+			if (cam != nullptr)
+			{
+				/*auto temp = getComponent<MeshRenderer>()->getMaterial().getShader();*/
+				cam.get()->sendData(Renderer::instance()->getShader("default"));
+			}
 		}
 	}
 }

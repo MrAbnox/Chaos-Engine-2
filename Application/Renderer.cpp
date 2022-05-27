@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include "../Components/MeshRenderer.h"
+#include "../Editor/Camera.h"
 
 Renderer* Renderer::instance()
 {
@@ -46,7 +47,8 @@ void Renderer::loadScene()
 
 void Renderer::loadShaders()
 {
-	default_Shader = new Shader("shaders/default.vert", "shaders/default.frag");
+	Shader* temp = new Shader("shaders/default.vert", "shaders/default.frag");
+	loadedShaders["Default"] = temp;
 }
 
 void Renderer::loadMaterials()
@@ -67,10 +69,18 @@ void Renderer::loadGameObjects()
 	temp->setMaterial(*loadedMaterials["Default"]);
 	temp->setMesh(*mesh);
 	loadedGameObjects["Cube"] = prim1;
-}
 
+	GameObject* cam = new GameObject();
+	cam->addComponent<Camera>();
+	loadedGameObjects["Camera"] = cam;
+}
 
 GameObject Renderer::getObject(std::string name)
 {
 	return *loadedGameObjects[name];
+}
+
+Shader Renderer::getShader(std::string name)
+{
+	return *loadedShaders[name];
 }

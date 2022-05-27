@@ -3,6 +3,7 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
 
 class Window
@@ -40,6 +41,7 @@ public:
 	float getLastY();
 
 	GLFWwindow* getWindow();
+	glm::vec2 getScreenSize();
 
 	//TODO:: Pass as Reference
 	void setLastX(float x);
