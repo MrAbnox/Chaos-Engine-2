@@ -10,14 +10,17 @@ MeshRenderer::~MeshRenderer()
 {
 }
 
+//Maybe remove this function
 void MeshRenderer::update()
 {
 }
 
 void MeshRenderer::render()
 {
+	mesh->draw();
 }
 
+//Maybe remove this function
 void MeshRenderer::fixedUpdate(float deltaTime)
 {
 }
@@ -29,10 +32,15 @@ void MeshRenderer::setMesh(Mesh& mesh)
 
 void MeshRenderer::setMaterial(Material& mat)
 {
-	this->mat = mat;
+	this->mat = &mat;
 }
 
 void MeshRenderer::setCastShadows(bool castShadows)
 {
 	this->castShadows = castShadows;
+}
+
+Material& MeshRenderer::getMaterial()
+{
+	return *mat;
 }

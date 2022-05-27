@@ -182,15 +182,11 @@ void Primitive::setup()
 
 void Primitive::draw()
 {
-	mat->getShader();
-
-	/*mat->getShader().setUniform("ambient", mat->getAmbient());
-	mat->getShader().setUniform("specular", mat->getSpecular());
-	mat->getShader().setUniform("diffuse", mat->getDiffuse());*/
+	mat->getShader()->setUniform("ambient", mat->getAmbient());
+	mat->getShader()->setUniform("specular", mat->getSpecular());
+	mat->getShader()->setUniform("diffuse", mat->getDiffuse());
 
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
-	//mat->getShader().SetMatrix4("model", glm::value_ptr(model), GL_FALSE);
-
 }

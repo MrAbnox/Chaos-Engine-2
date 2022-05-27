@@ -22,10 +22,13 @@ public:
 	void setMaterial(Material& mat);
 	void setCastShadows(bool castShadows);
 
+	Material& getMaterial();
+
 private:
 	
 	Mesh* mesh;
-	Material mat;
+	Material* mat;
+	
 private:
 	
 	bool castShadows;

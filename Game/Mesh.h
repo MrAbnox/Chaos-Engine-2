@@ -26,8 +26,8 @@ public:
     void setupMaterial(Material mat);
 
 public:
-    void draw(); //TODO: Maybe pass shader in here?
-    void setupMesh();
+    virtual void setup();
+    virtual void draw(); //TODO: Maybe pass shader in here?
 	
 protected:
     Material* mat; //TODO: Maybe make this a pointer?

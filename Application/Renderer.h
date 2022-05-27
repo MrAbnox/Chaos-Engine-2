@@ -3,6 +3,7 @@
 
 #include "../Game/Scene.h"
 #include <map>
+#include "../Game/Primitive.h"
 
 class Renderer
 {
@@ -13,30 +14,36 @@ private:
 	Renderer& operator = (Renderer&);
 
 public:
-
 	static Renderer* instance();
-
 	void initialize();
 	void run();
+	
 
 private:
-
 	void update();
 	void render();
+	
+	void loadScene();
+	void loadShaders();
+	void loadMaterials();
+	void loadGameObjects();
 
 public:
-
-	void loadScene();
-
+	GameObject getObject(std::string name);
+	
 private:
 
 	bool isRunning = true; //TODO:: Delete this variable either here or scene
 	bool isDirty;
 	bool isLoadingScene = false;
 
-	std::map<std::string, Scene> scenes;
-
 	Scene* currentScene;
+	Shader* default_Shader;
+	
+	std::map<std::string, Scene> scenes;
+	std::map<std::string, GameObject*> loadedGameObjects;
+	std::map<std::string, Material*> loadedMaterials;
+
 };
 #endif
 

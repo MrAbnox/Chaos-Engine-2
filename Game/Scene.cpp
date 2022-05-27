@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "../Components/MeshRenderer.h"
+#include "../Application/Renderer.h"
 
 Scene::Scene()
 {
@@ -57,17 +58,15 @@ void Scene::createEmpty()
 {
 }
 
-void Scene::createPrimitive(Primitive primitive, glm::vec3& pos)
+void Scene::createPrimitive(Prim primitive, glm::vec3& pos)
 {
-
-	
 	GameObject prim;
-	prim.addComponent<MeshRenderer>();
+	
 	switch (primitive)
 	{
 	case CUBE:
 
-		
+		prim = Renderer::instance()->getObject("Cube");
 		break;
 		
 	case QUAD:
@@ -78,8 +77,8 @@ void Scene::createPrimitive(Primitive primitive, glm::vec3& pos)
 	default:
 		break;
 	}
-	
-	//sceneObjects.push_back(std::make_shared<prim>());
+
+	addObjectToScene(prim);
 }
 
 void Scene::duplicateObject()
@@ -88,6 +87,11 @@ void Scene::duplicateObject()
 
 void Scene::deleteObject()
 {
+}
+
+void Scene::addObjectToScene(GameObject& object)
+{
+	sceneObjects.push_back(std::make_shared<GameObject>(object));
 }
 
 //TODO: Make sure this doesn't create another copy in memory and just passes the reference

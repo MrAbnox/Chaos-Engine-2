@@ -7,14 +7,14 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Mate
 	this->mat = &mat;
 }
 
+void Mesh::setup()
+{
+
+}
+
 void Mesh::draw()
 {
 	
-}
-
-void Mesh::setupMesh()
-{
-
 }
 
 void Mesh::setupVertices(std::vector<Vertex> vertices)

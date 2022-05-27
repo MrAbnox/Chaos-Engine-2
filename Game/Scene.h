@@ -3,7 +3,7 @@
 
 #include "GameObject.h"
 
-enum Primitive
+enum Prim
 {
 	CUBE, QUAD
 };
@@ -26,9 +26,10 @@ public:
 
 
 	void createEmpty(); //Create Empty Object
-	void createPrimitive(Primitive primitive, glm::vec3& pos = glm::vec3(0.0f)); //Create Primitive Object
+	void createPrimitive(Prim primitive, glm::vec3& pos = glm::vec3(0.0f)); //Create Primitive Object
 	void duplicateObject(); //Duplicate Object in the same position
 	void deleteObject(); //TODO::Add reference
+	void addObjectToScene(GameObject& object); //Add Object to the scene
 
 public:
 

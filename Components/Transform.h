@@ -46,6 +46,7 @@ private:
 
 	glm::vec3 up;
 	glm::vec3 forward;
+	glm::mat4 model;
 
 };
 
