@@ -7,6 +7,7 @@
 #include "../Components/Transform.h"
 
 class Component;
+class Transform;
 
 class GameObject
 {
@@ -36,8 +37,7 @@ public:
 	
 	bool getIsEnabled() const;
 	bool getShouldDestroy() const;
-	//Transform getTransform();
-
+	Transform* getTransform();
 
 private:
 
@@ -46,8 +46,7 @@ private:
 	bool shouldDestroy;
 	bool isStatic;
 	bool hastransform = false;
-	//std::shared_ptr<Transform> transform;
-
+	Transform* transform;
 	std::vector<std::shared_ptr<Component>> components;
 	
 };
@@ -63,10 +62,10 @@ inline std::shared_ptr<T> GameObject::addComponent()
 	if (temp)
 	{
 		//TRANSFORM FOUND
-		if (!hastransform)
-			hastransform = true;
+		/*if (transform == nullptr)
+			transform = obj;
 		else
-			return nullptr;
+			return nullptr;*/
 	}
 
 	components.push_back(obj);

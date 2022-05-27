@@ -1,4 +1,5 @@
 #include "MeshRenderer.h"
+#include "../Game/GameObject.h"
 
 MeshRenderer::MeshRenderer(GameObject* gameObject) : Component(gameObject)
 {
@@ -18,6 +19,7 @@ void MeshRenderer::update()
 void MeshRenderer::render()
 {
 	mesh->draw();
+	gameObject->getTransform()->sendData(*mat->getShader());
 }
 
 //Maybe remove this function

@@ -4,6 +4,7 @@
 #include "../Game/GameObject.h"
 #include "Component.h"
 #include <glm/matrix.hpp>
+#include "../Game/Shader.h"
 
 class Transform : public Component
 {
@@ -14,6 +15,7 @@ public:
 
 	void update() override {};
 	void fixedUpdate(float deltaTime) override {};
+	void sendData(Shader& shader);
 
 public:
 
@@ -34,6 +36,7 @@ public:
 
 	void setDirty(bool& value);
 	void setParent(Transform& parent);
+
 
 private:
 

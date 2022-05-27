@@ -79,7 +79,7 @@ bool GameObject::getShouldDestroy() const
 	return shouldDestroy;
 }
 
-//Transform GameObject::getTransform()
-//{
-//	return *transform;
-//}
+Transform* GameObject::getTransform()
+{
+	return transform;
+}
