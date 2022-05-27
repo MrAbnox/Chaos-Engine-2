@@ -25,7 +25,7 @@ public:
 	void unload(); //unload objects if need to be!
 
 
-	void createEmpty(); //Create Empty Object
+	std::shared_ptr<GameObject> createEmpty(); //Create Empty Object
 	void createPrimitive(Prim primitive, glm::vec3& pos = glm::vec3(0.0f)); //Create Primitive Object
 	void duplicateObject(); //Duplicate Object in the same position
 	void deleteObject(); //TODO::Add reference

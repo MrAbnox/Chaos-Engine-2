@@ -6,8 +6,8 @@
 GameObject::GameObject()
 {
 	std::shared_ptr<Transform> temp =  addComponent<Transform>();
-	components.size();
-	transform = temp.get();
+	//components.size();
+	//transform = temp.get();
 
 	temp->getGameObject();
 }
@@ -99,6 +99,11 @@ bool GameObject::getShouldDestroy() const
 
 Transform* GameObject::getTransform()
 {
-	//components.size();
+	components.size();
 	return transform;
+}
+
+std::vector<std::shared_ptr<Component>> GameObject::getComponents()
+{
+	return components;
 }

@@ -14,6 +14,7 @@ MeshRenderer::~MeshRenderer()
 //Maybe remove this function
 void MeshRenderer::update()
 {
+	gameObject;
 }
 
 void MeshRenderer::render()

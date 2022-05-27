@@ -39,6 +39,7 @@ public:
 	bool getIsEnabled() const;
 	bool getShouldDestroy() const;
 	Transform* getTransform();
+	std::vector < std::shared_ptr<Component>> getComponents();
 
 private:
 

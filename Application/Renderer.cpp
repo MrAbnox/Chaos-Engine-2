@@ -35,14 +35,15 @@ void Renderer::update()
 
 void Renderer::render()
 {
-	if(!isLoadingScene)
-		currentScene->render();
+	//if(!isLoadingScene)
+	currentScene->render();
 }
 
 void Renderer::loadScene()
 {
 	//TODO: Remove this, it's temporary
 	currentScene = new Scene();
+	currentScene->start();
 	currentScene->load();
 }
 
@@ -63,17 +64,17 @@ void Renderer::loadGameObjects()
 {
 	//TODO: Do the same for plane gameobject
 	GameObject* prim1 = new GameObject();
-	std::shared_ptr<MeshRenderer> temp = prim1->addComponent<MeshRenderer>();
+	loadedGameObjects["Cube"] = prim1;
+	std::shared_ptr<MeshRenderer> temp = loadedGameObjects["Cube"]->addComponent<MeshRenderer>();
 
 	Mesh* mesh = new Primitive();
 	mesh->setup();
 	temp->setMaterial(*loadedMaterials["Default"]);
 	temp->setMesh(*mesh);
-	loadedGameObjects["Cube"] = prim1;
 
 	GameObject* cam = new GameObject();
-	cam->addComponent<Camera>();
 	loadedGameObjects["Camera"] = cam;
+	loadedGameObjects["Camera"]->addComponent<Camera>();
 }
 
 GameObject Renderer::getObject(std::string name)

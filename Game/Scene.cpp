@@ -27,18 +27,18 @@ void Scene::start()
 
 void Scene::update()
 {
-	for (size_t i = 0; i < sceneObjects.size(); i++)
-	{
-		sceneObjects[i].get()->update();
-	}
+	//for (size_t i = 0; i < sceneObjects.size(); i++)
+	//{
+	//	sceneObjects[i].get()->update();
+	//}
 
-	for (int i = 0; i < sceneObjects.size(); i++) 
+	/*for (int i = 0; i < sceneObjects.size(); i++) 
 	{
 		if (sceneObjects[i]->getShouldDestroy())
 		{
 			sceneObjects.erase(sceneObjects.begin() + i);
 		}
-	}
+	}*/
 }
 
 void Scene::render()
@@ -57,8 +57,12 @@ void Scene::unload()
 {
 }
 
-void Scene::createEmpty()
+std::shared_ptr<GameObject> Scene::createEmpty()
 {
+	auto obj = std::shared_ptr<GameObject>(new GameObject());
+
+	sceneObjects.push_back(obj);
+	return obj;
 }
 
 void Scene::createPrimitive(Prim primitive, glm::vec3& pos)
@@ -94,7 +98,20 @@ void Scene::deleteObject()
 
 void Scene::addObjectToScene(GameObject& object)
 {
+	int i = 0;
+	for (auto& c : object.getComponents())
+	{
+		c->setGameObject(&object);
+	}
 	sceneObjects.push_back(std::make_shared<GameObject>(object));
+
+	for (size_t i = 0; i < sceneObjects.size(); i++)
+	{
+		for (size_t j = 0; j < sceneObjects[i]->getComponents().size(); j++)
+		{
+			sceneObjects[i]->getComponents()[j]->setGameObject(sceneObjects[i].get());
+		}
+	}
 }
 
 //TODO: Make sure this doesn't create another copy in memory and just passes the reference
