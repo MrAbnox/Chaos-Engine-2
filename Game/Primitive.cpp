@@ -165,14 +165,14 @@ void Primitive::setup()
 	buffer->GenerateBuffers(1, &VBO_vertex);
 	buffer->BindBuffer(GL_ARRAY_BUFFER, VBO_vertex);
 	buffer->FillBuffer(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
-	buffer->LinkToShader(ID_vertex, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	buffer->EnableVertexArray(ID_vertex);
+	buffer->LinkToShader(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	buffer->EnableVertexArray(0);
 
 	buffer->GenerateBuffers(1, &VBO_color);
 	buffer->BindBuffer(GL_ARRAY_BUFFER, VBO_color);
 	buffer->FillBuffer(GL_ARRAY_BUFFER, colors, GL_STATIC_DRAW);
-	buffer->LinkToShader(ID_color, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	buffer->EnableVertexArray(ID_color);
+	buffer->LinkToShader(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	buffer->EnableVertexArray(1);
 
 	buffer->GenerateBuffers(1, &EBO);
 	buffer->BindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
@@ -182,9 +182,9 @@ void Primitive::setup()
 
 void Primitive::draw()
 {
-	mat->getShader()->setUniform("ambient", mat->getAmbient());
-	mat->getShader()->setUniform("specular", mat->getSpecular());
-	mat->getShader()->setUniform("diffuse", mat->getDiffuse());
+	//mat->getShader()->setUniform("ambient", mat->getAmbient());
+	//mat->getShader()->setUniform("specular", mat->getSpecular());
+	//mat->getShader()->setUniform("diffuse", mat->getDiffuse());
 
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);

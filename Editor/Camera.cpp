@@ -1,5 +1,6 @@
 #include "Camera.h"
 #include "../Application/Window.h"
+#include <iostream>
 
 Camera::Camera(GameObject* object) : Component(gameObject)
 {
@@ -29,7 +30,11 @@ void Camera::sendData(Shader& shader)
 	glm::vec2 screenSize = Window::instance()->getScreenSize();
 	proj = glm::perspective(glm::radians(zoom), (float)screenSize.x / (float)screenSize.y, 0.1f, 100.0f);
 	viewProj = proj * view;
-	shader.setUniform("viewProjection", viewProj);
+	shader.Use();
+	shader.setUniform("view", view);
+	shader.setUniform("projection", proj);
+
+	std::cout << "Send Camera data" << std::endl;
 }
 
 void Camera::updateCameraVectors()

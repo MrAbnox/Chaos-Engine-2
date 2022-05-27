@@ -5,7 +5,11 @@
 
 GameObject::GameObject()
 {
-	transform = addComponent<Transform>().get();
+	std::shared_ptr<Transform> temp =  addComponent<Transform>();
+	components.size();
+	transform = temp.get();
+
+	temp->getGameObject();
 }
 
 GameObject::~GameObject()
@@ -56,7 +60,7 @@ void GameObject::render()
 			if (cam != nullptr)
 			{
 				/*auto temp = getComponent<MeshRenderer>()->getMaterial().getShader();*/
-				cam.get()->sendData(Renderer::instance()->getShader("default"));
+				cam.get()->sendData(Renderer::instance()->getShader("Default"));
 			}
 		}
 	}
@@ -95,5 +99,6 @@ bool GameObject::getShouldDestroy() const
 
 Transform* GameObject::getTransform()
 {
+	//components.size();
 	return transform;
 }

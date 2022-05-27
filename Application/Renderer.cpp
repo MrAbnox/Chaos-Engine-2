@@ -16,8 +16,8 @@ void Renderer::initialize()
 	//Load all Materials into memory
 
 	//TODO: Maybe load all scenes into memory
-	loadScene();
 	loadGameObjects();
+	loadScene();
 }
 
 void Renderer::run()
@@ -43,6 +43,7 @@ void Renderer::loadScene()
 {
 	//TODO: Remove this, it's temporary
 	currentScene = new Scene();
+	currentScene->load();
 }
 
 void Renderer::loadShaders()

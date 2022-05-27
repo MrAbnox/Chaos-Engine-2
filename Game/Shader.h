@@ -7,6 +7,8 @@
 #include <string>
 class Shader
 {
+private:
+	Shader& operator = (Shader&);
 public:
 	Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr);
 	//~Shader();

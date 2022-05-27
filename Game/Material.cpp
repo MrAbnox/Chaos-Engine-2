@@ -17,16 +17,15 @@ void Material::loadMaterialFile(std::string name)
 
 void Material::sendData()
 {
-	if (t_ambient == nullptr)
-		shader->setUniform("ambient", ambient);
-	//TODO: Add else
+	//if (t_ambient == nullptr)
+	//	shader->setUniform("ambient", ambient);
+	////TODO: Add else
 
-	if (t_diffuse == nullptr)
-		shader->setUniform("diffuse", diffuse);
+	//if (t_diffuse == nullptr)
+	//	shader->setUniform("diffuse", diffuse);
 
-	if(t_specular)
-		shader->setUniform("specular", specular);
-
+	//if(t_specular)
+	//	shader->setUniform("specular", specular);
 }
 
 void Material::reset()

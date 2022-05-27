@@ -5,6 +5,7 @@
 #include <vector>
 #include <memory>
 #include "../Components/Transform.h"
+#include <iostream>
 
 class Component;
 class Transform;
@@ -42,8 +43,8 @@ public:
 private:
 
 	std::string name;
-	bool isEnabled;
-	bool shouldDestroy;
+	bool isEnabled = true;
+	bool shouldDestroy = false;
 	bool isStatic;
 	bool hastransform = false;
 	Transform* transform;
@@ -61,9 +62,18 @@ inline std::shared_ptr<T> GameObject::addComponent()
 	//TODO: Make sure this works
 	if (temp)
 	{
-		//TRANSFORM FOUND
-		if (transform != nullptr)
-			return nullptr;
+		//std::cout << "Add transform test" << std::endl;
+		////TRANSFORM FOUND
+		//if (transform != nullptr)
+		//{
+		//	std::cout << "second transform found" << std::endl;
+		//	return nullptr;
+		//}
+		//else
+		//{
+		//	std::cout << "Add transform test" << std::endl;
+		//	transform = temp.get();
+		//}
 	}
 
 	components.push_back(obj);

@@ -1,5 +1,7 @@
 #include "Mesh.h"
 
+std::map<std::string, GLint>* Mesh::s_IDMap = new std::map <std::string, GLint>;
+
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material mat)
 {
 	this->vertices = vertices;

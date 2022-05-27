@@ -8,6 +8,7 @@ Scene::Scene()
 
 void Scene::load()
 {
+	Renderer::instance();
 	//TODO: Read from file and pass string
 	GameObject obj = Renderer::instance()->getObject("Camera");
 	addObjectToScene(obj);

@@ -39,6 +39,8 @@ private:
     std::vector<unsigned int> indices;
 
     glm::mat4 model;
+
+    static std::map<std::string, GLint>* s_IDMap;
 	
 };
 
