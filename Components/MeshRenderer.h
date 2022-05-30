@@ -18,8 +18,8 @@ public:
 	void render();
 	void fixedUpdate(float deltaTime) override;
 
-	void setMesh(Mesh& mesh);
-	void setMaterial(Material& mat);
+	void setMesh(Mesh* mesh);
+	void setMaterial(Material* mat);
 	void setCastShadows(bool castShadows);
 
 	Material& getMaterial();

@@ -8,6 +8,6 @@ Transform::Transform(GameObject* object) : Component(gameObject)
 
 void Transform::sendData(Shader& shader)
 {
+	shader.Use();
 	shader.setUniform("model", model);
-	std::cout << "Send model data" << std::endl;
 }

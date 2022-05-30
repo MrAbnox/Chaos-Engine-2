@@ -71,6 +71,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geo
         checkCompileErrors(geometry, "GEOMETRY");
     }
     // shader Program
+    std::cout << "POOPOO" << std::endl;
     ID = glCreateProgram();
     glAttachShader(ID, vertex);
     glAttachShader(ID, fragment);

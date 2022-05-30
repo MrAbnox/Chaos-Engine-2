@@ -29,14 +29,14 @@ void MeshRenderer::fixedUpdate(float deltaTime)
 {
 }
 
-void MeshRenderer::setMesh(Mesh& mesh)
+void MeshRenderer::setMesh(Mesh* mesh)
 {
-	this->mesh = &mesh;
+	this->mesh = mesh;
 }
 
-void MeshRenderer::setMaterial(Material& mat)
+void MeshRenderer::setMaterial(Material* mat)
 {
-	this->mat = &mat;
+	this->mat = mat;
 }
 
 void MeshRenderer::setCastShadows(bool castShadows)

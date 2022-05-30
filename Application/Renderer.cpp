@@ -57,7 +57,9 @@ void Renderer::loadMaterials()
 {
 	//TODO: Read from file
 	Material* mat = new Material();
+	mat->setShader(loadedShaders["Default"]);
 	loadedMaterials["Default"] = mat;
+	
 }
 
 void Renderer::loadGameObjects()
@@ -70,8 +72,8 @@ void Renderer::loadGameObjects()
 
 	Mesh* mesh = new Primitive();
 	mesh->setup();
-	temp->setMaterial(*loadedMaterials["Default"]);
-	temp->setMesh(*mesh);
+	temp->setMaterial(loadedMaterials["Default"]);
+	temp->setMesh(mesh);
 
 	std::shared_ptr<GameObject> cam = std::make_shared<GameObject>();
 	cam->addComponent<Camera>();
