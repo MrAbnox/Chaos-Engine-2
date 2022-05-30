@@ -168,11 +168,11 @@ void Primitive::setup()
 	buffer->LinkToShader(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	buffer->EnableVertexArray(0);
 
-	buffer->GenerateBuffers(1, &VBO_color);
-	buffer->BindBuffer(GL_ARRAY_BUFFER, VBO_color);
-	buffer->FillBuffer(GL_ARRAY_BUFFER, colors, GL_STATIC_DRAW);
-	buffer->LinkToShader(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	buffer->EnableVertexArray(1);
+	//buffer->GenerateBuffers(1, &VBO_color);
+	//buffer->BindBuffer(GL_ARRAY_BUFFER, VBO_color);
+	//buffer->FillBuffer(GL_ARRAY_BUFFER, colors, GL_STATIC_DRAW);
+	//buffer->LinkToShader(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	//buffer->EnableVertexArray(1);
 
 	buffer->GenerateBuffers(1, &EBO);
 	buffer->BindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);

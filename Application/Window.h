@@ -4,6 +4,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include "../Editor/Camera.h"
 
 
 class Window
@@ -40,9 +41,11 @@ public:
 	float getLastX();
 	float getLastY();
 
+	Camera* getCamera();
 	GLFWwindow* getWindow();
 	glm::vec2 getScreenSize();
 
+	void setCamera(Camera* camera);
 	//TODO:: Pass as Reference
 	void setLastX(float x);
 	void setLastY(float y);
@@ -50,14 +53,15 @@ public:
 
 private:
 
+	Camera* camera;
 	GLFWwindow* window;
 	int screenWidth;
 	int screenHeight;
 
-	float lastX = (float)screenWidth / 2.0;
-	float lastY = (float)screenHeight / 2.0;
+	float lastX;
+	float lastY;
 
-	bool isPaused;
+	bool isPaused = false;
 };
 
 #endif // !WINDOW_H

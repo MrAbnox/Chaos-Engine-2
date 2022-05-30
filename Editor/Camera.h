@@ -6,6 +6,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glad/glad.h>
 #include "../Game/Shader.h"
+#include "../Application/Renderer.h"
 
 // Default camera values
 const float YAW = -90.0f;
@@ -13,6 +14,15 @@ const float PITCH = 0.0f;
 const float SPEED = 2.5f;
 const float SENSITIVITY = 0.1f;
 const float ZOOM = 45.0f;
+
+// Defines several possible options for camera movement. Used as abstraction to stay away from window-system specific input methods
+enum Camera_Movement {
+	FORWARD,
+	BACKWARD,
+	LEFT,
+	RIGHT
+};
+
 class Camera : public Component
 {
 public:
@@ -20,7 +30,7 @@ public:
 	
 public:	
 
-	virtual void update() {};
+	virtual void update();
 	virtual void fixedUpdate(float deltaTime) {};
 	void render();
 
@@ -48,7 +58,8 @@ public:
 	
 	glm::mat4 GetProjection();
 	glm::mat4 GetView();
-
+	void ProcessKeyboard(Camera_Movement direction);
+	void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true);
 	//TODO:: Add Later (Not important) & add vector overloads
 	/*void SetLookAt(float x, float y, float z, float targetX, float targetY, float targetZ, float upX, float upY, float upZ);
 	void SetLookAt(float x, float y, float z, float targetX, float targetY, float targetZ);

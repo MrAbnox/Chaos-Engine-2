@@ -11,3 +11,13 @@ void Transform::sendData(Shader& shader)
 	shader.Use();
 	shader.setUniform("model", model);
 }
+
+glm::mat4* Transform::getModel()
+{
+	return &model;
+}
+
+//glm::vec3 Transform::getPos()
+//{
+//	return p
+//}

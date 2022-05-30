@@ -90,3 +90,8 @@ Shader Renderer::getShader(std::string name)
 {
 	return *loadedShaders[name];
 }
+
+std::shared_ptr<GameObject> Renderer::getCube()
+{
+	return currentScene->getSceneObjects()[1];
+}

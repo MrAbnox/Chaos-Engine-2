@@ -2,8 +2,9 @@
 
 
 #include <iostream>
-namespace callbacks
-{
+//namespace callbacks
+//{
+
 	void cursor_input_callback(GLFWwindow* window, double posX, double posY) {
 
 		// camera rotation
@@ -18,8 +19,8 @@ namespace callbacks
 			firstMouse = false;
 		}
 
-		float xoffset = (float)posX - lastX;
-		float yoffset = lastY - (float)posY; // reversed since y-coordinates go from bottom to top
+		float xOffset = (float)posX - lastX;
+		float yOffset = lastY - (float)posY; // reversed since y-coordinates go from bottom to top
 
 		lastX = (float)posX;
 		lastY = (float)posY;
@@ -32,9 +33,11 @@ namespace callbacks
 
 		// we use the handy camera class from LearnOpenGL to handle our camera
 		//TODO:: Make Camera Process Mouse Movement
-		//camera.ProcessMouseMovement(xoffset, yoffset);
-	}
 
+		std::cout << "XOFFSET: " + std::to_string(xOffset) + " YOFFSET: " + std::to_string(yOffset) << std::endl;
+		Window::instance()->getCamera()->ProcessMouseMovement(xOffset, yOffset);
+	}
+	
 	void key_input_callback(GLFWwindow* window, int button, int other, int action, int mods) {
 		// controls pause mode
 		if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
@@ -57,7 +60,7 @@ namespace callbacks
 		// height will be significantly larger than specified on retina displays.
 		glViewport(0, 0, width, height);
 	}
-}
+
 
 Window* Window::instance()
 {
@@ -89,10 +92,11 @@ void Window::initialize()
 	}
 
 	glfwMakeContextCurrent(window);
-	glfwSetFramebufferSizeCallback(window, callbacks::framebuffer_size_callback);
-	glfwSetCursorPosCallback(window, callbacks::cursor_input_callback);
-	glfwSetKeyCallback(window, callbacks::key_input_callback);
-	glfwSetScrollCallback(window, callbacks::scroll_callback);
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwSetCursorPosCallback(window, cursor_input_callback);
+	glfwSetKeyCallback(window, key_input_callback);
+	glfwSetScrollCallback(window, scroll_callback);
+
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -151,6 +155,9 @@ void Window::loadSettings()
 	//if there's no settings use default file
 	screenHeight = 800;
 	screenWidth = 1200;
+
+	lastX = (float)screenWidth / 2.0;
+	lastY = (float)screenHeight / 2.0;
 }
 
 bool Window::getIsPaused()
@@ -168,6 +175,11 @@ float Window::getLastY()
 	return lastY;
 }
 
+Camera* Window::getCamera()
+{
+	return camera;
+}
+
 GLFWwindow* Window::getWindow()
 {
 	return window;
@@ -176,6 +188,11 @@ GLFWwindow* Window::getWindow()
 glm::vec2 Window::getScreenSize()
 {
 	return  glm::vec2(screenWidth, screenHeight);
+}
+
+void Window::setCamera(Camera* camera)
+{
+	this->camera = camera;
 }
 
 void Window::setLastX(float x)
