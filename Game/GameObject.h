@@ -39,8 +39,7 @@ public:
 	bool getIsEnabled() const;
 	bool getShouldDestroy() const;
 	Transform* getTransform();
-	std::vector < std::shared_ptr<Component>> getComponents();
-
+	const std::vector<std::shared_ptr<Component>>& getComponents();
 private:
 
 	std::string name;
@@ -58,25 +57,7 @@ inline std::shared_ptr<T> GameObject::addComponent()
 {
 	auto obj = std::shared_ptr<T>(new T(this));
 
-	auto temp = std::dynamic_pointer_cast<Transform>(obj);
-
-	//TODO: Make sure this works
-	if (temp)
-	{
-		//std::cout << "Add transform test" << std::endl;
-		////TRANSFORM FOUND
-		//if (transform != nullptr)
-		//{
-		//	std::cout << "second transform found" << std::endl;
-		//	return nullptr;
-		//}
-		//else
-		//{
-		//	std::cout << "Add transform test" << std::endl;
-		//	transform = temp.get();
-		//}
-	}
-
+	std::cout << "TEST " << std::endl;
 	components.push_back(obj);
 	return obj;
 }

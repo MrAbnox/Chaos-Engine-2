@@ -29,7 +29,7 @@ private:
 	void loadGameObjects();
 
 public:
-	GameObject getObject(std::string name);
+	std::shared_ptr<GameObject> getObject(std::string name);
 	Shader getShader(std::string name);
 	
 private:
@@ -41,7 +41,7 @@ private:
 	Scene* currentScene;
 	
 	std::map<std::string, Scene> scenes;
-	std::map<std::string, GameObject*> loadedGameObjects;
+	std::map<std::string, std::shared_ptr<GameObject>> loadedGameObjects;
 	std::map<std::string, Material*> loadedMaterials;
 	std::map<std::string, Shader*> loadedShaders;
 

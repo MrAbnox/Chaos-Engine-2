@@ -2,14 +2,21 @@
 
 Component::Component(GameObject* gameObject) :gameObject(gameObject)
 {
+	this->gameObject = gameObject;
 }
+
+Component::Component(const Component& c)
+{
+	gameObject = c.gameObject;
+}
+
 
 GameObject* Component::getGameObject()
 {
 	return gameObject;
 }
 
-void Component::setGameObject(GameObject* gameObject)
+void Component::setGameObject(GameObject& gameObject)
 {
-	this->gameObject = gameObject;
+	this->gameObject = &gameObject;
 }

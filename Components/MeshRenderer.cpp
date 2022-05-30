@@ -20,6 +20,7 @@ void MeshRenderer::update()
 void MeshRenderer::render()
 {
 	mesh->draw();
+	gameObject;
 	gameObject->getTransform()->sendData(*mat->getShader());
 }
 

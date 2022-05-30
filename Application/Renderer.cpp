@@ -63,23 +63,25 @@ void Renderer::loadMaterials()
 void Renderer::loadGameObjects()
 {
 	//TODO: Do the same for plane gameobject
-	GameObject* prim1 = new GameObject();
+	std::shared_ptr<GameObject> prim1 = std::make_shared<GameObject>();
+	std::shared_ptr<MeshRenderer> temp = prim1->addComponent<MeshRenderer>();
 	loadedGameObjects["Cube"] = prim1;
-	std::shared_ptr<MeshRenderer> temp = loadedGameObjects["Cube"]->addComponent<MeshRenderer>();
+	//std::shared_ptr<MeshRenderer> temp = loadedGameObjects["Cube"]->addComponent<MeshRenderer>();
 
 	Mesh* mesh = new Primitive();
 	mesh->setup();
 	temp->setMaterial(*loadedMaterials["Default"]);
 	temp->setMesh(*mesh);
 
-	GameObject* cam = new GameObject();
+	std::shared_ptr<GameObject> cam = std::make_shared<GameObject>();
+	cam->addComponent<Camera>();
 	loadedGameObjects["Camera"] = cam;
-	loadedGameObjects["Camera"]->addComponent<Camera>();
+	//loadedGameObjects["Camera"]->addComponent<Camera>();
 }
 
-GameObject Renderer::getObject(std::string name)
+std::shared_ptr<GameObject> Renderer::getObject(std::string name)
 {
-	return *loadedGameObjects[name];
+	return loadedGameObjects[name];
 }
 
 Shader Renderer::getShader(std::string name)

@@ -10,8 +10,8 @@ void Scene::load()
 {
 	Renderer::instance();
 	//TODO: Read from file and pass string
-	GameObject obj = Renderer::instance()->getObject("Camera");
-	addObjectToScene(obj);
+	;
+	addObjectToScene(Renderer::instance()->getObject("Camera"));
 
 	//TEMP
 	createPrimitive(CUBE);
@@ -43,9 +43,12 @@ void Scene::update()
 
 void Scene::render()
 {
-	for (size_t i = 0; i < sceneObjects.size(); i++)
+	for (auto& go : sceneObjects)
 	{
-		sceneObjects[i].get()->render();
+		if (go->getIsEnabled())
+		{
+			go->render();
+		}
 	}
 }
 
@@ -67,13 +70,13 @@ std::shared_ptr<GameObject> Scene::createEmpty()
 
 void Scene::createPrimitive(Prim primitive, glm::vec3& pos)
 {
-	GameObject prim;
+	std::string temp = "";
 	
 	switch (primitive)
 	{
 	case CUBE:
 
-		prim = Renderer::instance()->getObject("Cube");
+		temp = "Cube";
 		break;
 		
 	case QUAD:
@@ -85,7 +88,7 @@ void Scene::createPrimitive(Prim primitive, glm::vec3& pos)
 		break;
 	}
 
-	addObjectToScene(prim);
+	addObjectToScene(Renderer::instance()->getObject(temp));
 }
 
 void Scene::duplicateObject()
@@ -96,20 +99,17 @@ void Scene::deleteObject()
 {
 }
 
-void Scene::addObjectToScene(GameObject& object)
+void Scene::addObjectToScene(const std::shared_ptr<GameObject> object)
 {
-	int i = 0;
-	for (auto& c : object.getComponents())
-	{
-		c->setGameObject(&object);
-	}
-	sceneObjects.push_back(std::make_shared<GameObject>(object));
+	GameObject* t = object.get();
+	auto obj = std::make_shared<GameObject>(*t);
+	sceneObjects.push_back(obj);
 
 	for (size_t i = 0; i < sceneObjects.size(); i++)
 	{
 		for (size_t j = 0; j < sceneObjects[i]->getComponents().size(); j++)
 		{
-			sceneObjects[i]->getComponents()[j]->setGameObject(sceneObjects[i].get());
+			sceneObjects[i]->getComponents()[j]->setGameObject(*sceneObjects[i].get());
 		}
 	}
 }

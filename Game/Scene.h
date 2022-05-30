@@ -29,7 +29,7 @@ public:
 	void createPrimitive(Prim primitive, glm::vec3& pos = glm::vec3(0.0f)); //Create Primitive Object
 	void duplicateObject(); //Duplicate Object in the same position
 	void deleteObject(); //TODO::Add reference
-	void addObjectToScene(GameObject& object); //Add Object to the scene
+	void addObjectToScene(const std::shared_ptr<GameObject> object); //Add Object to the scene
 
 public:
 
