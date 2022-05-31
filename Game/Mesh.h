@@ -6,26 +6,14 @@
 #include "Material.h"
 #include "Buffer.h"
 
-struct Vertex 
-{
-    glm::vec3 position;
-    glm::vec3 normal;
-    glm::vec2 texCoords;
-    glm::vec3 tangent;
-    glm::vec3 bitangent;
-};
-
 class Mesh
 {
 public:
-    Mesh() {};
-	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material mat);
+    Mesh();
 
-    void setupVertices(std::vector<Vertex> vertices);
-    void setupIndices(std::vector<unsigned int> indices);
-    void setupMaterial(Material mat);
+    void setupMaterial(std::shared_ptr<Material> mat); //Maybe delete this
 
-    Material* getMaterial();
+    std::shared_ptr<Material> getMaterial();
 
 public:
     virtual void setup();
@@ -34,18 +22,41 @@ public:
     unsigned int getVAO();
 	
 protected:
-    Material* mat; //TODO: Maybe make this a pointer?
+    std::shared_ptr<Material> mat; //TODO: Maybe make this a pointer?
     Buffer* buffer;
-    unsigned int VAO, VBO, EBO;
-    glm::mat4 model;
+	
+protected:
+	
+    GLuint VAO;
+    GLuint EBO;
+    GLuint vertexVBO;
+    GLuint colorVBO;
+    GLuint normalVBO;
+    GLuint textureVBO;
+    GLuint totalVertices;
+    GLuint VBO_tangent;
+    GLuint VBO_bitangent;
+
+    std::vector<glm::vec3> vertices;
+    std::vector<glm::vec2> uvs;
+    std::vector<glm::vec3> normals;
+    std::vector<GLuint> indices;
+
+    std::vector<GLfloat> tangents;
+    std::vector<GLfloat> bitangents;
+
+    GLuint ID_vertex;
+    GLuint ID_normal;
+    GLuint ID_texture;
+    GLuint ID_tangent;
+    GLuint ID_bitangent;
+    GLuint ID_color;
+
 private:
 
-    std::vector<Vertex> vertices;
-    std::vector<unsigned int> indices;
-
-
-    static std::map<std::string, GLint>* s_IDMap;
-	
+    Texture texture;
+    Texture normalMap;
+    Texture heightMap;
 };
 
 #endif

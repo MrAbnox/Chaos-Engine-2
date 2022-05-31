@@ -19,14 +19,9 @@ Primitive::Primitive()
 	cubemapTexture = loadCubemap(faces);
 }
 
-Primitive::Primitive(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material mat)
-{
-}
-
-
 void Primitive::setup()
 {
-	mat = new Material();
+	mat = std::make_shared<Material>();
 
 	vertices = {
 		// back face

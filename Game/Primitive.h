@@ -7,7 +7,6 @@ class Primitive : public Mesh
 {
 public: 
 	Primitive();
-	Primitive(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material mat);
 	unsigned int loadCubemap(std::vector<std::string> faces);
 
 	void setup() override;
