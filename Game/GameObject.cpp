@@ -60,7 +60,8 @@ void GameObject::render()
 			if (cam != nullptr)
 			{
 				/*auto temp = getComponent<MeshRenderer>()->getMaterial().getShader();*/
-				cam.get()->sendData(Renderer::instance()->getShader("Default"));
+				//cam.get()->sendData(Renderer::instance()->getShader("Default"));
+				cam.get()->sendData(Renderer::instance()->getShader("Skybox"));
 			}
 		}
 	}

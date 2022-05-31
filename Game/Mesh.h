@@ -25,9 +25,13 @@ public:
     void setupIndices(std::vector<unsigned int> indices);
     void setupMaterial(Material mat);
 
+    Material* getMaterial();
+
 public:
     virtual void setup();
     virtual void draw(); //TODO: Maybe pass shader in here?
+
+    unsigned int getVAO();
 	
 protected:
     Material* mat; //TODO: Maybe make this a pointer?

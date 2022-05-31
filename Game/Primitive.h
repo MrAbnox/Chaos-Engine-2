@@ -8,6 +8,7 @@ class Primitive : public Mesh
 public: 
 	Primitive();
 	Primitive(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material mat);
+	unsigned int loadCubemap(std::vector<std::string> faces);
 
 	void setup() override;
 	void draw() override;
@@ -18,6 +19,8 @@ private:
 	std::vector<GLfloat> vertices;
 	std::vector<GLfloat> normals;
 	std::vector<GLfloat> colors;
+
+	unsigned int cubemapTexture;
 
 	GLuint VBO_color;
 	GLuint VBO_normal;

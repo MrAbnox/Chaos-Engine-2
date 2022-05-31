@@ -19,6 +19,11 @@ void Mesh::draw()
 	
 }
 
+unsigned int Mesh::getVAO()
+{
+	return VAO;
+}
+
 void Mesh::setupVertices(std::vector<Vertex> vertices)
 {
 	this->vertices = vertices;
@@ -30,4 +35,9 @@ void Mesh::setupIndices(std::vector<unsigned int> indices)
 void Mesh::setupMaterial(Material mat)
 {
 	this->mat = &mat;
+}
+
+Material* Mesh::getMaterial()
+{
+	return mat;
 }

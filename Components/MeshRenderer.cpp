@@ -9,6 +9,7 @@ MeshRenderer::MeshRenderer(GameObject* gameObject) : Component(gameObject)
 
 MeshRenderer::~MeshRenderer()
 {
+	std::cout;
 }
 
 //Maybe remove this function
@@ -20,8 +21,7 @@ void MeshRenderer::update()
 void MeshRenderer::render()
 {
 	mesh->draw();
-	gameObject;
-	gameObject->getTransform()->sendData(*mat->getShader());
+	//gameObject->getTransform()->sendData(*mat->getShader());
 }
 
 //Maybe remove this function

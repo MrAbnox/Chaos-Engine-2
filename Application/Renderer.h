@@ -43,8 +43,8 @@ private:
 	
 	std::map<std::string, Scene> scenes;
 	std::map<std::string, std::shared_ptr<GameObject>> loadedGameObjects;
-	std::map<std::string, Material*> loadedMaterials;
-	std::map<std::string, Shader*> loadedShaders;
+	std::map<std::string, std::shared_ptr<Material>> loadedMaterials;
+	std::map<std::string, std::shared_ptr<Shader>> loadedShaders;
 
 };
 #endif

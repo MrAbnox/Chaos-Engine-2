@@ -1,8 +1,22 @@
 #include "Primitive.h"
+#include <iostream>
+#include "../Application/Renderer.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
 
 Primitive::Primitive()
 {
 	buffer = new Buffer();
+	std::vector<std::string> faces
+	{
+		"skybox/right.tga",
+		"skybox/left.tga",
+		"skybox/top.tga",
+		"skybox/bottom.tga",
+		"skybox/front.tga",
+		"skybox/back.tga"
+	};
+	cubemapTexture = loadCubemap(faces);
 }
 
 Primitive::Primitive(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material mat)
@@ -75,8 +89,6 @@ void Primitive::setup()
 	//link vertex attributes 
 	buffer->BindVertexArrays(VAO);
 	buffer->EnableVertexArray(0);
-
-	buffer->EnableVertexArray(0);
 	buffer->LinkToShader(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	buffer->EnableVertexArray(1);
 	buffer->LinkToShader(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
@@ -88,11 +100,52 @@ void Primitive::setup()
 
 void Primitive::draw()
 {
-	//mat->getShader()->setUniform("ambient", mat->getAmbient());
-	//mat->getShader()->setUniform("specular", mat->getSpecular());
-	//mat->getShader()->setUniform("diffuse", mat->getDiffuse());
-
+	glClear(GL_DEPTH_BUFFER_BIT);
+	glDepthFunc(GL_LEQUAL);
+	
+	Renderer::instance()->getShader("Skybox").Use();
+	Renderer::instance()->getShader("Skybox").setUniform("skybox", 0);
+	
 	glBindVertexArray(VAO);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glBindVertexArray(0);
+	glDepthFunc(GL_LESS);
+
+	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+}
+
+unsigned int Primitive::loadCubemap(std::vector<std::string> faces)
+{
+	unsigned int textureID;
+	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+
+	int width, height, nrComponents;
+	for (unsigned int i = 0; i < faces.size(); i++)
+	{
+		unsigned char* data = stbi_load(faces[i].c_str(), &width, &height, &nrComponents, 0);
+		if (data)
+		{
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_SRGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
+		}
+		else
+		{
+			std::cout << "Cubemap texture failed to load at path: " << faces[i] << std::endl;
+			stbi_image_free(data);
+		}
+	}
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_MIRRORED_REPEAT);
+
+	glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
+
+	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
+	return textureID;
 }

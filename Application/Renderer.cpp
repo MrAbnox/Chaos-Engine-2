@@ -51,19 +51,20 @@ void Renderer::loadScene()
 
 void Renderer::loadShaders()
 {
-	Shader* temp = new Shader("shaders/default.vert", "shaders/default.frag");
-	loadedShaders["Default"] = temp;
+	//std::shared_ptr<Shader> temp = std::make_shared<Shader>("shaders/default.vert", "shaders/default.frag");
+	//loadedShaders["Default"] = temp;
 
-	temp = new Shader("shaders/skybox.vert", "shaders/skybox.frag");
+	std::shared_ptr<Shader> temp2 = std::make_shared<Shader>("shaders/skybox.vert", "shaders/skybox.frag");
+	loadedShaders["Skybox"] = temp2;
 }
 
 void Renderer::loadMaterials()
 {
 	//TODO: Read from file
-	Material* mat = new Material();
-	mat->setShader(loadedShaders["Default"]);
-	loadedMaterials["Default"] = mat;
-	
+	std::shared_ptr<Material> mat = std::make_shared<Material>(SKYBOX);
+	mat->setShader(loadedShaders["Skybox"]);
+	loadedMaterials["Skybox"] = mat;
+	loadedMaterials["Skybox"]->setShader(loadedShaders["Skybox"]);
 }
 
 void Renderer::loadGameObjects()
@@ -76,7 +77,7 @@ void Renderer::loadGameObjects()
 
 	Mesh* mesh = new Primitive();
 	mesh->setup();
-	temp->setMaterial(loadedMaterials["Default"]);
+	temp->setMaterial(loadedMaterials["Skybox"].get());
 	temp->setMesh(mesh);
 
 	std::shared_ptr<GameObject> cam = std::make_shared<GameObject>();

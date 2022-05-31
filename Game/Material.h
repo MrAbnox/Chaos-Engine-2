@@ -3,18 +3,27 @@
 
 #include "Texture.h"
 #include "Shader.h"
+#include <vector>
+#include <memory>
+
+enum Type {
+	DEFAULT, SKYBOX
+};
 
 class Material
 {
 public:
-	Material();
+	Material(Type type = DEFAULT);
+	Material(const Material&); // copy constructor	
 
-	void setShader(Shader* shader);
+	void setShader(std::shared_ptr<Shader> shader);
 	void loadMaterialFile(std::string name);
 	void sendData();
 	void reset(); //Resets to default
 
-	Shader* getShader();
+	//unsigned int loadCubemap(std::vector<std::string> faces);
+
+	std::shared_ptr<Shader> getShader();
 	glm::vec3 getAmbient();
 	glm::vec3 getDiffuse();
 	glm::vec3 getSpecular();
@@ -24,7 +33,7 @@ public:
 
 private:
 
-	Shader* shader;
+	std::shared_ptr<Shader> shader;
 
 	Texture* t_ambient;
 	Texture* t_specular;
@@ -38,6 +47,9 @@ private:
 	float shininess;
 	float reflectivity;
 	float transparency;
+	Type type;
+
+	unsigned int cubemapTexture;
 	//float refractionIndex;
 };
 #endif

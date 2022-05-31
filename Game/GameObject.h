@@ -57,7 +57,6 @@ inline std::shared_ptr<T> GameObject::addComponent()
 {
 	auto obj = std::shared_ptr<T>(new T(this));
 
-	std::cout << "TEST " << std::endl;
 	components.push_back(obj);
 	return obj;
 }
