@@ -32,7 +32,6 @@ public:
 
 	void update() override;
 	virtual void fixedUpdate(float deltaTime) {};
-	void render();
 
 private:
 	
@@ -86,6 +85,8 @@ protected:
 	float yaw;
 	float pitch;
 	float zoom;
+
+	bool doOnce = false;
 
 	glm::mat4 view;
 	glm::mat4 proj;

@@ -15,6 +15,12 @@ Camera::Camera(GameObject* object) : Component(gameObject)
 
 void Camera::update()
 {
+	//if (!doOnce)
+	//{
+	//	setDefault(glm::vec3(-5.0f, 1.0f, -10.0f));
+	//	doOnce = true;
+	//}
+	//
 	GLFWwindow* window = Window::instance()->getWindow();
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		ProcessKeyboard(FORWARD);
@@ -26,11 +32,6 @@ void Camera::update()
 		ProcessKeyboard(RIGHT);
 }
 
-void Camera::render()
-{
-	//sendData();
-}
-
 void Camera::setDefault(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
 {
 	this->position = position;
@@ -39,37 +40,32 @@ void Camera::setDefault(glm::vec3 position, glm::vec3 up, float yaw, float pitch
 	this->yaw = yaw;	
 	this->pitch = pitch;
 	zoom = ZOOM;
+	front = glm::vec3(0.0f, 0.0f, -1.0f);
 }
 
 void Camera::sendData(Shader& shader)
 {
-	glEnable(GL_DEPTH_TEST);
 	view = getViewMatrix();
-	//view = glm::lookAt(position, glm::vec3(0.0f), up);/* Renderer::instance()->getCube()->getTransform()->getModel());*/
 	glm::vec2 screenSize = Window::instance()->getScreenSize();
-	proj = glm::perspective(glm::radians(zoom), (float)screenSize.x / (float)screenSize.y, NEAR_CLIP,FAR_CLIP);
+	proj = glm::perspective(glm::radians(zoom), (float)screenSize.x / (float)screenSize.y, NEAR_CLIP, 100.0f);
 	viewProj = proj * view;
 	shader.Use();
 	shader.setUniform("view", view);
 	shader.setUniform("projection", proj);
-	//std::cout << "Send Camera data" << std::endl;
 }
 
 void Camera::updateCameraVectors()
 {
 	// Calculate the new Front vector
-	glm::vec3 front;
-	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-	front.y = sin(glm::radians(pitch));
-	front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-	front = glm::normalize(front);
+	glm::vec3 fronts;
+	fronts.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+	fronts.y = sin(glm::radians(pitch));
+	fronts.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+	fronts = glm::normalize(fronts);
 	// Also re-calculate the Right and Up vector
 	right = glm::normalize(glm::cross(front, worldUp));  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
-	up = glm::normalize(glm::cross(right, front));
-	
-	//std::cout << "front: " << front.x << " " << front.y << " " << front.z << std::endl;
-	//std::cout << "right: " << right.x << " " << right.y << " " << right.z << std::endl;
-	//std::cout << "up: " << right.x << " " << right.y << " " << right.z << std::endl;
+	up = glm::normalize(glm::cross(right, fronts));
+	front = fronts;
 }
 
 glm::mat4 Camera::getViewMatrix()

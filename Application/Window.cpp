@@ -34,7 +34,7 @@
 		// we use the handy camera class from LearnOpenGL to handle our camera
 		//TODO:: Make Camera Process Mouse Movement
 
-		Window::instance()->getCamera()->ProcessMouseMovement(xOffset, yOffset);
+		Window::instance()->getCamera()->ProcessMouseMovement(xOffset, yOffset, false);
 	}
 	
 	void key_input_callback(GLFWwindow* window, int button, int other, int action, int mods) {
@@ -96,7 +96,7 @@ void Window::initialize()
 	glfwSetKeyCallback(window, key_input_callback);
 	glfwSetScrollCallback(window, scroll_callback);
 
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
