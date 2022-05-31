@@ -756,18 +756,17 @@ bool Model::loadModel(const std::string& filename)
 	buffer->LinkToShader(ID_vertex, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	buffer->EnableVertexArray(ID_vertex);
 
+	//Fill and link normal VBO
+	buffer->BindBuffer(GL_ARRAY_BUFFER, normalVBO);
+	buffer->FillBuffer(GL_ARRAY_BUFFER, tempNormals, GL_STATIC_DRAW);
+	buffer->LinkToShader(ID_normal, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	buffer->EnableVertexArray(ID_normal);
 
 	//Fill and link texture VBO
 	buffer->BindBuffer(GL_ARRAY_BUFFER, textureVBO);
 	buffer->FillBuffer(GL_ARRAY_BUFFER, tempTextures, GL_STATIC_DRAW);
 	buffer->LinkToShader(ID_texture, 2, GL_FLOAT, GL_FALSE, 0, 0);
 	buffer->EnableVertexArray(ID_texture);
-
-	//Fill and link normal VBO
-	buffer->BindBuffer(GL_ARRAY_BUFFER, normalVBO);
-	buffer->FillBuffer(GL_ARRAY_BUFFER, tempNormals, GL_STATIC_DRAW);
-	buffer->LinkToShader(ID_normal, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	buffer->EnableVertexArray(ID_normal);
 
 	//Fill EBO with indices 
 	buffer->BindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
