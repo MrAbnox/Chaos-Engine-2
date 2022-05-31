@@ -1,7 +1,5 @@
 #include "Mesh.h"
 
-std::map<std::string, GLint>* Mesh::s_IDMap = new std::map <std::string, GLint>;
-
 Mesh::Mesh()
 {
 

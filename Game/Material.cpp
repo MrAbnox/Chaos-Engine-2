@@ -120,6 +120,31 @@ glm::vec3 Material::getSpecular()
 	return specular;
 }
 
+std::shared_ptr<Texture> Material::getAmbientTexture()
+{
+	return ambientTexture;
+}
+
+std::shared_ptr<Texture> Material::getSpecularTexture()
+{
+	return specularTexture;
+}
+
+std::shared_ptr<Texture> Material::getDiffuseTexture()
+{
+	return diffuseTexture;
+}
+
+std::shared_ptr<Texture> Material::getNormalMap()
+{
+	return normalMap;
+}
+
+std::shared_ptr<Texture> Material::getHeightMap()
+{
+	return heightMap;
+}
+
 float Material::getShininess()
 {
 	return shininess;

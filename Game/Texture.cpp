@@ -1,5 +1,7 @@
 #include "Texture.h"
 #include <string>
+#include <stb_image.h>
+#include "../Utility/Debug.h"
 
 //initialize texture map at the very start of the app
 std::map<std::string, Texture>* Texture::s_textureMap = new std::map<std::string, Texture>;
@@ -9,7 +11,7 @@ Texture::Texture()
 	
 }
 
-void Texture::init(int width, int height, unsigned char** data, GLenum textureTarget, GLfloat* filter, GLenum* internalFormat, GLenum* format, bool clam, GLenum* attachment)
+void Texture::init(int width, int height, unsigned char** data, GLenum textureTarget, GLfloat* filter, GLenum* internalFormat, GLenum* format, bool clamp, GLenum* attachment)
 {
 	height = height;
 	width = width;
@@ -20,9 +22,9 @@ void Texture::init(int width, int height, unsigned char** data, GLenum textureTa
 	glTexParameterf(textureTarget, GL_TEXTURE_MIN_FILTER, filter[0]);
 	glTexParameterf(textureTarget, GL_TEXTURE_MAG_FILTER, filter[0]);
 
-	if (clam)
+	if (clamp)
 	{
-		//TODO:Do something about this?
+		//TODO: Fix clamp
 		//glTexParameterf(textureTarget, GL_TEXTURE_WRAP_S, GL_CLAMP);
 		//glTexParameterf(textureTarget, GL_TEXTURE_WRAP_T, GL_CLAMP);
 	}
@@ -71,7 +73,7 @@ void Texture::init(int width, int height, unsigned char** data, GLenum textureTa
 
 			if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 			{
-				//std::cerr << "Framebuffer creation failed!" << std::endl;
+				Debug::Log("Framebuffer creation failed!", ALERT);
 			}
 
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -79,81 +81,63 @@ void Texture::init(int width, int height, unsigned char** data, GLenum textureTa
 	}
 }
 
-//bool Texture::Load(const std::string& filename, const std::string& IDRef)
-//{
-//	//-----------------------------
-//	//Check if texture has already been loaded
-//	//-----------------------------
-//	bool isInMap = false;
-//	std::map<std::string, Texture>::iterator it;
-//
-//	it = s_textureMap->find(IDRef);
-//
-//	if (it == s_textureMap->end())
-//	{
-//	}
-//	else
-//	{
-//		isInMap = true;
-//		*this = it->second;
-//	}
-//
-//	//-----------------------------
-//	//Load raw image into RAM
-//	//-----------------------------
-//
-//	if (isInMap == false)
-//	{
-//		//Load the raw image data from file
-//		SDL_Surface* textureData = IMG_Load(filename.c_str());
-//
-//		//----------------------------- If image data could not be loaded 
-//
-//		if (!textureData)
-//		{
-//			std::string tempS = "Error loading texture file " + filename;
-//			TheDebug::Log(tempS, ALERT);
-//
-//			return false;
-//		}
-//
-//		//Extract the raw mage data and store in variables for use below (easier)
-//		GLsizei width = textureData->w;
-//		GLsizei height = textureData->h;
-//
-//		Uint8* pixels = (Uint8*)textureData->pixels;
-//		Uint8 depth = textureData->format->BytesPerPixel;
-//		GLint format = (depth == 4) ? GL_RGBA : GL_RGB;
-//
-//
-//		//----------------------------
-//		//Create texture object in VRAM
-//		//----------------------------
-//
-//		//Create the teture ID for our texture object(VRAM)
-//		glGenTextures(1, &ID);
-//
-//		//Bind the texture ID
-//		glBindTexture(GL_TEXTURE_2D, ID);
-//
-//		//Set default filtering options
-//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-//
-//		//Create the texture object in VRAM using the raw data extracted above
-//		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, pixels);
-//
-//		//Create mipmap for textures
-//		glGenerateMipmap(GL_TEXTURE_2D);
-//
-//		glBindTexture(GL_TEXTURE_2D, 0);
-//
-//		//Release RAM image
-//		SDL_FreeSurface(textureData);
-//
-//		//Add the new texture image to the map
-//		s_textureMap->insert(std::pair<std::string, Texture>(IDRef, *this));
-//	}
-//
-//	return true;
-//}
+
+//TODO: Check if texture was already loaded
+bool Texture::loadTexture(const std::string& fName)
+{
+	std::string filename = fName;
+
+	unsigned int textureID;
+	glGenTextures(1, &textureID);
+
+	int width, height, nrComponents;
+	unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
+	if (data)
+	{
+		bind();
+
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		unbind();
+
+		stbi_image_free(data);
+	}
+	else
+	{
+		Debug::Log("Texture failed to load at path:" + fName); 
+		stbi_image_free(data);
+		return false;
+	}
+
+	ID = textureID;
+
+	return true;
+}
+
+void const Texture::bind() const
+{
+	//Bind texture
+	glBindTexture(GL_TEXTURE_2D, ID);
+
+	if (ID < 0)
+	{
+		Debug::Log("Texture ID could not be bound", ALERT);
+	}
+}
+
+void const Texture::unbind() const
+{
+	//Bind texture
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	if (ID < 0)
+	{
+		Debug::Log("Texture ID could not be bound", ALERT);
+	}
+}

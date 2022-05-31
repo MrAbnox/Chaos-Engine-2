@@ -14,7 +14,7 @@ class Debug
 
 public:
 
-	static Debug* Log(const std::string& debuglog, Logs l);
+	static Debug* Log(const std::string& debuglog, Logs l = LOG);
 	static Debug* Instance();
 
 public:

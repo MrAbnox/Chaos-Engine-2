@@ -27,6 +27,13 @@ public:
 	glm::vec3 getAmbient();
 	glm::vec3 getDiffuse();
 	glm::vec3 getSpecular();
+
+	std::shared_ptr<Texture> getAmbientTexture();
+	std::shared_ptr<Texture> getSpecularTexture();
+	std::shared_ptr<Texture> getDiffuseTexture();
+	std::shared_ptr<Texture> getNormalMap();
+	std::shared_ptr<Texture> getHeightMap();
+
 	float getShininess();
 	float getReflectivity();
 	float getTransparency();
@@ -35,21 +42,21 @@ private:
 
 	std::shared_ptr<Shader> shader;
 
-	Texture* t_ambient;
-	Texture* t_specular;
-	Texture* t_diffuse;
-	Texture* t_normal;
+	std::shared_ptr<Texture> ambientTexture;
+	std::shared_ptr<Texture> specularTexture;
+	std::shared_ptr<Texture> diffuseTexture;
+	std::shared_ptr<Texture> normalMap;
+	std::shared_ptr<Texture> heightMap;
 
 	glm::vec3 ambient = glm::vec3(1.0f, 0.0f, 0.0f);
 	glm::vec3 diffuse = glm::vec3(1.0f);
 	glm::vec3 specular = glm::vec3(1.0f);
+	Type type;
 	
 	float shininess;
 	float reflectivity;
 	float transparency;
-	Type type;
 
 	unsigned int cubemapTexture;
-	//float refractionIndex;
 };
 #endif

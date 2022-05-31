@@ -32,9 +32,9 @@ public:
 	bool loadObj(const std::string& filepath);
 	bool loadModel(const std::string& filename);
 	bool loadTexture(const std::string& filename, const std::string textureID);
-	//void UnloadTexture(const std::string textureID); Maybe delete?
-	//void LoadNormalMap(std::string filepath);		   Maybe delete?
-	//void LoadHeightMap(std::string filepath);		   Maybe delete?
+	//void UnloadTexture(const std::string textureID);
+	//void LoadNormalMap(std::string filepath);		  
+	//void LoadHeightMap(std::string filepath);		  
 
 public:
 
@@ -90,14 +90,6 @@ private:
 		std::vector<glm::vec3>& bitangents);
 
 private:
-
-	GLfloat shininess;
-	GLint isTextured;
-
-	Buffer* buffer;
-
-private:
-
 	GLuint VAO;
 	GLuint EBO;
 	GLuint vertexVBO;
@@ -108,6 +100,9 @@ private:
 	GLuint VBO_tangent;
 	GLuint VBO_bitangent;
 
+	GLint isTextured;
+	GLfloat shininess;
+
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvs;
 	std::vector<glm::vec3> normals;
@@ -117,7 +112,6 @@ private:
 	std::vector<GLfloat> bitangents;
 
 private:
-
 	GLuint ID_vertex;
 	GLuint ID_normal;
 	GLuint ID_texture;
@@ -126,24 +120,16 @@ private:
 	GLuint ID_color;
 
 private:
-
-	glm::mat3 normal;
-
-private:
-
 	glm::vec3 position;
 	glm::vec3 rotation;
 	glm::vec3 scale;
 
-private:
-
-	Texture texture;
-	Texture normalMap;
-	Texture heightMap;
-
-private:
-
+	glm::mat3 normal;
 	std::string shader;
+
+	Buffer* buffer;
+private:
+
 
 	bool firstML;
 

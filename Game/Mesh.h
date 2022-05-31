@@ -54,9 +54,9 @@ protected:
 
 private:
 
-    Texture texture;
-    Texture normalMap;
-    Texture heightMap;
+    //Texture texture;
+    //Texture normalMap;
+    //Texture heightMap;
 };
 
 #endif

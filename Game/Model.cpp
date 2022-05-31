@@ -8,6 +8,7 @@
 #include <cstring>
 #include "Buffer.h"
 #include "../Utility/Debug.h"
+#include "../Application/Renderer.h"
 
 //Constructor that assigns all default values 
 //------------------------------------------------------------------------------------------------------
@@ -778,16 +779,16 @@ bool Model::loadModel(const std::string& filename)
 
 }
 
-//Function that loads in texture file for cube
+//Function that loads in texture file for model
 //------------------------------------------------------------------------------------------------------
 bool Model::loadTexture(const std::string& filename, const std::string textureID)
 {
 	isTextured = 1;
 
-	return texture.Load(filename, textureID);
+	return mat->getAmbientTexture()->loadTexture(filename);
 }
 
-//Function that unloads texture file for cube
+//Function that unloads texture file for model
 //------------------------------------------------------------------------------------------------------
 //void Model::UnloadTexture(const std::string textureID)
 //{
@@ -827,13 +828,8 @@ void Model::Create(std::string programString)
 	//Set program string to classe's
 	shader = programString;
 
-	//Make sure model always exists
-	scale = glm::vec3(1.0f);
-
 	//Set material color to default
 	shininess = 1.0f;
-
-	isHighlighted = 1;
 
 	//Get all other shader IDs relating to attributes
 
@@ -864,75 +860,28 @@ void Model::Update()
 //------------------------------------------------------------------------------------------------------
 void Model::Draw()
 {
-	if (shader == "Lighting")
-	{
-		//Send model matrix to vertex shader
-		TheShader::Instance()->SendUniformData("Lighting_model", 1, GL_FALSE, transform->GetLocalToWorldCoords());
-
-		//Send normal matrix to vertex shader  ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>CHECK WITH KARSTEN
-		glUniformMatrix3fv(ID_normal, 1, GL_TRUE, &normal[0][0]);
-
-		TheShader::Instance()->SendUniformData("Lighting_material.ambient", 1, &ambient.r);
-		TheShader::Instance()->SendUniformData("Lighting_material.diffuse", 1, &diffuse.r);
-		TheShader::Instance()->SendUniformData("Lighting_material.specular", 1, &specular.r);
-		TheShader::Instance()->SendUniformData("Lighting_material.shininess", shininess);
-
-		TheShader::Instance()->SendUniformData("Lighting_isTextured", isTextured);
-
-		TheShader::Instance()->SendUniformData("Lighting_isShadowMapped", isShadowMapped);
-		TheShader::Instance()->SendUniformData("Lighting_isNormalMapped", isNormalMapped);
-		//TheShader::Instance()->SendUniformData("Lighting_isHeightMapped", m_isHeightMapped);
-	}
-	else if (shader == "Lightless")
-	{
-		//Send model matrix to vertex shader
-		TheShader::Instance()->SendUniformData("Lightless_model", 1, GL_FALSE, transform->GetLocalToWorldCoords());
-		TheShader::Instance()->SendUniformData("Lightless_isTextured", isTextured);
-	}
-	else if (shader == "ShadowMapping")
-	{
-		TheShader::Instance()->SendUniformData("ShadowMapping_model", 1, GL_FALSE, transform->GetLocalToWorldCoords());
-	}
-	else if (shader == "NormalMapping")
-	{
-		TheShader::Instance()->SendUniformData("NormalMapping_model", 1, GL_FALSE, transform->GetLocalToWorldCoords());
-	}
-	else if (shader == "ShadowMapGen")
-	{
-		TheShader::Instance()->SendUniformData("ShadowMapGen_model", 1, GL_FALSE, transform->GetLocalToWorldCoords());
-	}
-	else if (shader == "Toon")
-	{
-		glm::vec3 v3_rgb = glm::vec3(0.0f);
-		glm::vec3 v3_position = glm::vec3(0.0f);
-
-		TheShader::Instance()->SendUniformData("Toon_model", 1, GL_FALSE, transform->GetLocalToWorldCoords());
-		TheShader::Instance()->SendUniformData("Toon_material.ambient", 1, &ambient.r);
-		TheShader::Instance()->SendUniformData("Toon_material.diffuse", 1, &diffuse.r);
-		TheShader::Instance()->SendUniformData("Toon_toon", isHighlighted);
-		TheShader::Instance()->SendUniformData("Toon_material.color", v3_rgb);
-		TheShader::Instance()->SendUniformData("Toon_position", v3_position);
-	}
+	Renderer::instance()->getShader("Default").Use();
+	Renderer::instance()->getShader("Default").setUniform("skybox", 0);
 
 	//Only if model is set to be textured bind the texture
 	if (isTextured == 1)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		texture.Bind();
+		mat->getAmbientTexture()->bind();
 
 		if (isNormalMapped == 1)
 		{
 			//Bind Normal Mapping
 			glActiveTexture(GL_TEXTURE1);
 
-			normalMap.Bind();
+			mat->getNormalMap()->bind();
 
 			if (isHeightMapped == 1)
 			{
 				//Bind Height Mapping
 				glActiveTexture(GL_TEXTURE2);
 
-				heightMap.Bind();
+				mat->getHeightMap()->bind();
 			}
 		}
 	}

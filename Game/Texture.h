@@ -42,9 +42,11 @@ public:
 
 public:
 
-	void init(int width, int height, unsigned char** data, GLenum textureTarget, GLfloat* filter, GLenum* internalFormat, GLenum* format, bool clam, GLenum* attachment);
-	bool Load(const std::string& filename, const std::string& IDRef);
-	
+	void init(int width, int height, unsigned char** data, GLenum textureTarget, GLfloat* filter, GLenum* internalFormat, GLenum* format, bool clamp, GLenum* attachment);
+	bool loadTexture(const std::string& fName);
+	void const bind() const;
+	void const unbind() const;
+
 private:
 
 	int width;
