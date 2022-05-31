@@ -16,8 +16,3 @@ glm::mat4* Transform::getModel()
 {
 	return &model;
 }
-
-//glm::vec3 Transform::getPos()
-//{
-//	return p
-//}

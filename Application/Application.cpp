@@ -24,7 +24,7 @@ void Application::run()
 
 	while (isRunning && !glfwWindowShouldClose(Window::instance()->getWindow()))
 	{
-		Window::instance()->clear();
+		//Window::instance()->clear();
 
 		EditorLayer::instance()->run();
 		UI::instance()->run();

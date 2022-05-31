@@ -27,10 +27,10 @@ void Scene::start()
 
 void Scene::update()
 {
-	//for (size_t i = 0; i < sceneObjects.size(); i++)
-	//{
-	//	sceneObjects[i].get()->update();
-	//}
+	for (size_t i = 0; i < sceneObjects.size(); i++)
+	{
+		sceneObjects[i].get()->update();
+	}
 
 	/*for (int i = 0; i < sceneObjects.size(); i++) 
 	{

@@ -9,6 +9,8 @@ Camera::Camera(GameObject* object) : Component(gameObject)
 
 	setDefault(glm::vec3(-5.0f, 1.0f, -10.0f));
 	Window::instance()->setCamera(this);
+
+	updateCameraVectors();
 }
 
 void Camera::update()
@@ -41,10 +43,11 @@ void Camera::setDefault(glm::vec3 position, glm::vec3 up, float yaw, float pitch
 
 void Camera::sendData(Shader& shader)
 {
+	glEnable(GL_DEPTH_TEST);
 	view = getViewMatrix();
 	//view = glm::lookAt(position, glm::vec3(0.0f), up);/* Renderer::instance()->getCube()->getTransform()->getModel());*/
 	glm::vec2 screenSize = Window::instance()->getScreenSize();
-	proj = glm::perspective(glm::radians(zoom), (float)screenSize.x / (float)screenSize.y, 0.1f, 100.0f);
+	proj = glm::perspective(glm::radians(zoom), (float)screenSize.x / (float)screenSize.y, NEAR_CLIP,FAR_CLIP);
 	viewProj = proj * view;
 	shader.Use();
 	shader.setUniform("view", view);
@@ -63,6 +66,10 @@ void Camera::updateCameraVectors()
 	// Also re-calculate the Right and Up vector
 	right = glm::normalize(glm::cross(front, worldUp));  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
 	up = glm::normalize(glm::cross(right, front));
+	
+	//std::cout << "front: " << front.x << " " << front.y << " " << front.z << std::endl;
+	//std::cout << "right: " << right.x << " " << right.y << " " << right.z << std::endl;
+	//std::cout << "up: " << right.x << " " << right.y << " " << right.z << std::endl;
 }
 
 glm::mat4 Camera::getViewMatrix()
@@ -81,6 +88,8 @@ void Camera::ProcessKeyboard(Camera_Movement direction)
 		position -= right * velocity;
 	if (direction == RIGHT)
 		position += right * velocity;
+
+	//std::cout << "Camera position: " << position.x << " " << position.y << " " << position.z << std::endl;
 }
 
 void Camera::ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch)

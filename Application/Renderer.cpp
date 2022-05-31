@@ -35,6 +35,8 @@ void Renderer::update()
 
 void Renderer::render()
 {
+	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
 	//if(!isLoadingScene)
 	currentScene->render();
 }
@@ -51,6 +53,8 @@ void Renderer::loadShaders()
 {
 	Shader* temp = new Shader("shaders/default.vert", "shaders/default.frag");
 	loadedShaders["Default"] = temp;
+
+	temp = new Shader("shaders/skybox.vert", "shaders/skybox.frag");
 }
 
 void Renderer::loadMaterials()

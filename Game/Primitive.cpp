@@ -73,6 +73,7 @@ void Primitive::setup()
 		0.5f,0.5f
 	};
 
+		
 	normals = {
 		0.0f,0.0f,
 		1.0f,0.0f,
@@ -165,8 +166,6 @@ void Primitive::setup()
 	buffer->GenerateBuffers(1, &VBO_vertex);
 	buffer->BindBuffer(GL_ARRAY_BUFFER, VBO_vertex);
 	buffer->FillBuffer(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
-	buffer->LinkToShader(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	buffer->EnableVertexArray(0);
 
 	//buffer->GenerateBuffers(1, &VBO_color);
 	//buffer->BindBuffer(GL_ARRAY_BUFFER, VBO_color);
@@ -177,7 +176,19 @@ void Primitive::setup()
 	buffer->GenerateBuffers(1, &EBO);
 	buffer->BindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	buffer->FillBuffer(GL_ELEMENT_ARRAY_BUFFER, indices, GL_STATIC_DRAW);
+
+	
+	buffer->LinkToShader(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	buffer->EnableVertexArray(0);
 	buffer->BindVertexArrays(0);
+
+
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	glBindVertexArray(0);
 }
 
 void Primitive::draw()
@@ -187,6 +198,6 @@ void Primitive::draw()
 	//mat->getShader()->setUniform("diffuse", mat->getDiffuse());
 
 	glBindVertexArray(VAO);
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glBindVertexArray(0);
 }

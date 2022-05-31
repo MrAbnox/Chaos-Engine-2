@@ -33,12 +33,12 @@ protected:
     Material* mat; //TODO: Maybe make this a pointer?
     Buffer* buffer;
     unsigned int VAO, VBO, EBO;
+    glm::mat4 model;
 private:
 
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
 
-    glm::mat4 model;
 
     static std::map<std::string, GLint>* s_IDMap;
 	

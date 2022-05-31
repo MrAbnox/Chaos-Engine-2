@@ -34,6 +34,7 @@ void GameObject::update()
 		for (auto& c : components)
 		{
 			c->update();
+			
 		}
 	}
 }

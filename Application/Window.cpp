@@ -34,7 +34,6 @@
 		// we use the handy camera class from LearnOpenGL to handle our camera
 		//TODO:: Make Camera Process Mouse Movement
 
-		std::cout << "XOFFSET: " + std::to_string(xOffset) + " YOFFSET: " + std::to_string(yOffset) << std::endl;
 		Window::instance()->getCamera()->ProcessMouseMovement(xOffset, yOffset);
 	}
 	
@@ -83,7 +82,7 @@ void Window::initialize()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
-	window = glfwCreateWindow(screenWidth, screenHeight, "Exercise 9", NULL, NULL);
+	window = glfwCreateWindow(screenWidth, screenHeight, "Chaos Engine", NULL, NULL);
 	if (window == NULL)
 	{
 		//std::cout << "Failed to create GLFW window" << std::endl;
@@ -114,7 +113,7 @@ void Window::initialize()
 void Window::clear()
 {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT );
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void Window::swapBuffers()

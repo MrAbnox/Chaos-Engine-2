@@ -30,7 +30,7 @@ public:
 	
 public:	
 
-	virtual void update();
+	void update() override;
 	virtual void fixedUpdate(float deltaTime) {};
 	void render();
 
