@@ -13,145 +13,51 @@ Primitive::Primitive(std::vector<Vertex> vertices, std::vector<unsigned int> ind
 void Primitive::setup()
 {
 	mat = new Material();
-	//Setup indices
-	indices = { 
-		0,1,
-		3,3,
-		1,2,
-		4,5,
-		7,7,
-		5,6,
-		8,9,
-		11,11,
-		9,10,
-		12,13,
-		15,15,
-		13,14,
-		16,17,
-		19,19,
-		17,18,
-		20,21,
-		23,23,
-		21,22 };
 
 	vertices = {
-		-0.5f,0.5f,
-		0.5f,0.5f,
-		0.5f,0.5f,
-		0.5f,-0.5f,
-		0.5f,-0.5f,
-		-0.5f,0.5f,
-		-0.5f,0.5f,
-		-0.5f,0.5f,
-		0.5f,-0.5f,
-		0.5f,-0.5f,
-		-0.5f,-0.5f,
-		-0.5f,-0.5f,
-		-0.5f,0.5f,
-		-0.5f,-0.5f,
-		0.5f,0.5f,
-		-0.5f,-0.5f,
-		0.5f,-0.5f,
-		-0.5f,-0.5f,
-		0.5f,0.5f,
-		-0.5f,0.5f,
-		0.5f,0.5f,
-		0.5f,-0.5f,
-		0.5f,0.5f,
-		-0.5f,-0.5f,
-		-0.5f,-0.5f,
-		-0.5f,0.5f,
-		-0.5f,-0.5f,
-		0.5f,-0.5f,
-		0.5f,-0.5f,
-		-0.5f,0.5f,
-		-0.5f,0.5f,
-		-0.5f,0.5f,
-		0.5f,-0.5f,
-		0.5f,0.5f,
-		0.5f,-0.5f,
-		0.5f,0.5f
+		// back face
+		-1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
+		1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 1.0f, // top-right
+		1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 0.0f, // bottom-right
+		1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 1.0f, // top-right
+		-1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
+		-1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 1.0f, // top-left
+		// front face
+		-1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 0.0f, // bottom-left
+		1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 0.0f, // bottom-right
+		1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 1.0f, // top-right
+		1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 1.0f, // top-right
+		-1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 1.0f, // top-left
+		-1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 0.0f, // bottom-left
+		// left face
+		-1.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-right
+		-1.0f,  1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 1.0f, // top-left
+		-1.0f, -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-left
+		-1.0f, -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-left
+		-1.0f, -1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 0.0f, // bottom-right
+		-1.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-right
+		// right face
+		1.0f,  1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-left
+		1.0f, -1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-right
+		1.0f,  1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 1.0f, // top-right
+		1.0f, -1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-right
+		1.0f,  1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-left
+		1.0f, -1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 0.0f, // bottom-left
+		// bottom face
+		-1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 1.0f, // top-right
+		1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 1.0f, // top-left
+		1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 0.0f, // bottom-left
+		1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 0.0f, // bottom-left
+		-1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 0.0f, // bottom-right
+		-1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 1.0f, // top-right
+		// top face
+		-1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 1.0f, // top-left
+		1.0f,  1.0f , 1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f, // bottom-right
+		1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 1.0f, // top-right
+		1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f, // bottom-right
+		-1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 1.0f, // top-left
+		-1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 0.0f  // bottom-left
 	};
-
-		
-	normals = {
-		0.0f,0.0f,
-		1.0f,0.0f,
-		0.0f,1.0f,
-		0.0f,0.0f,
-		1.0f,0.0f,
-		0.0f,1.0f,
-		0.0f,0.0f,
-		-1.0f,0.0f,
-		0.0f,-1.0f,
-		0.0f,0.0f,
-		-1.0f,0.0f,
-		0.0f,-1.0f,
-		-1.0f,0.0f,
-		0.0f,-1.0f,
-		0.0f,0.0f,
-		-1.0f,0.0f,
-		0.0f,-1.0f,
-		0.0f,0.0f,
-		1.0f,0.0f,
-		0.0f,1.0f,
-		0.0f,0.0f,
-		1.0f,0.0f,
-		0.0f,1.0f,
-		0.0f,0.0f,
-		0.0f,-1.0f,
-		0.0f,0.0f,
-		-1.0f,0.0f,
-		0.0f,-1.0f,
-		0.0f,0.0f,
-		-1.0f,0.0f,
-		0.0f,1.0f,
-		0.0f,0.0f,
-		1.0f,0.0f,
-		0.0f,1.0f,
-		0.0f,0.0f,
-		1.0f,0.0f 
-	};
-
-	//Set color was white
-	glm::vec3 temp_rgb = mat->getAmbient();
-	
-	//Temp Color array for cube colors
-	GLfloat tempColors[]{ temp_rgb.x, temp_rgb.y, temp_rgb.z,
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,								//#face1 front
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,
-
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,								//#face2 back
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,
-
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,								//#face2 left
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,
-
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,								//#face2 right
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,
-
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,								//#face2 top
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,
-
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,								//#face2 bottom
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z,
-						  temp_rgb.x, temp_rgb.y, temp_rgb.z
-	};
-
-	for (size_t i = 0; i < 72; i++)
-	{
-		colors.push_back(tempColors[i]);
-	}
 
 	//Set EBO/VAO and VBOs to default
 	EBO = 0;
@@ -161,33 +67,22 @@ void Primitive::setup()
 	VBO_normal = 0;
 
 	buffer->GenerateVertexArrays(1, &VAO);
-	buffer->BindVertexArrays(VAO);
-
 	buffer->GenerateBuffers(1, &VBO_vertex);
+	
 	buffer->BindBuffer(GL_ARRAY_BUFFER, VBO_vertex);
 	buffer->FillBuffer(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
-
-	//buffer->GenerateBuffers(1, &VBO_color);
-	//buffer->BindBuffer(GL_ARRAY_BUFFER, VBO_color);
-	//buffer->FillBuffer(GL_ARRAY_BUFFER, colors, GL_STATIC_DRAW);
-	//buffer->LinkToShader(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	//buffer->EnableVertexArray(1);
-
-	buffer->GenerateBuffers(1, &EBO);
-	buffer->BindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	buffer->FillBuffer(GL_ELEMENT_ARRAY_BUFFER, indices, GL_STATIC_DRAW);
-
 	
-	buffer->LinkToShader(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	//link vertex attributes 
+	buffer->BindVertexArrays(VAO);
 	buffer->EnableVertexArray(0);
-	buffer->BindVertexArrays(0);
 
-
-	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-
+	buffer->EnableVertexArray(0);
+	buffer->LinkToShader(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	buffer->EnableVertexArray(1);
+	buffer->LinkToShader(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	buffer->EnableVertexArray(2);;
+	buffer->LinkToShader(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
 	glBindVertexArray(0);
 }
 
