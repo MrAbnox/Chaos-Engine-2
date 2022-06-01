@@ -48,6 +48,9 @@ Model::Model(std::string shader, std::string path)
 	ID_vertex = 0;
 	ID_normal = 0;
 	ID_texture = 0;
+
+	Create(shader);
+	loadModel(path);
 }
 
 //Predicate function that returns flag reference
@@ -773,7 +776,6 @@ bool Model::loadModel(const std::string& filename)
 
 	//Bind all VBOs and shader attributes together with VAO
 	glBindVertexArray(VAO);
-	Renderer::instance()->getShader(shader).Use();
 	//fFll and link vertex VBO
 	buffer->BindBuffer(GL_ARRAY_BUFFER, vertexVBO);
 	buffer->FillBuffer(GL_ARRAY_BUFFER, tempVertices, GL_STATIC_DRAW);

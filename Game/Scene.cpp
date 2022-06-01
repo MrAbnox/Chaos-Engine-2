@@ -33,13 +33,13 @@ void Scene::update()
 		sceneObjects[i].get()->update();
 	}
 
-	/*for (int i = 0; i < sceneObjects.size(); i++) 
+	for (int i = 0; i < sceneObjects.size(); i++) 
 	{
 		if (sceneObjects[i]->getShouldDestroy())
 		{
 			sceneObjects.erase(sceneObjects.begin() + i);
 		}
-	}*/
+	}
 }
 
 void Scene::render()

@@ -85,16 +85,12 @@ void Renderer::loadGameObjects()
 	// Floor
 	//________________________________________________________________________________
 	std::shared_ptr<GameObject> obj2 = std::make_shared<GameObject>();
-	Mesh* model = new Model();
-	std::dynamic_pointer_cast<Model>(model)->Create("Default");
-	model->loadModel("floor/floor.obj");
+	Mesh* model = new Model("Default", ("floor/floor.obj"));
 	std::shared_ptr<GameObject> floor = std::make_shared<GameObject>();
 	std::shared_ptr<MeshRenderer> temp2 = obj2->addComponent<MeshRenderer>();
-	loadedGameObjects["Floor"] = obj2;
-	mesh = model;
-	mesh->setup();
-	temp->setMaterial(loadedMaterials["Skybox"].get());
-	temp->setMesh(mesh);
+	loadedGameObjects["Floor"] = obj2;;
+	temp2->setMaterial(loadedMaterials["Skybox"].get());
+	temp2->setMesh(model);
 
 	// Camera
 	//________________________________________________________________________________
