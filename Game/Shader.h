@@ -14,6 +14,7 @@ public:
 	//~Shader();
 
 	void Use();
+	unsigned int getID();
 
 public:
 

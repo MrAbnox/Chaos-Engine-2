@@ -23,6 +23,7 @@ class Model : public Mesh
 public:
 
 	Model();
+	Model(std::string shader, std::string path);
 
 public:
 
@@ -40,7 +41,7 @@ public:
 
 	void Create(std::string shader);
 	void Update();
-	void Draw();
+	void draw() override;
 	void Destroy();
 
 

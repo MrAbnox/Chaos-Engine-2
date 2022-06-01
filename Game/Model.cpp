@@ -31,6 +31,25 @@ Model::Model()
 	ID_texture = 0;
 }
 
+Model::Model(std::string shader, std::string path)
+{
+	isShadowMapped = 0;
+	isTextured = 0;
+	shininess = 0.1f;
+
+	VAO = 0;
+	EBO = 0;
+	vertexVBO = 0;
+	colorVBO = 0;
+	normalVBO = 0;
+	textureVBO = 0;
+	totalVertices = 0;
+
+	ID_vertex = 0;
+	ID_normal = 0;
+	ID_texture = 0;
+}
+
 //Predicate function that returns flag reference
 //------------------------------------------------------------------------------------------------------
 GLint& Model::getIsTextured()
@@ -42,7 +61,7 @@ GLint& Model::getIsTextured()
 //------------------------------------------------------------------------------------------------------
 void Model::SetShininess(GLfloat shininess)
 {
-	shininess = shininess;
+	this->shininess = shininess;
 }
 //
 ////Setter function that sets ambient component of model's material
@@ -539,6 +558,11 @@ bool Model::loadModel(const std::string& filename)
 	std::vector<std::string> subNumbers;
 	std::vector<std::string> subStrings;
 
+	unsigned int shaderID = Renderer::instance()->getShader("Default").getID();
+	ID_vertex = glGetAttribLocation(shaderID, "vertex");
+	ID_normal = glGetAttribLocation(shaderID, "normal");
+	ID_texture = glGetAttribLocation(shaderID, "textCoord");
+
 	//Display text to state that file is being opened and read
 	std::cout << "Opening and reading model file : " << "\"" << filename << "\"" << std::endl;
 
@@ -749,24 +773,24 @@ bool Model::loadModel(const std::string& filename)
 
 	//Bind all VBOs and shader attributes together with VAO
 	glBindVertexArray(VAO);
-
+	Renderer::instance()->getShader(shader).Use();
 	//fFll and link vertex VBO
 	buffer->BindBuffer(GL_ARRAY_BUFFER, vertexVBO);
 	buffer->FillBuffer(GL_ARRAY_BUFFER, tempVertices, GL_STATIC_DRAW);
 	buffer->LinkToShader(ID_vertex, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	buffer->EnableVertexArray(ID_vertex);
 
-	//Fill and link normal VBO
-	buffer->BindBuffer(GL_ARRAY_BUFFER, normalVBO);
-	buffer->FillBuffer(GL_ARRAY_BUFFER, tempNormals, GL_STATIC_DRAW);
-	buffer->LinkToShader(ID_normal, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	buffer->EnableVertexArray(ID_normal);
+	////Fill and link normal VBO
+	//buffer->BindBuffer(GL_ARRAY_BUFFER, normalVBO);
+	//buffer->FillBuffer(GL_ARRAY_BUFFER, tempNormals, GL_STATIC_DRAW);
+	//buffer->LinkToShader(ID_normal, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	//buffer->EnableVertexArray(ID_normal);
 
-	//Fill and link texture VBO
-	buffer->BindBuffer(GL_ARRAY_BUFFER, textureVBO);
-	buffer->FillBuffer(GL_ARRAY_BUFFER, tempTextures, GL_STATIC_DRAW);
-	buffer->LinkToShader(ID_texture, 2, GL_FLOAT, GL_FALSE, 0, 0);
-	buffer->EnableVertexArray(ID_texture);
+	////Fill and link texture VBO
+	//buffer->BindBuffer(GL_ARRAY_BUFFER, textureVBO);
+	//buffer->FillBuffer(GL_ARRAY_BUFFER, tempTextures, GL_STATIC_DRAW);
+	//buffer->LinkToShader(ID_texture, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	//buffer->EnableVertexArray(ID_texture);
 
 	//Fill EBO with indices 
 	buffer->BindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
@@ -857,7 +881,7 @@ void Model::Update()
 //------------------------------------------------------------------------------------------------------
 //Function that renders model on screen
 //------------------------------------------------------------------------------------------------------
-void Model::Draw()
+void Model::draw()
 {
 	Renderer::instance()->getShader("Default").Use();
 	Renderer::instance()->getShader("Default").setUniform("skybox", 0);

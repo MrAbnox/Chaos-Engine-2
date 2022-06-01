@@ -1,6 +1,7 @@
 #include "Renderer.h"
 #include "../Components/MeshRenderer.h"
 #include "../Editor/Camera.h"
+#include "../Game/Model.h"
 
 Renderer* Renderer::instance()
 {
@@ -51,8 +52,8 @@ void Renderer::loadScene()
 
 void Renderer::loadShaders()
 {
-	//std::shared_ptr<Shader> temp = std::make_shared<Shader>("shaders/default.vert", "shaders/default.frag");
-	//loadedShaders["Default"] = temp;
+	std::shared_ptr<Shader> temp = std::make_shared<Shader>("shaders/default.vert", "shaders/default.frag");
+	loadedShaders["Default"] = temp;
 
 	std::shared_ptr<Shader> temp2 = std::make_shared<Shader>("shaders/skybox.vert", "shaders/skybox.frag");
 	loadedShaders["Skybox"] = temp2;
@@ -69,21 +70,38 @@ void Renderer::loadMaterials()
 
 void Renderer::loadGameObjects()
 {
-	//TODO: Do the same for plane gameobject
-	std::shared_ptr<GameObject> prim1 = std::make_shared<GameObject>();
-	std::shared_ptr<MeshRenderer> temp = prim1->addComponent<MeshRenderer>();
-	loadedGameObjects["Cube"] = prim1;
-	//std::shared_ptr<MeshRenderer> temp = loadedGameObjects["Cube"]->addComponent<MeshRenderer>();
-
+	//TODO: Automate this system with a prefab system (File reading)
+	
+	// Cube
+	//________________________________________________________________________________
+	std::shared_ptr<GameObject> obj1 = std::make_shared<GameObject>();
+	std::shared_ptr<MeshRenderer> temp = obj1->addComponent<MeshRenderer>();
+	loadedGameObjects["Cube"] = obj1;
 	Mesh* mesh = new Primitive();
 	mesh->setup();
 	temp->setMaterial(loadedMaterials["Skybox"].get());
 	temp->setMesh(mesh);
 
+	// Floor
+	//________________________________________________________________________________
+	std::shared_ptr<GameObject> obj2 = std::make_shared<GameObject>();
+	Mesh* model = new Model();
+	std::dynamic_pointer_cast<Model>(model)->Create("Default");
+	model->loadModel("floor/floor.obj");
+	std::shared_ptr<GameObject> floor = std::make_shared<GameObject>();
+	std::shared_ptr<MeshRenderer> temp2 = obj2->addComponent<MeshRenderer>();
+	loadedGameObjects["Floor"] = obj2;
+	mesh = model;
+	mesh->setup();
+	temp->setMaterial(loadedMaterials["Skybox"].get());
+	temp->setMesh(mesh);
+
+	// Camera
+	//________________________________________________________________________________
+	std::shared_ptr<GameObject> obj3 = std::make_shared<GameObject>();
 	std::shared_ptr<GameObject> cam = std::make_shared<GameObject>();
 	cam->addComponent<Camera>();
 	loadedGameObjects["Camera"] = cam;
-	//loadedGameObjects["Camera"]->addComponent<Camera>();
 }
 
 std::shared_ptr<GameObject> Renderer::getObject(std::string name)
