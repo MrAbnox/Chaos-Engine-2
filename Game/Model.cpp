@@ -886,24 +886,23 @@ void Model::draw()
 	if (isTextured == 1)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, mat->getAmbientTexture()->getID());
-		//mat->getAmbientTexture()->bind();
+		mat->getAmbientTexture()->bind();
 
-		//if (isNormalMapped == 1)
-		//{
-		//	//Bind Normal Mapping
-		//	glActiveTexture(GL_TEXTURE1);
+		if (isNormalMapped == 1)
+		{
+			//Bind Normal Mapping
+			glActiveTexture(GL_TEXTURE1);
 
-		//	mat->getNormalMap()->bind();
+			mat->getNormalMap()->bind();
 
-		//	if (isHeightMapped == 1)
-		//	{
-		//		//Bind Height Mapping
-		//		glActiveTexture(GL_TEXTURE2);
+			if (isHeightMapped == 1)
+			{
+				//Bind Height Mapping
+				glActiveTexture(GL_TEXTURE2);
 
-		//		mat->getHeightMap()->bind();
-		//	}
-		//}
+				mat->getHeightMap()->bind();
+			}
+		}
 	}
 
 	glClear(GL_DEPTH_BUFFER_BIT);
