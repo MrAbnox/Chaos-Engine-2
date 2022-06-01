@@ -2,6 +2,7 @@
 #include <string>
 #include <stb_image.h>
 #include "../Utility/Debug.h"
+#include "../Application/Renderer.h"
 
 //initialize texture map at the very start of the app
 std::map<std::string, Texture>* Texture::s_textureMap = new std::map<std::string, Texture>;
@@ -10,6 +11,11 @@ Texture::Texture()
 {
 	
 }
+Texture::Texture(const Texture& m)
+{
+
+}
+
 
 void Texture::init(int width, int height, unsigned char** data, GLenum textureTarget, GLfloat* filter, GLenum* internalFormat, GLenum* format, bool clamp, GLenum* attachment)
 {
@@ -83,20 +89,22 @@ void Texture::init(int width, int height, unsigned char** data, GLenum textureTa
 
 
 //TODO: Check if texture was already loaded
-bool Texture::loadTexture(const std::string& fName)
+GLuint Texture::loadTexture(const std::string& fName)
 {
 	std::string filename = fName;
 
 	unsigned int textureID;
 	glGenTextures(1, &textureID);
+	
+	//Renderer::instance()->getShader("Default").Use();
 
 	int width, height, nrComponents;
 	unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
 	if (data)
 	{
-		bind();
+		glBindTexture(GL_TEXTURE_2D, textureID);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, width, height, 0, GL_RED, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -104,7 +112,7 @@ bool Texture::loadTexture(const std::string& fName)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		unbind();
+		glBindTexture(GL_TEXTURE_2D, 0);
 
 		stbi_image_free(data);
 	}
@@ -116,8 +124,7 @@ bool Texture::loadTexture(const std::string& fName)
 	}
 
 	ID = textureID;
-
-	return true;
+	return textureID;
 }
 
 void const Texture::bind() const
@@ -140,4 +147,9 @@ void const Texture::unbind() const
 	{
 		Debug::Log("Texture ID could not be bound", ALERT);
 	}
+}
+
+void Texture::setID(GLuint id)
+{
+	ID = id;
 }

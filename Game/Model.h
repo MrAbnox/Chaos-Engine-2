@@ -104,7 +104,7 @@ private:
 	GLint isTextured;
 	GLfloat shininess;
 
-	std::vector<GLfloat> vertices;
+	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvs;
 	std::vector<glm::vec3> normals;
 	std::vector<GLuint> indices;
@@ -116,6 +116,7 @@ private:
 	GLuint ID_vertex;
 	GLuint ID_normal;
 	GLuint ID_texture;
+	GLuint ID_tex;
 	GLuint ID_tangent;
 	GLuint ID_bitangent;
 	GLuint ID_color;

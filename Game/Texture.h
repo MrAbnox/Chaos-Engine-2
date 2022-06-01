@@ -38,21 +38,22 @@ class Texture
 {
 public:
 	Texture();
-	~Texture();
+	Texture(const Texture&); // copy constructor	
 
 public:
 
 	void init(int width, int height, unsigned char** data, GLenum textureTarget, GLfloat* filter, GLenum* internalFormat, GLenum* format, bool clamp, GLenum* attachment);
-	bool loadTexture(const std::string& fName);
+	GLuint loadTexture(const std::string& fName);
 	void const bind() const;
 	void const unbind() const;
+	void setID(GLuint id);
 
 private:
 
 	int width;
 	int height;
 
-	GLuint ID;
+	unsigned int ID;
 	Filters filter;
 	GLuint frameBuffer;
 	GLuint renderBuffer;

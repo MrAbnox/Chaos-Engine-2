@@ -16,6 +16,8 @@ public:
 	Material(Type type = DEFAULT);
 	Material(const Material&); // copy constructor	
 
+	void start();
+
 	void setShader(std::shared_ptr<Shader> shader);
 	void loadMaterialFile(std::string name);
 	void sendData();
@@ -23,11 +25,13 @@ public:
 
 	//unsigned int loadCubemap(std::vector<std::string> faces);
 
+	void setAmbientTexture(std::shared_ptr<Texture> t);
+
 	std::shared_ptr<Shader> getShader();
 	glm::vec3 getAmbient();
 	glm::vec3 getDiffuse();
 	glm::vec3 getSpecular();
-
+	
 	std::shared_ptr<Texture> getAmbientTexture();
 	std::shared_ptr<Texture> getSpecularTexture();
 	std::shared_ptr<Texture> getDiffuseTexture();

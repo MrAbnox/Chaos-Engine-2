@@ -11,29 +11,23 @@ Material::Material(Type type)
 	case DEFAULT:
 		break;
 	case SKYBOX:
-		
-		//std::vector<std::string> faces
-		//{
-		//	"skybox/right.tga",
-		//	"skybox/left.tga",
-		//	"skybox/top.tga",
-		//	"skybox/bottom.tga",
-		//	"skybox/front.tga",
-		//	"skybox/back.tga"
-		//};
-		//cubemapTexture = loadCubemap(faces);
-
 		break;
 	default:
 		break;
 	}
 
-	
+	std::shared_ptr<Texture> t = std::make_shared<Texture>();
+	setAmbientTexture(t);
 }
 
 Material::Material(const Material &m)
 {
 	type = m.type;
+}
+
+void Material::start()
+{
+
 }
 
 void Material::setShader(std::shared_ptr<Shader> shader)
@@ -98,6 +92,11 @@ void Material::sendData()
 
 void Material::reset()
 {
+}
+
+void Material::setAmbientTexture(std::shared_ptr<Texture> t)
+{
+	ambientTexture = t;
 }
 
 std::shared_ptr<Shader> Material::getShader()

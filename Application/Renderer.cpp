@@ -71,6 +71,7 @@ void Renderer::loadMaterials()
 	mat2->setShader(loadedShaders["Default"]);
 	loadedMaterials["Default"] = mat2;
 	loadedMaterials["Default"]->setShader(loadedShaders["Default"]);
+
 }
 
 void Renderer::loadGameObjects()

@@ -56,8 +56,9 @@ Model::Model(std::string shader, std::string path, std::string texturePath)
 
 	Create(shader);
 	loadModel(path);
-	loadTexture("bricks2");
-	
+	glActiveTexture(GL_TEXTURE0);
+	GLuint temp = loadTexture(texturePath);
+	Renderer::instance()->getMat("Default")->getAmbientTexture()->setID(temp);
 }
 
 //Predicate function that returns flag reference
@@ -314,7 +315,7 @@ bool Model::loadObj(const std::string& filepath)
 		testindices.push_back(i);
 	}
 	indices = testindices;
-	vertices = testv;
+
 	//Bind all VBOs and shader attributes together with VAO
 	//Bind all VBOs and shader attributes together with VAO
 	//Bind all VBOs and shader attributes together with VAO
@@ -746,7 +747,7 @@ bool Model::loadModel(const std::string& filename)
 	//Total up vertices for use in Draw() function
 	totalVertices = tempIndices.size();
 
-	/*std::vector<GLfloat> testv;
+	std::vector<GLfloat> testv;
 	std::vector<GLfloat> testu;
 	std::vector<GLfloat> testn;
 	std::vector<unsigned int> testi;
@@ -767,7 +768,7 @@ bool Model::loadModel(const std::string& filename)
 		testn.push_back(normals[i].z);
 
 		testi.push_back(indices[i]);
-	}*/
+	}
 
 	//Bind all VBOs and shader attributes together with VAO
 	glBindVertexArray(VAO);
@@ -884,27 +885,27 @@ void Model::draw()
 	//Renderer::instance()->getShader("Default").setUniform("skybox", 0);
 
 	//Only if model is set to be textured bind the texture
-	//if (isTextured == 1)
-	//{
-	//	glActiveTexture(GL_TEXTURE0);
-	//	mat->getAmbientTexture()->bind();
+	if (isTextured == 1)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		//mat->getAmbientTexture()->bind();
 
-	//	if (isNormalMapped == 1)
-	//	{
-	//		//Bind Normal Mapping
-	//		glActiveTexture(GL_TEXTURE1);
+		if (isNormalMapped == 1)
+		{
+			//Bind Normal Mapping
+			glActiveTexture(GL_TEXTURE1);
 
-	//		mat->getNormalMap()->bind();
+			mat->getNormalMap()->bind();
 
-	//		if (isHeightMapped == 1)
-	//		{
-	//			//Bind Height Mapping
-	//			glActiveTexture(GL_TEXTURE2);
+			if (isHeightMapped == 1)
+			{
+				//Bind Height Mapping
+				glActiveTexture(GL_TEXTURE2);
 
-	//			mat->getHeightMap()->bind();
-	//		}
-	//	}
-	//}
+				mat->getHeightMap()->bind();
+			}
+		}
+	}
 
 	//Bind VAO and render everything!
 	glBindVertexArray(VAO);
