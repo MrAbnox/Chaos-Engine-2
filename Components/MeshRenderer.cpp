@@ -21,7 +21,7 @@ void MeshRenderer::update()
 void MeshRenderer::render()
 {
 	mesh->draw();
-	//gameObject->getTransform()->sendData(*mat->getShader());
+	gameObject->getTransform()->sendData(*mat->getShader());
 }
 
 //Maybe remove this function
@@ -29,12 +29,12 @@ void MeshRenderer::fixedUpdate(float deltaTime)
 {
 }
 
-void MeshRenderer::setMesh(Mesh* mesh)
+void MeshRenderer::setMesh(std::shared_ptr<Mesh> mesh)
 {
 	this->mesh = mesh;
 }
 
-void MeshRenderer::setMaterial(Material* mat)
+void MeshRenderer::setMaterial(std::shared_ptr<Material> mat)
 {
 	this->mat = mat;
 }
@@ -44,7 +44,7 @@ void MeshRenderer::setCastShadows(bool castShadows)
 	this->castShadows = castShadows;
 }
 
-Material& MeshRenderer::getMaterial()
+std::shared_ptr<Material> MeshRenderer::getMaterial()
 {
-	return *mat;
+	return mat;
 }

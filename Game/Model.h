@@ -23,7 +23,7 @@ class Model : public Mesh
 public:
 
 	Model();
-	Model(std::string shader, std::string path);
+	Model(std::string shader, std::string modelPath, std::string texturePath);
 
 public:
 
@@ -32,7 +32,7 @@ public:
 
 	bool loadObj(const std::string& filepath);
 	bool loadModel(const std::string& filename);
-	bool loadTexture(const std::string& filename, const std::string textureID);
+	bool loadTexture(const std::string& filename);
 	//void UnloadTexture(const std::string textureID);
 	//void LoadNormalMap(std::string filepath);		  
 	//void LoadHeightMap(std::string filepath);		  
@@ -104,7 +104,7 @@ private:
 	GLint isTextured;
 	GLfloat shininess;
 
-	std::vector<glm::vec3> vertices;
+	std::vector<GLfloat> vertices;
 	std::vector<glm::vec2> uvs;
 	std::vector<glm::vec3> normals;
 	std::vector<GLuint> indices;
@@ -132,7 +132,7 @@ private:
 private:
 
 
-	bool firstML;
+	bool firstML = false;
 
 	int isHeightMapped;
 

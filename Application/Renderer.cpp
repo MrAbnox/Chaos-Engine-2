@@ -37,7 +37,7 @@ void Renderer::update()
 void Renderer::render()
 {
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//if(!isLoadingScene)
 	currentScene->render();
 }
@@ -66,6 +66,11 @@ void Renderer::loadMaterials()
 	mat->setShader(loadedShaders["Skybox"]);
 	loadedMaterials["Skybox"] = mat;
 	loadedMaterials["Skybox"]->setShader(loadedShaders["Skybox"]);
+
+	std::shared_ptr<Material> mat2 = std::make_shared<Material>(DEFAULT);
+	mat2->setShader(loadedShaders["Default"]);
+	loadedMaterials["Default"] = mat2;
+	loadedMaterials["Default"]->setShader(loadedShaders["Default"]);
 }
 
 void Renderer::loadGameObjects()
@@ -76,21 +81,22 @@ void Renderer::loadGameObjects()
 	//________________________________________________________________________________
 	std::shared_ptr<GameObject> obj1 = std::make_shared<GameObject>();
 	std::shared_ptr<MeshRenderer> temp = obj1->addComponent<MeshRenderer>();
-	loadedGameObjects["Cube"] = obj1;
-	Mesh* mesh = new Primitive();
+	std::shared_ptr<Mesh> mesh = std::make_shared<Primitive>();
 	mesh->setup();
-	temp->setMaterial(loadedMaterials["Skybox"].get());
+	temp->setMaterial(loadedMaterials["Skybox"]);
 	temp->setMesh(mesh);
+	loadedGameObjects["Cube"] = obj1;
 
 	// Floor
 	//________________________________________________________________________________
 	std::shared_ptr<GameObject> obj2 = std::make_shared<GameObject>();
-	Mesh* model = new Model("Default", ("floor/floor.obj"));
+	std::shared_ptr<Mesh> model = std::make_shared<Model>("Default", "car/GR_Ceiling.obj", "car/bricks2.jpg");
 	std::shared_ptr<GameObject> floor = std::make_shared<GameObject>();
 	std::shared_ptr<MeshRenderer> temp2 = obj2->addComponent<MeshRenderer>();
-	loadedGameObjects["Floor"] = obj2;;
-	temp2->setMaterial(loadedMaterials["Skybox"].get());
+	temp2->setMaterial(loadedMaterials["Default"]);
 	temp2->setMesh(model);
+	model->setupMaterial(loadedMaterials["Default"]);
+	loadedGameObjects["Floor"] = obj2;
 
 	// Camera
 	//________________________________________________________________________________
@@ -113,4 +119,9 @@ Shader Renderer::getShader(std::string name)
 std::shared_ptr<GameObject> Renderer::getCube()
 {
 	return currentScene->getSceneObjects()[1];
+}
+
+std::shared_ptr<Material> Renderer::getMat(std::string name)
+{
+	return loadedMaterials[name];
 }

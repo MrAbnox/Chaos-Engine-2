@@ -32,6 +32,7 @@ public:
 	std::shared_ptr<GameObject> getObject(std::string name);
 	Shader getShader(std::string name);
 	std::shared_ptr<GameObject> getCube();
+	std::shared_ptr<Material> getMat(std::string name);
 	
 private:
 

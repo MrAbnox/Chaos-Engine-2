@@ -7,7 +7,7 @@ Camera::Camera(GameObject* object) : Component(gameObject)
 {
 	this->gameObject = gameObject;
 
-	setDefault(glm::vec3(-5.0f, 1.0f, -10.0f));
+	setDefault(glm::vec3(0.0f, 0.0f, 00.0f));
 	Window::instance()->setCamera(this);
 
 	updateCameraVectors();
@@ -15,12 +15,6 @@ Camera::Camera(GameObject* object) : Component(gameObject)
 
 void Camera::update()
 {
-	//if (!doOnce)
-	//{
-	//	setDefault(glm::vec3(-5.0f, 1.0f, -10.0f));
-	//	doOnce = true;
-	//}
-	//
 	GLFWwindow* window = Window::instance()->getWindow();
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		ProcessKeyboard(FORWARD);

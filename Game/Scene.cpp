@@ -15,7 +15,7 @@ void Scene::load()
 	addObjectToScene(Renderer::instance()->getObject("Floor"));
 
 	//TEMP
-	createPrimitive(CUBE);
+	//createPrimitive(CUBE);
 }
 
 void Scene::start()

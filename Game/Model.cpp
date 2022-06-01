@@ -31,7 +31,7 @@ Model::Model()
 	ID_texture = 0;
 }
 
-Model::Model(std::string shader, std::string path)
+Model::Model(std::string shader, std::string path, std::string texturePath)
 {
 	isShadowMapped = 0;
 	isTextured = 0;
@@ -49,8 +49,15 @@ Model::Model(std::string shader, std::string path)
 	ID_normal = 0;
 	ID_texture = 0;
 
+	unsigned int shaderID = Renderer::instance()->getShader("Default").getID();
+	ID_vertex = glGetAttribLocation(shaderID, "vertex");
+	ID_normal = glGetAttribLocation(shaderID, "normal");
+	ID_texture = glGetAttribLocation(shaderID, "textCoord");
+
 	Create(shader);
 	loadModel(path);
+	loadTexture("bricks2");
+	
 }
 
 //Predicate function that returns flag reference
@@ -307,23 +314,22 @@ bool Model::loadObj(const std::string& filepath)
 		testindices.push_back(i);
 	}
 	indices = testindices;
+	vertices = testv;
+	//Bind all VBOs and shader attributes together with VAO
 	//Bind all VBOs and shader attributes together with VAO
 	//Bind all VBOs and shader attributes together with VAO
 	glBindVertexArray(VAO);
-
 	//fFll and link vertex VBO
 	buffer->BindBuffer(GL_ARRAY_BUFFER, vertexVBO);
 	buffer->FillBuffer(GL_ARRAY_BUFFER, testv, GL_STATIC_DRAW);
 	buffer->LinkToShader(ID_vertex, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	buffer->EnableVertexArray(ID_vertex);
 
-	//if (shader == "Lightless")
-	//{
-	//	buffer->BindBuffer(GL_ARRAY_BUFFER, colorVBO);
-	//	buffer->FillBuffer(GL_ARRAY_BUFFER, testc, GL_STATIC_DRAW);
-	//	buffer->LinkToShader(ID_color, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	//	buffer->EnableVertexArray(ID_vertex);
-	//}
+	//Fill and link normal VBO
+	buffer->BindBuffer(GL_ARRAY_BUFFER, normalVBO);
+	buffer->FillBuffer(GL_ARRAY_BUFFER, testn, GL_STATIC_DRAW);
+	buffer->LinkToShader(ID_normal, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	buffer->EnableVertexArray(ID_normal);
 
 	//Fill and link texture VBO
 	buffer->BindBuffer(GL_ARRAY_BUFFER, textureVBO);
@@ -331,24 +337,18 @@ bool Model::loadObj(const std::string& filepath)
 	buffer->LinkToShader(ID_texture, 2, GL_FLOAT, GL_FALSE, 0, 0);
 	buffer->EnableVertexArray(ID_texture);
 
-	//TODO: Change this?
-	//if (shader != "Lightless")
-	{
-		//Fill and link normal VBO
-		buffer->BindBuffer(GL_ARRAY_BUFFER, normalVBO);
-		buffer->FillBuffer(GL_ARRAY_BUFFER, testn, GL_STATIC_DRAW);
-		buffer->LinkToShader(ID_normal, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		buffer->EnableVertexArray(ID_normal);
-	}
-	
+	//Fill EBO with indices 
+	buffer->BindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	buffer->FillBuffer(GL_ELEMENT_ARRAY_BUFFER, tempIndices.size() * sizeof(GLuint), &tempIndices[0], GL_STATIC_DRAW);
+
 	if (isNormalMapped == 1)
 	{
-		//Fill and link texture VBO
-		buffer->GenerateBuffers(1, &VBO_tangent);
-		buffer->BindBuffer(GL_ARRAY_BUFFER, VBO_tangent);
-		buffer->FillBuffer(GL_ARRAY_BUFFER, tangents, GL_STATIC_DRAW);
-		buffer->LinkToShader(ID_tangent, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		buffer->EnableVertexArray(ID_tangent);
+		////Fill and link texture VBO
+		//buffer->GenerateBuffers(1, &VBO_tangent);
+		//buffer->BindBuffer(GL_ARRAY_BUFFER, VBO_tangent);
+		//buffer->FillBuffer(GL_ARRAY_BUFFER, tangents, GL_STATIC_DRAW);
+		//buffer->LinkToShader(ID_tangent, 3, GL_FLOAT, GL_FALSE, 0, 0);
+		//buffer->EnableVertexArray(ID_tangent);
 
 		//if (isHeightMapped)
 		//{
@@ -360,8 +360,8 @@ bool Model::loadObj(const std::string& filepath)
 		//}
 	}
 	//Fill EBO with indices 
-	buffer->BindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO); //gl bind buffer
-	buffer->FillBuffer(GL_ELEMENT_ARRAY_BUFFER, testindices.size() * sizeof(GLuint), &testindices[0], GL_STATIC_DRAW); //gl buffer data
+	//buffer->BindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO); //gl bind buffer
+	//buffer->FillBuffer(GL_ELEMENT_ARRAY_BUFFER, testindices.size() * sizeof(GLuint), &testindices[0], GL_STATIC_DRAW); //gl buffer data
 
 	glBindVertexArray(0);
 
@@ -561,11 +561,6 @@ bool Model::loadModel(const std::string& filename)
 	std::vector<std::string> subNumbers;
 	std::vector<std::string> subStrings;
 
-	unsigned int shaderID = Renderer::instance()->getShader("Default").getID();
-	ID_vertex = glGetAttribLocation(shaderID, "vertex");
-	ID_normal = glGetAttribLocation(shaderID, "normal");
-	ID_texture = glGetAttribLocation(shaderID, "textCoord");
-
 	//Display text to state that file is being opened and read
 	std::cout << "Opening and reading model file : " << "\"" << filename << "\"" << std::endl;
 
@@ -751,12 +746,12 @@ bool Model::loadModel(const std::string& filename)
 	//Total up vertices for use in Draw() function
 	totalVertices = tempIndices.size();
 
-	std::vector<GLfloat> testv;
+	/*std::vector<GLfloat> testv;
 	std::vector<GLfloat> testu;
 	std::vector<GLfloat> testn;
 	std::vector<unsigned int> testi;
 
-	Debug::Log(std::to_string(vertices.size()), LOG);
+	Debug::Log("size + " + std::to_string(vertices.size()), LOG);
 
 	for (size_t i = 0; i < vertices.size(); i++)
 	{
@@ -772,7 +767,7 @@ bool Model::loadModel(const std::string& filename)
 		testn.push_back(normals[i].z);
 
 		testi.push_back(indices[i]);
-	}
+	}*/
 
 	//Bind all VBOs and shader attributes together with VAO
 	glBindVertexArray(VAO);
@@ -782,17 +777,17 @@ bool Model::loadModel(const std::string& filename)
 	buffer->LinkToShader(ID_vertex, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	buffer->EnableVertexArray(ID_vertex);
 
-	////Fill and link normal VBO
-	//buffer->BindBuffer(GL_ARRAY_BUFFER, normalVBO);
-	//buffer->FillBuffer(GL_ARRAY_BUFFER, tempNormals, GL_STATIC_DRAW);
-	//buffer->LinkToShader(ID_normal, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	//buffer->EnableVertexArray(ID_normal);
+	//Fill and link normal VBO
+	buffer->BindBuffer(GL_ARRAY_BUFFER, normalVBO);
+	buffer->FillBuffer(GL_ARRAY_BUFFER, tempNormals, GL_STATIC_DRAW);
+	buffer->LinkToShader(ID_normal, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	buffer->EnableVertexArray(ID_normal);
 
-	////Fill and link texture VBO
-	//buffer->BindBuffer(GL_ARRAY_BUFFER, textureVBO);
-	//buffer->FillBuffer(GL_ARRAY_BUFFER, tempTextures, GL_STATIC_DRAW);
-	//buffer->LinkToShader(ID_texture, 2, GL_FLOAT, GL_FALSE, 0, 0);
-	//buffer->EnableVertexArray(ID_texture);
+	//Fill and link texture VBO
+	buffer->BindBuffer(GL_ARRAY_BUFFER, textureVBO);
+	buffer->FillBuffer(GL_ARRAY_BUFFER, tempTextures, GL_STATIC_DRAW);
+	buffer->LinkToShader(ID_texture, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	buffer->EnableVertexArray(ID_texture);
 
 	//Fill EBO with indices 
 	buffer->BindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
@@ -806,11 +801,11 @@ bool Model::loadModel(const std::string& filename)
 
 //Function that loads in texture file for model
 //------------------------------------------------------------------------------------------------------
-bool Model::loadTexture(const std::string& filename, const std::string textureID)
+bool Model::loadTexture(const std::string& filename)
 {
 	isTextured = 1;
 
-	return mat->getAmbientTexture()->loadTexture(filename);
+	return Renderer::instance()->getMat("Default")->getAmbientTexture()->loadTexture(filename);
 }
 
 //Function that unloads texture file for model
@@ -885,41 +880,43 @@ void Model::Update()
 //------------------------------------------------------------------------------------------------------
 void Model::draw()
 {
-	Renderer::instance()->getShader("Default").Use();
-	Renderer::instance()->getShader("Default").setUniform("skybox", 0);
+	Renderer::instance()->getShader(shader).Use();
+	//Renderer::instance()->getShader("Default").setUniform("skybox", 0);
 
 	//Only if model is set to be textured bind the texture
-	if (isTextured == 1)
-	{
-		glActiveTexture(GL_TEXTURE0);
-		mat->getAmbientTexture()->bind();
+	//if (isTextured == 1)
+	//{
+	//	glActiveTexture(GL_TEXTURE0);
+	//	mat->getAmbientTexture()->bind();
 
-		if (isNormalMapped == 1)
-		{
-			//Bind Normal Mapping
-			glActiveTexture(GL_TEXTURE1);
+	//	if (isNormalMapped == 1)
+	//	{
+	//		//Bind Normal Mapping
+	//		glActiveTexture(GL_TEXTURE1);
 
-			mat->getNormalMap()->bind();
+	//		mat->getNormalMap()->bind();
 
-			if (isHeightMapped == 1)
-			{
-				//Bind Height Mapping
-				glActiveTexture(GL_TEXTURE2);
+	//		if (isHeightMapped == 1)
+	//		{
+	//			//Bind Height Mapping
+	//			glActiveTexture(GL_TEXTURE2);
 
-				mat->getHeightMap()->bind();
-			}
-		}
-	}
+	//			mat->getHeightMap()->bind();
+	//		}
+	//	}
+	//}
 
 	//Bind VAO and render everything!
 	glBindVertexArray(VAO);
 
 	if (firstML)
 	{
+		//glDrawArrays(GL_TRIANGLES, totalVertices, GL_UNSIGNED_INT);
 		glDrawElements(GL_TRIANGLES, totalVertices, GL_UNSIGNED_INT, 0);
 	}
 	else
 	{
+		//glDrawArrays(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT);
 		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 	}
 

@@ -18,16 +18,16 @@ public:
 	void render();
 	void fixedUpdate(float deltaTime) override;
 
-	void setMesh(Mesh* mesh);
-	void setMaterial(Material* mat);
+	void setMesh(std::shared_ptr<Mesh> mesh);
+	void setMaterial(std::shared_ptr<Material> mat);
 	void setCastShadows(bool castShadows);
 
-	Material& getMaterial();
+	std::shared_ptr<Material> getMaterial();
 
 private:
 	
-	Mesh* mesh;
-	Material* mat;
+	std::shared_ptr<Mesh> mesh;
+	std::shared_ptr<Material> mat;
 	
 private:
 	
