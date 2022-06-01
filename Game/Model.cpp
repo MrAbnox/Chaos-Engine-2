@@ -55,10 +55,9 @@ Model::Model(std::string shader, std::string path, std::string texturePath)
 	ID_texture = glGetAttribLocation(shaderID, "textCoord");
 
 	Create(shader);
-	loadModel(path);
+	loadObj(path);
 	glActiveTexture(GL_TEXTURE0);
 	GLuint temp = loadTexture(texturePath);
-	Renderer::instance()->getMat("Default")->getAmbientTexture()->setID(temp);
 }
 
 //Predicate function that returns flag reference
@@ -326,17 +325,17 @@ bool Model::loadObj(const std::string& filepath)
 	buffer->LinkToShader(ID_vertex, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	buffer->EnableVertexArray(ID_vertex);
 
-	//Fill and link normal VBO
-	buffer->BindBuffer(GL_ARRAY_BUFFER, normalVBO);
-	buffer->FillBuffer(GL_ARRAY_BUFFER, testn, GL_STATIC_DRAW);
-	buffer->LinkToShader(ID_normal, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	buffer->EnableVertexArray(ID_normal);
+	////Fill and link normal VBO
+	//buffer->BindBuffer(GL_ARRAY_BUFFER, normalVBO);
+	//buffer->FillBuffer(GL_ARRAY_BUFFER, testn, GL_STATIC_DRAW);
+	//buffer->LinkToShader(ID_normal, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	//buffer->EnableVertexArray(ID_normal);
 
-	//Fill and link texture VBO
-	buffer->BindBuffer(GL_ARRAY_BUFFER, textureVBO);
-	buffer->FillBuffer(GL_ARRAY_BUFFER, testu, GL_STATIC_DRAW);
-	buffer->LinkToShader(ID_texture, 2, GL_FLOAT, GL_FALSE, 0, 0);
-	buffer->EnableVertexArray(ID_texture);
+	////Fill and link texture VBO
+	//buffer->BindBuffer(GL_ARRAY_BUFFER, textureVBO);
+	//buffer->FillBuffer(GL_ARRAY_BUFFER, testu, GL_STATIC_DRAW);
+	//buffer->LinkToShader(ID_texture, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	//buffer->EnableVertexArray(ID_texture);
 
 	//Fill EBO with indices 
 	buffer->BindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
@@ -884,45 +883,45 @@ void Model::draw()
 	Renderer::instance()->getShader(shader).Use();
 	//Renderer::instance()->getShader("Default").setUniform("skybox", 0);
 
+	Renderer::instance()->getShader(shader).setUniform("textureImage1", 0);
 	//Only if model is set to be textured bind the texture
 	if (isTextured == 1)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		//mat->getAmbientTexture()->bind();
 
-		if (isNormalMapped == 1)
-		{
-			//Bind Normal Mapping
-			glActiveTexture(GL_TEXTURE1);
+		//if (isNormalMapped == 1)
+		//{
+		//	//Bind Normal Mapping
+		//	glActiveTexture(GL_TEXTURE1);
 
-			mat->getNormalMap()->bind();
+		//	mat->getNormalMap()->bind();
 
-			if (isHeightMapped == 1)
-			{
-				//Bind Height Mapping
-				glActiveTexture(GL_TEXTURE2);
+		//	if (isHeightMapped == 1)
+		//	{
+		//		//Bind Height Mapping
+		//		glActiveTexture(GL_TEXTURE2);
 
-				mat->getHeightMap()->bind();
-			}
-		}
+		//		mat->getHeightMap()->bind();
+		//	}
+		//}
 	}
 
+	glClear(GL_DEPTH_BUFFER_BIT);
 	//Bind VAO and render everything!
 	glBindVertexArray(VAO);
-
+	glActiveTexture(GL_TEXTURE0);
 	if (firstML)
 	{
 		//glDrawArrays(GL_TRIANGLES, totalVertices, GL_UNSIGNED_INT);
-		glDrawElements(GL_TRIANGLES, totalVertices, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, (int)totalVertices, GL_UNSIGNED_INT, 0);
 	}
 	else
 	{
 		//glDrawArrays(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT);
-		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, (int)indices.size(), GL_UNSIGNED_INT, 0);
 	}
-
 	glBindVertexArray(0);
-
 }
 //------------------------------------------------------------------------------------------------------
 //Function that destroys all buffer objects

@@ -7,7 +7,7 @@ Transform::Transform(GameObject* object) : Component(gameObject)
 {
 	this->gameObject = gameObject;
 	model = glm::mat4(1.0f);
-	//model = glm::scale(model, glm::vec3(10.0f));
+	model = glm::scale(model, glm::vec3(0.2f));
 }
 
 void Transform::sendData(Shader& shader)
@@ -15,8 +15,8 @@ void Transform::sendData(Shader& shader)
 	shader.Use();
 	shader.setUniform("model", model);
 
-	Renderer::instance()->getShader("Default").Use();
-	Renderer::instance()->getShader("Default").setUniform("model", model);
+	//Renderer::instance()->getShader("Default").Use();
+	//Renderer::instance()->getShader("Default").setUniform("model", model);
 }
 
 glm::mat4* Transform::getModel()

@@ -1,5 +1,6 @@
 #include "MeshRenderer.h"
 #include "../Game/GameObject.h"
+#include "../Application/Renderer.h"
 
 MeshRenderer::MeshRenderer(GameObject* gameObject) : Component(gameObject)
 {
@@ -21,7 +22,8 @@ void MeshRenderer::update()
 void MeshRenderer::render()
 {
 	mesh->draw();
-	gameObject->getTransform()->sendData(*mat->getShader());
+	//gameObject->getTransform()->sendData(*mat->getShader());
+	gameObject->getTransform()->sendData(Renderer::instance()->getShader("Default"));
 }
 
 //Maybe remove this function
