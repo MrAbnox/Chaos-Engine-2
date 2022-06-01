@@ -94,7 +94,7 @@ void Renderer::loadGameObjects()
 	// Floor
 	//________________________________________________________________________________
 	std::shared_ptr<GameObject> obj2 = std::make_shared<GameObject>();
-	std::shared_ptr<Mesh> model = std::make_shared<Model>("Default", "car/GR_Ceiling.obj", "car/bricks2.jpg");
+	std::shared_ptr<Mesh> model = std::make_shared<Model>("Default", "car/GR_NintendoWii.obj", "car/GR_NintendoWii_Diffuse.png");
 	std::shared_ptr<GameObject> floor = std::make_shared<GameObject>();
 	std::shared_ptr<MeshRenderer> temp2 = obj2->addComponent<MeshRenderer>();
 	temp2->setMaterial(loadedMaterials["Default"]);

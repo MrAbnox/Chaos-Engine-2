@@ -55,9 +55,9 @@ Model::Model(std::string shader, std::string path, std::string texturePath)
 	ID_texture = glGetAttribLocation(shaderID, "textCoord");
 
 	Create(shader);
-	loadObj(path);
+	loadModel(path);
 	glActiveTexture(GL_TEXTURE0);
-	GLuint temp = loadTexture(texturePath);
+	loadTexture(texturePath);
 }
 
 //Predicate function that returns flag reference
@@ -325,17 +325,17 @@ bool Model::loadObj(const std::string& filepath)
 	buffer->LinkToShader(ID_vertex, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	buffer->EnableVertexArray(ID_vertex);
 
-	////Fill and link normal VBO
-	//buffer->BindBuffer(GL_ARRAY_BUFFER, normalVBO);
-	//buffer->FillBuffer(GL_ARRAY_BUFFER, testn, GL_STATIC_DRAW);
-	//buffer->LinkToShader(ID_normal, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	//buffer->EnableVertexArray(ID_normal);
+	//Fill and link normal VBO
+	buffer->BindBuffer(GL_ARRAY_BUFFER, normalVBO);
+	buffer->FillBuffer(GL_ARRAY_BUFFER, testn, GL_STATIC_DRAW);
+	buffer->LinkToShader(ID_normal, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	buffer->EnableVertexArray(ID_normal);
 
-	////Fill and link texture VBO
-	//buffer->BindBuffer(GL_ARRAY_BUFFER, textureVBO);
-	//buffer->FillBuffer(GL_ARRAY_BUFFER, testu, GL_STATIC_DRAW);
-	//buffer->LinkToShader(ID_texture, 2, GL_FLOAT, GL_FALSE, 0, 0);
-	//buffer->EnableVertexArray(ID_texture);
+	//Fill and link texture VBO
+	buffer->BindBuffer(GL_ARRAY_BUFFER, textureVBO);
+	buffer->FillBuffer(GL_ARRAY_BUFFER, testu, GL_STATIC_DRAW);
+	buffer->LinkToShader(ID_texture, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	buffer->EnableVertexArray(ID_texture);
 
 	//Fill EBO with indices 
 	buffer->BindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
@@ -751,8 +751,6 @@ bool Model::loadModel(const std::string& filename)
 	std::vector<GLfloat> testn;
 	std::vector<unsigned int> testi;
 
-	Debug::Log("size + " + std::to_string(vertices.size()), LOG);
-
 	for (size_t i = 0; i < vertices.size(); i++)
 	{
 		testv.push_back(vertices[i].x);
@@ -888,6 +886,7 @@ void Model::draw()
 	if (isTextured == 1)
 	{
 		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, mat->getAmbientTexture()->getID());
 		//mat->getAmbientTexture()->bind();
 
 		//if (isNormalMapped == 1)

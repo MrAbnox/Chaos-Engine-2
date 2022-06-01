@@ -11,10 +11,6 @@ Texture::Texture()
 {
 	
 }
-Texture::Texture(const Texture& m)
-{
-
-}
 
 
 void Texture::init(int width, int height, unsigned char** data, GLenum textureTarget, GLfloat* filter, GLenum* internalFormat, GLenum* format, bool clamp, GLenum* attachment)
@@ -104,7 +100,7 @@ GLuint Texture::loadTexture(const std::string& fName)
 	{
 		glBindTexture(GL_TEXTURE_2D, textureID);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, width, height, 0, GL_RED, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB8, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -147,6 +143,11 @@ void const Texture::unbind() const
 	{
 		Debug::Log("Texture ID could not be bound", ALERT);
 	}
+}
+
+unsigned int Texture::getID() const
+{
+	return ID;
 }
 
 void Texture::setID(GLuint id)

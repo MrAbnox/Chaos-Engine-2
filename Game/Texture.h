@@ -38,7 +38,6 @@ class Texture
 {
 public:
 	Texture();
-	Texture(const Texture&); // copy constructor	
 
 public:
 
@@ -46,6 +45,7 @@ public:
 	GLuint loadTexture(const std::string& fName);
 	void const bind() const;
 	void const unbind() const;
+	unsigned int getID() const;
 	void setID(GLuint id);
 
 private:
