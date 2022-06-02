@@ -11,10 +11,21 @@ void Scene::load()
 {
 	Renderer::instance();
 	//TODO: Read from file and pass string
-	;
+	
 	addObjectToScene(Renderer::instance()->getObject("Camera"));
-	addObjectToScene(Renderer::instance()->getObject("Nintendo"));
 	addObjectToScene(Renderer::instance()->getObject("Water"));
+
+	//Can Only render one of these at a time
+	//______________________________________________________________
+	addObjectToScene(Renderer::instance()->getObject("Rock"));
+	//addObjectToScene(Renderer::instance()->getObject("Nintendo"));
+
+
+
+
+
+
+
 
 	//TEMP
 	//createPrimitive(CUBE);

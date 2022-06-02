@@ -79,8 +79,13 @@ void Renderer::loadMaterials()
 	loadedMaterials["Default"]->setShader(loadedShaders["Default"]);
 
 	std::shared_ptr<Material> mat3 = std::make_shared<Material>(DEFAULT);
-	mat3->setShader(loadedShaders["Water"]);
-	loadedMaterials["Water"] = mat3;
+	mat3->setShader(loadedShaders["Default"]);
+	loadedMaterials["Rocks"] = mat3;
+	loadedMaterials["Rocks"]->setShader(loadedShaders["Default"]);
+
+	std::shared_ptr<Material> mat4 = std::make_shared<Material>(DEFAULT);
+	mat4->setShader(loadedShaders["Water"]);
+	loadedMaterials["Water"] = mat4;
 	loadedMaterials["Water"]->setShader(loadedShaders["Water"]);
 
 }
@@ -103,22 +108,23 @@ void Renderer::loadGameObjects()
 	// Nintendo Wii
 	//________________________________________________________________________________
 	std::shared_ptr<GameObject> obj2 = std::make_shared<GameObject>();
-	std::shared_ptr<Mesh> model = std::make_shared<Model>("Default", "car/GR_NintendoWii.obj");
+	std::shared_ptr<Mesh> model = std::make_shared<Model>("Default", "car/rock.obj");
 	std::shared_ptr<MeshRenderer> temp2 = obj2->addComponent<MeshRenderer>();
 	obj2->getTransform()->setScale(glm::vec3(1.0f));
+	obj2->getTransform()->setPos(glm::vec3(0.0f,-4.0f,0.0f));
 	temp2->setMesh(model);
 	temp2->setShader("Default");
-	temp2->setMaterial(loadedMaterials["Default"]);
-	model->setupMaterial(loadedMaterials["Default"]);
-	model->getMaterial()->loadTexture("car/GR_NintendoWii_Diffuse.png");
-	obj2->setName("Wii");
-	loadedGameObjects["Nintendo"] = obj2;
+	temp2->setMaterial(loadedMaterials["Rocks"]);
+	model->setupMaterial(loadedMaterials["Rocks"]);
+	model->getMaterial()->loadTexture("car/WindowAlbedo.png");
+	obj2->setName("Rock");
+	loadedGameObjects["Rock"] = obj2;
 
 	//Cube (Water)
 	//________________________________________________________________________________
 	std::shared_ptr<GameObject> obj3 = std::make_shared<GameObject>();
-	obj3->getTransform()->setPos(glm::vec3(10.0f, 6.0f, -40.0f));
-	obj3->getTransform()->setScale(glm::vec3(20.0f, 1.0f, 20.0f));
+	obj3->getTransform()->setPos(glm::vec3(0.0f, -3.0f, 0.0f));
+	obj3->getTransform()->setScale(glm::vec3(500.0f, 1.0f, 500.0f));
 	std::shared_ptr<Mesh> model2 = std::make_shared<Model>("Water", "car/cube.obj");
 	std::shared_ptr<MeshRenderer> temp3 = obj3->addComponent<MeshRenderer>();
 	temp3->setShader("Water");
@@ -127,6 +133,20 @@ void Renderer::loadGameObjects()
 	model2->setupMaterial(loadedMaterials["Water"]);
 	obj3->setName("Water");
 	loadedGameObjects["Water"] = obj3;
+
+
+	// Nintendo Wii
+	//________________________________________________________________________________
+	std::shared_ptr<GameObject> obj4 = std::make_shared<GameObject>();
+	std::shared_ptr<Mesh> model3 = std::make_shared<Model>("Default", "car/GR_NintendoWii.obj");
+	std::shared_ptr<MeshRenderer> temp4 = obj4->addComponent<MeshRenderer>();
+	temp4->setMesh(model3);
+	temp4->setShader("Default");
+	temp4->setMaterial(loadedMaterials["Default"]);
+	model3->setupMaterial(loadedMaterials["Default"]);
+	model3->getMaterial()->loadTexture("car/GR_NintendoWii_Diffuse.png");
+	obj4->setName("Wii");
+	loadedGameObjects["Nintendo"] = obj4;
 
 	// Camera
 	//________________________________________________________________________________

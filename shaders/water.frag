@@ -10,7 +10,7 @@ uniform sampler2D depthBuffer;
 
 void main()
 {
-	vec3 waterColor = vec3(0.0f,0.0f,1.0f);
+	vec3 waterColor = vec3(0.0f,0.37f,0.72f);
 	vec3 foamColor = vec3(1.0f,1.0f,1.0f);
 
 	mat4 invProj = inverse(projection);
