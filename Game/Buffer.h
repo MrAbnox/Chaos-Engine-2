@@ -53,9 +53,5 @@ public:
 
 	void DeleteBuffer(GLsizei& n, const GLuint* buffers);
 	void DeleteVertexArrays(GLsizei n, const GLuint* arrays);
-
-private:
-
-	static std::map<std::string, Buffer>* s_bufferMap;
 };
 #endif

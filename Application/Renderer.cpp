@@ -38,11 +38,11 @@ void Renderer::render()
 {
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//glEnable(GL_FRAMEBUFFER_SRGB);
+	glEnable(GL_FRAMEBUFFER_SRGB);
 	//if(!isLoadingScene)
 	currentScene->render();
 
-	//glDisable(GL_FRAMEBUFFER_SRGB);
+	glDisable(GL_FRAMEBUFFER_SRGB);
 }
 
 void Renderer::loadScene()
@@ -105,6 +105,7 @@ void Renderer::loadGameObjects()
 	std::shared_ptr<GameObject> obj2 = std::make_shared<GameObject>();
 	std::shared_ptr<Mesh> model = std::make_shared<Model>("Default", "car/GR_NintendoWii.obj");
 	std::shared_ptr<MeshRenderer> temp2 = obj2->addComponent<MeshRenderer>();
+	obj2->getTransform()->setScale(glm::vec3(1.0f));
 	temp2->setMesh(model);
 	temp2->setShader("Default");
 	temp2->setMaterial(loadedMaterials["Default"]);
@@ -116,7 +117,7 @@ void Renderer::loadGameObjects()
 	//Cube (Water)
 	//________________________________________________________________________________
 	std::shared_ptr<GameObject> obj3 = std::make_shared<GameObject>();
-	obj3->getTransform()->setPos(glm::vec3(1.0f, -3.0f, -15.0f));
+	obj3->getTransform()->setPos(glm::vec3(10.0f, 6.0f, -40.0f));
 	obj3->getTransform()->setScale(glm::vec3(20.0f, 1.0f, 20.0f));
 	std::shared_ptr<Mesh> model2 = std::make_shared<Model>("Water", "car/cube.obj");
 	std::shared_ptr<MeshRenderer> temp3 = obj3->addComponent<MeshRenderer>();

@@ -10,6 +10,8 @@ void UI::initialize()
 {
 }
 
+//Add ingame UI
+//Such as health bar and such
 void UI::run()
 {
 }

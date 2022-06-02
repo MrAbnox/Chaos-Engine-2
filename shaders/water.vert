@@ -8,11 +8,16 @@ uniform mat4 view;
 uniform mat4 model;
 
 out vec3 outNormal;
+out vec4 screenCoords;
+
 out vec2 outTextCoord;
 
 void main()
 {
 	outTextCoord = textCoord;
 
-   gl_Position = projection * view * model  * vec4(vertex, 1.0);
+    vec4 t = (projection * view * model  * vec4(vertex, 1.0));
+    gl_Position = t;
+
+	screenCoords = t;
 }  

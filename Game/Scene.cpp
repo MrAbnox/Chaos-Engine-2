@@ -58,13 +58,31 @@ void Scene::render()
 	{
 		if (go->getIsEnabled())
 		{
-			go->render();
+			//render everything but water
+			if (go->getName() != "Water")
+				go->render();
 		}
 	}
 
+	//
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
+	glBlitFramebuffer(0, 0, Window::instance()->getScreenSize().x, Window::instance()->getScreenSize().y, 0, 0, Window::instance()->getScreenSize().x, Window::instance()->getScreenSize().y, GL_COLOR_BUFFER_BIT , GL_NEAREST);
 
 	sendDepthBuffer();
+	//render water
+	for (auto& go : sceneObjects)
+	{
+		if (go->getIsEnabled())
+		{
+			//render everything but water
+			if(go->getName() == "Water")
+				go->render();
+		}
+	}
+
+	glDisable(GL_BLEND);
 }
 
 void Scene::setupDepthBuffer()
@@ -76,6 +94,16 @@ void Scene::setupDepthBuffer()
 
 	int width, height;
 	glfwGetFramebufferSize(Window::instance()->getWindow(), &width, &height);
+
+	// others color buffer
+	glGenTextures(1, &gOthers);
+	glBindTexture(GL_TEXTURE_2D, gOthers);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_FLOAT, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gOthers, 0);
+
+
 
 	// depth texture buffer
 	glGenTextures(1, &gDepth);
@@ -105,12 +133,9 @@ void Scene::sendDepthBuffer()
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gDepth);
 	Renderer::instance()->getShader("Water").setUniform("depthBuffer", 0);
-
-	//// Depth clamp ignores clipping with near and far planes
-	//glEnable(GL_DEPTH_CLAMP);
-	//
-	//// Disable depth write
-	//glDepthMask(false);
+	
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void Scene::restorePass()
@@ -123,14 +148,6 @@ void Scene::restorePass()
 	//glDisable(GL_CULL_FACE);
 	//glDepthMask(true);
 	//glEnable(GL_DEPTH_TEST);
-}
-
-void Scene::saveScene()
-{
-}
-
-void Scene::unload()
-{
 }
 
 std::shared_ptr<GameObject> Scene::createEmpty()

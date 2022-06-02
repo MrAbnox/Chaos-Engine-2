@@ -26,9 +26,7 @@ public:
 
 public:
 
-	void saveScene(); //TODO:: Save prefabs and information in the scene
-	void unload(); //unload objects if need to be!
-
+	void saveScene() {}; //TODO:: Save prefabs and information in the scene
 
 	std::shared_ptr<GameObject> createEmpty(); //Create Empty Object
 	void createPrimitive(Prim primitive, glm::vec3& pos = glm::vec3(0.0f)); //Create Primitive Object
@@ -47,6 +45,7 @@ private:
 
 	GLuint gBuffer;
 	GLuint accumBuffer;
+	GLuint gOthers;
 	std::vector<std::shared_ptr<GameObject>> sceneObjects;
 };
 #endif

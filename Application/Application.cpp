@@ -1,6 +1,6 @@
 #include "Application.h"
 #include "Window.h"
-#include "EditorLayer.h"
+#include "Editor.h"
 #include "UI.h"
 #include "Renderer.h"
 
@@ -18,7 +18,7 @@ void Application::start()
 void Application::run()
 {
 	Window::instance()->initialize();
-	EditorLayer::instance()->initialize();
+	Editor::instance()->initialize();
 	UI::instance()->initialize();
 	Renderer::instance()->initialize();
 
@@ -26,7 +26,7 @@ void Application::run()
 	{
 		//Window::instance()->clear();
 
-		EditorLayer::instance()->run();
+		Editor::instance()->run();
 		UI::instance()->run();
 		Renderer::instance()->run();
 
