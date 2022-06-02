@@ -20,6 +20,7 @@ void Scene::load()
 	//createPrimitive(CUBE);
 }
 
+
 void Scene::start()
 {
 	for (size_t i = 0; i < sceneObjects.size(); i++)
@@ -30,6 +31,7 @@ void Scene::start()
 	setupDepthBuffer();
 }
 
+//Update objects and destroy them later (So it doesn't mess up the for vector)
 void Scene::update()
 {
 	for (size_t i = 0; i < sceneObjects.size(); i++)
@@ -46,29 +48,23 @@ void Scene::update()
 	}
 }
 
+//TODO: Render objects
 void Scene::render()
 {
+	glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
 	for (auto& go : sceneObjects)
 	{
 		if (go->getIsEnabled())
 		{
-			if (go->getName() == "Water")
-			{
-				
-				//glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
-				sendDepthBuffer();
-			}
-			
 			go->render();
-
-			if (go->getName() == "Water")
-			{
-				restorePass();
-				//glBindFramebuffer(GL_FRAMEBUFFER, 0);
-				
-			}
 		}
 	}
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	sendDepthBuffer();
 }
 
 void Scene::setupDepthBuffer()
@@ -81,41 +77,24 @@ void Scene::setupDepthBuffer()
 	int width, height;
 	glfwGetFramebufferSize(Window::instance()->getWindow(), &width, &height);
 
-	// accumulation buffer
-	// TODO 9.1 : Change the format of the accumulation buffer to 16bit floating point (4 components)
-	glGenTextures(1, &gAccum);
-	glBindTexture(GL_TEXTURE_2D, gAccum);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB8_ALPHA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	
 	// depth texture buffer
 	glGenTextures(1, &gDepth);
 	glBindTexture(GL_TEXTURE_2D, gDepth);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);	
-
-	// attach textures to framebuffer
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT3, GL_TEXTURE_2D, gAccum, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, gDepth, 0);
 
+	// attach textures to framebuffer
+
 	// tell OpenGL which color attachments we'll use (of this framebuffer) for rendering
-	unsigned int attachments[4] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3 };
-	glDrawBuffers(4, attachments);
+	unsigned int attachments[1] = { GL_COLOR_ATTACHMENT0};
+	glDrawBuffers(1, attachments);
 	
 	// finally check if framebuffer is complete
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		std::cout << "Framebuffer not complete!" << std::endl;
-
 	
-	// configure accumulation buffer framebuffer
-	// ------------------------------
-	glGenFramebuffers(1, &accumBuffer);
-	glBindFramebuffer(GL_FRAMEBUFFER, accumBuffer);
-
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, gDepth, 0);
-
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
@@ -125,28 +104,25 @@ void Scene::sendDepthBuffer()
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gDepth);
-	Renderer::instance()->getShader("Water").setUniform("DepthBuffer", 0);
+	Renderer::instance()->getShader("Water").setUniform("depthBuffer", 0);
 
-	// Depth clamp ignores clipping with near and far planes
-	glEnable(GL_DEPTH_CLAMP);
-	
-	// Disable depth write
-	glDepthMask(false);
-
-	// Disable depth test
-	glDisable(GL_DEPTH_TEST);
+	//// Depth clamp ignores clipping with near and far planes
+	//glEnable(GL_DEPTH_CLAMP);
+	//
+	//// Disable depth write
+	//glDepthMask(false);
 }
 
 void Scene::restorePass()
 {
-	// Restore values
-	glDisable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ZERO);
-	glDisable(GL_DEPTH_CLAMP);
-	glCullFace(GL_BACK);
-	glDisable(GL_CULL_FACE);
-	glDepthMask(true);
-	glEnable(GL_DEPTH_TEST);
+	//// Restore values
+	//glDisable(GL_BLEND);
+	//glBlendFunc(GL_ONE, GL_ZERO);
+	//glDisable(GL_DEPTH_CLAMP);
+	//glCullFace(GL_BACK);
+	//glDisable(GL_CULL_FACE);
+	//glDepthMask(true);
+	//glEnable(GL_DEPTH_TEST);
 }
 
 void Scene::saveScene()
@@ -165,6 +141,8 @@ std::shared_ptr<GameObject> Scene::createEmpty()
 	return obj;
 }
 
+//TODO: Have U.I. able to create and render multiple objects
+//ADD Quads as a primitive
 void Scene::createPrimitive(Prim primitive, glm::vec3& pos)
 {
 	std::string temp = "";
@@ -188,20 +166,24 @@ void Scene::createPrimitive(Prim primitive, glm::vec3& pos)
 	addObjectToScene(Renderer::instance()->getObject(temp));
 }
 
+//TODO: add object duplication with UI
 void Scene::duplicateObject()
 {
 }
 
+//TODO: delete object with UI
 void Scene::deleteObject()
 {
 }
 
+//This adds the object to the scene so it can be rendered
 void Scene::addObjectToScene(const std::shared_ptr<GameObject> object)
 {
 	GameObject* t = object.get();
 	auto obj = std::make_shared<GameObject>(*t);
 	sceneObjects.push_back(obj);
 
+	//Set components pointer to gameobject they are attached to as the one created.
 	for (size_t i = 0; i < sceneObjects.size(); i++)
 	{
 		for (size_t j = 0; j < sceneObjects[i]->getComponents().size(); j++)
