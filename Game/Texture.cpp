@@ -88,8 +88,6 @@ GLuint Texture::loadTexture(const std::string& fName)
 
 	unsigned int textureID;
 	glGenTextures(1, &textureID);
-	std::cout << "Gen ID: " << textureID << std::endl;
-	//Renderer::instance()->getShader("Default").Use();
 
 	int width, height, nrComponents;
 	unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);

@@ -3,7 +3,7 @@
 
 #include "../Game/Scene.h"
 #include <map>
-#include "../Game/Primitive.h"
+#include "../Game/Skybox.h"
 
 class Renderer
 {

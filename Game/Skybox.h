@@ -1,12 +1,12 @@
-#ifndef PRIMITIVE_H
-#define PRIMITIVE_H
+#ifndef SKYBOX_H
+#define SKYBOX_H
 
 #include "Mesh.h"
 
-class Primitive : public Mesh
+class Skybox : public Mesh
 {
 public: 
-	Primitive();
+	Skybox();
 	unsigned int loadCubemap(std::vector<std::string> faces);
 
 	void setup() override;

@@ -1,10 +1,10 @@
-#include "Primitive.h"
+#include "Skybox.h"
 #include <iostream>
 #include "../Application/Renderer.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
-Primitive::Primitive()
+Skybox::Skybox()
 {
 	buffer = new Buffer();
 	std::vector<std::string> faces
@@ -19,7 +19,7 @@ Primitive::Primitive()
 	cubemapTexture = loadCubemap(faces);
 }
 
-void Primitive::setup()
+void Skybox::setup()
 {
 	mat = std::make_shared<Material>();
 
@@ -93,7 +93,7 @@ void Primitive::setup()
 	glBindVertexArray(0);
 }
 
-void Primitive::draw()
+void Skybox::draw()
 {
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glDepthFunc(GL_LEQUAL);
@@ -111,7 +111,7 @@ void Primitive::draw()
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 }
 
-unsigned int Primitive::loadCubemap(std::vector<std::string> faces)
+unsigned int Skybox::loadCubemap(std::vector<std::string> faces)
 {
 	unsigned int textureID;
 	glGenTextures(1, &textureID);

@@ -6,6 +6,7 @@
 GameObject::GameObject()
 {
 	transform = new Transform(this);
+	//TODO: Add this to component list
 	//components.push_back(std::make_shared<Transform>(*transform));
 	//components.size();
 	//transform = temp.get();

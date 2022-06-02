@@ -99,7 +99,7 @@ void Renderer::loadGameObjects()
 	std::shared_ptr<GameObject> obj1 = std::make_shared<GameObject>();
 	std::shared_ptr<MeshRenderer> temp = obj1->addComponent<MeshRenderer>();
 	temp->setShader("Skybox");
-	std::shared_ptr<Mesh> mesh = std::make_shared<Primitive>();
+	std::shared_ptr<Mesh> mesh = std::make_shared<Skybox>();
 	mesh->setup();
 	temp->setMaterial(loadedMaterials["Skybox"]);
 	temp->setMesh(mesh);
