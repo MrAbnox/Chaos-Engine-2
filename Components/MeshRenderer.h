@@ -21,6 +21,7 @@ public:
 	void setMesh(std::shared_ptr<Mesh> mesh);
 	void setMaterial(std::shared_ptr<Material> mat);
 	void setCastShadows(bool castShadows);
+	void setShader(std::string shader);
 
 	std::shared_ptr<Material> getMaterial();
 
@@ -32,6 +33,7 @@ private:
 private:
 	
 	bool castShadows;
+	std::string shader;
 };
 
 #endif

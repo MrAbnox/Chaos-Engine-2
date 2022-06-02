@@ -23,7 +23,8 @@ void MeshRenderer::render()
 {
 	mesh->draw();
 	//gameObject->getTransform()->sendData(*mat->getShader());
-	gameObject->getTransform()->sendData(Renderer::instance()->getShader("Default"));
+	gameObject->getTransform()->sendData(Renderer::instance()->getShader(shader));
+	//gameObject->getTransform()->sendData(Renderer::instance()->getShader("Default"));
 }
 
 //Maybe remove this function
@@ -44,6 +45,11 @@ void MeshRenderer::setMaterial(std::shared_ptr<Material> mat)
 void MeshRenderer::setCastShadows(bool castShadows)
 {
 	this->castShadows = castShadows;
+}
+
+void MeshRenderer::setShader(std::string shader)
+{
+	this->shader = shader;
 }
 
 std::shared_ptr<Material> MeshRenderer::getMaterial()

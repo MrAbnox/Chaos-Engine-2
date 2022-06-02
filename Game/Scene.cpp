@@ -13,6 +13,7 @@ void Scene::load()
 	;
 	addObjectToScene(Renderer::instance()->getObject("Camera"));
 	addObjectToScene(Renderer::instance()->getObject("Nintendo"));
+	addObjectToScene(Renderer::instance()->getObject("Water"));
 
 	//TEMP
 	//createPrimitive(CUBE);

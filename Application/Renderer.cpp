@@ -93,6 +93,7 @@ void Renderer::loadGameObjects()
 	//________________________________________________________________________________
 	std::shared_ptr<GameObject> obj1 = std::make_shared<GameObject>();
 	std::shared_ptr<MeshRenderer> temp = obj1->addComponent<MeshRenderer>();
+	temp->setShader("Skybox");
 	std::shared_ptr<Mesh> mesh = std::make_shared<Primitive>();
 	mesh->setup();
 	temp->setMaterial(loadedMaterials["Skybox"]);
@@ -105,6 +106,7 @@ void Renderer::loadGameObjects()
 	std::shared_ptr<Mesh> model = std::make_shared<Model>("Default", "car/GR_NintendoWii.obj");
 	std::shared_ptr<MeshRenderer> temp2 = obj2->addComponent<MeshRenderer>();
 	temp2->setMesh(model);
+	temp2->setShader("Default");
 	temp2->setMaterial(loadedMaterials["Default"]);
 	model->setupMaterial(loadedMaterials["Default"]);
 	model->getMaterial()->loadTexture("car/GR_NintendoWii_Diffuse.png");
@@ -114,8 +116,11 @@ void Renderer::loadGameObjects()
 	//Cube (Water)
 	//________________________________________________________________________________
 	std::shared_ptr<GameObject> obj3 = std::make_shared<GameObject>();
+	obj3->getTransform()->setPos(glm::vec3(1.0f, -5.0f, -12.0f));
+	//obj3->getTransform()->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
 	std::shared_ptr<Mesh> model2 = std::make_shared<Model>("Water", "car/cube.obj");
 	std::shared_ptr<MeshRenderer> temp3 = obj3->addComponent<MeshRenderer>();
+	temp3->setShader("Water");
 	temp3->setMaterial(loadedMaterials["Water"]);
 	temp3->setMesh(model2);
 	model2->setupMaterial(loadedMaterials["Water"]);
