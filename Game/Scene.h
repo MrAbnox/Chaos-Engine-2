@@ -22,6 +22,7 @@ public:
 
 	void setupDepthBuffer();
 	void sendDepthBuffer();
+	void restorePass();
 
 public:
 
@@ -44,7 +45,8 @@ private:
 	bool isRunning; //TODO:: Delete this variable either here or renderer
 	GLuint gDepth;
 	GLuint gAccum;
-
+	GLuint gBuffer;
+	GLuint accumBuffer;
 	std::vector<std::shared_ptr<GameObject>> sceneObjects;
 };
 #endif

@@ -48,18 +48,36 @@ void Scene::update()
 
 void Scene::render()
 {
-	sendDepthBuffer();
 	for (auto& go : sceneObjects)
 	{
 		if (go->getIsEnabled())
 		{
+			if (go->getName() == "Water")
+			{
+				
+				//glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
+				sendDepthBuffer();
+			}
+			
 			go->render();
+
+			if (go->getName() == "Water")
+			{
+				restorePass();
+				//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+				
+			}
 		}
 	}
 }
 
 void Scene::setupDepthBuffer()
 {
+	// configure g-buffer framebuffer
+// ------------------------------
+	glGenFramebuffers(1, &gBuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
+
 	int width, height;
 	glfwGetFramebufferSize(Window::instance()->getWindow(), &width, &height);
 
@@ -82,14 +100,23 @@ void Scene::setupDepthBuffer()
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT3, GL_TEXTURE_2D, gAccum, 0);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, gDepth, 0);
 
-	//// configure accumulation buffer framebuffer
-	//// ------------------------------
-	//glGenFramebuffers(1, &accumBuffer);
-	//glBindFramebuffer(GL_FRAMEBUFFER, accumBuffer);
+	// tell OpenGL which color attachments we'll use (of this framebuffer) for rendering
+	unsigned int attachments[4] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3 };
+	glDrawBuffers(4, attachments);
+	
+	// finally check if framebuffer is complete
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+		std::cout << "Framebuffer not complete!" << std::endl;
 
-	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, gDepth, 0);
+	
+	// configure accumulation buffer framebuffer
+	// ------------------------------
+	glGenFramebuffers(1, &accumBuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, accumBuffer);
 
-	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, gDepth, 0);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void Scene::sendDepthBuffer()
@@ -100,22 +127,26 @@ void Scene::sendDepthBuffer()
 	glBindTexture(GL_TEXTURE_2D, gDepth);
 	Renderer::instance()->getShader("Water").setUniform("DepthBuffer", 0);
 
-	// Render additional lights in additive
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
-
 	// Depth clamp ignores clipping with near and far planes
 	glEnable(GL_DEPTH_CLAMP);
-
-	// Render only the back faces of the box
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_FRONT);
-
+	
 	// Disable depth write
 	glDepthMask(false);
 
 	// Disable depth test
 	glDisable(GL_DEPTH_TEST);
+}
+
+void Scene::restorePass()
+{
+	// Restore values
+	glDisable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ZERO);
+	glDisable(GL_DEPTH_CLAMP);
+	glCullFace(GL_BACK);
+	glDisable(GL_CULL_FACE);
+	glDepthMask(true);
+	glEnable(GL_DEPTH_TEST);
 }
 
 void Scene::saveScene()
