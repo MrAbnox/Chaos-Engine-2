@@ -116,8 +116,8 @@ void Renderer::loadGameObjects()
 	//Cube (Water)
 	//________________________________________________________________________________
 	std::shared_ptr<GameObject> obj3 = std::make_shared<GameObject>();
-	obj3->getTransform()->setPos(glm::vec3(1.0f, -5.0f, -12.0f));
-	//obj3->getTransform()->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
+	obj3->getTransform()->setPos(glm::vec3(1.0f, -3.0f, -15.0f));
+	obj3->getTransform()->setScale(glm::vec3(20.0f, 1.0f, 20.0f));
 	std::shared_ptr<Mesh> model2 = std::make_shared<Model>("Water", "car/cube.obj");
 	std::shared_ptr<MeshRenderer> temp3 = obj3->addComponent<MeshRenderer>();
 	temp3->setShader("Water");
