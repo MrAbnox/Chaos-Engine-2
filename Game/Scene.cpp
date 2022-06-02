@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "../Components/MeshRenderer.h"
 #include "../Application/Renderer.h"
+#include "../Application/Window.h"
 
 Scene::Scene()
 {
@@ -25,6 +26,8 @@ void Scene::start()
 	{
 		sceneObjects[i].get()->initialize();
 	}
+
+	setupDepthBuffer();
 }
 
 void Scene::update()
@@ -45,6 +48,7 @@ void Scene::update()
 
 void Scene::render()
 {
+	sendDepthBuffer();
 	for (auto& go : sceneObjects)
 	{
 		if (go->getIsEnabled())
@@ -52,6 +56,66 @@ void Scene::render()
 			go->render();
 		}
 	}
+}
+
+void Scene::setupDepthBuffer()
+{
+	int width, height;
+	glfwGetFramebufferSize(Window::instance()->getWindow(), &width, &height);
+
+	// accumulation buffer
+	// TODO 9.1 : Change the format of the accumulation buffer to 16bit floating point (4 components)
+	glGenTextures(1, &gAccum);
+	glBindTexture(GL_TEXTURE_2D, gAccum);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB8_ALPHA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	
+	// depth texture buffer
+	glGenTextures(1, &gDepth);
+	glBindTexture(GL_TEXTURE_2D, gDepth);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);	
+
+	// attach textures to framebuffer
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT3, GL_TEXTURE_2D, gAccum, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, gDepth, 0);
+
+	//// configure accumulation buffer framebuffer
+	//// ------------------------------
+	//glGenFramebuffers(1, &accumBuffer);
+	//glBindFramebuffer(GL_FRAMEBUFFER, accumBuffer);
+
+	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, gDepth, 0);
+
+	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void Scene::sendDepthBuffer()
+{
+	Renderer::instance()->getShader("Water").Use();
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, gDepth);
+	Renderer::instance()->getShader("Water").setUniform("DepthBuffer", 0);
+
+	// Render additional lights in additive
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ONE);
+
+	// Depth clamp ignores clipping with near and far planes
+	glEnable(GL_DEPTH_CLAMP);
+
+	// Render only the back faces of the box
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_FRONT);
+
+	// Disable depth write
+	glDepthMask(false);
+
+	// Disable depth test
+	glDisable(GL_DEPTH_TEST);
 }
 
 void Scene::saveScene()

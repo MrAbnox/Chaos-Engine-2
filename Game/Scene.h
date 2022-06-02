@@ -18,6 +18,10 @@ public:
 	void start();
 	void update();
 	void render();
+	
+
+	void setupDepthBuffer();
+	void sendDepthBuffer();
 
 public:
 
@@ -38,6 +42,8 @@ public:
 private:
 
 	bool isRunning; //TODO:: Delete this variable either here or renderer
+	GLuint gDepth;
+	GLuint gAccum;
 
 	std::vector<std::shared_ptr<GameObject>> sceneObjects;
 };
