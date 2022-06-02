@@ -31,7 +31,7 @@ Model::Model()
 	ID_texture = 0;
 }
 
-Model::Model(std::string shader, std::string path, std::string texturePath)
+Model::Model(std::string shader, std::string path)
 {
 	isShadowMapped = 0;
 	isTextured = 0;
@@ -49,15 +49,16 @@ Model::Model(std::string shader, std::string path, std::string texturePath)
 	ID_normal = 0;
 	ID_texture = 0;
 
-	unsigned int shaderID = Renderer::instance()->getShader("Default").getID();
+	unsigned int shaderID = Renderer::instance()->getShader(shader).getID();
 	ID_vertex = glGetAttribLocation(shaderID, "vertex");
 	ID_normal = glGetAttribLocation(shaderID, "normal");
 	ID_texture = glGetAttribLocation(shaderID, "textCoord");
 
 	Create(shader);
 	loadModel(path);
-	glActiveTexture(GL_TEXTURE0);
-	loadTexture(texturePath);
+
+	if (shader == "Default")
+		isTextured = true;
 }
 
 //Predicate function that returns flag reference
@@ -74,28 +75,6 @@ void Model::SetShininess(GLfloat shininess)
 	this->shininess = shininess;
 }
 //
-////Setter function that sets ambient component of model's material
-////------------------------------------------------------------------------------------------------------
-//void Model::SetAmbient(GLfloat r, GLfloat g, GLfloat b)
-//{
-//	ambient = glm::vec3(r, g, b);
-//}
-//
-//
-////Setter function that sets diffuse component of model's material
-////------------------------------------------------------------------------------------------------------
-//void Model::SetDiffuse(GLfloat r, GLfloat g, GLfloat b)
-//{
-//	diffuse = glm::vec3(r, g, b);
-//}
-//
-////Setter function that sets specular component of model's material
-////------------------------------------------------------------------------------------------------------
-//void Model::SetSpecular(GLfloat r, GLfloat g, GLfloat b)
-//{
-//	specular = glm::vec3(r, g, b);
-//}
-
 
 //Setter function that sets position of model
 //------------------------------------------------------------------------------------------------------
@@ -797,14 +776,6 @@ bool Model::loadModel(const std::string& filename)
 
 }
 
-//Function that loads in texture file for model
-//------------------------------------------------------------------------------------------------------
-bool Model::loadTexture(const std::string& filename)
-{
-	isTextured = 1;
-
-	return Renderer::instance()->getMat("Default")->getAmbientTexture()->loadTexture(filename);
-}
 
 //Function that unloads texture file for model
 //------------------------------------------------------------------------------------------------------
@@ -881,10 +852,10 @@ void Model::draw()
 	Renderer::instance()->getShader(shader).Use();
 	//Renderer::instance()->getShader("Default").setUniform("skybox", 0);
 
-	Renderer::instance()->getShader(shader).setUniform("textureImage1", 0);
 	//Only if model is set to be textured bind the texture
 	if (isTextured == 1)
 	{
+		Renderer::instance()->getShader(shader).setUniform("textureImage1", 0);
 		glActiveTexture(GL_TEXTURE0);
 		mat->getAmbientTexture()->bind();
 
@@ -905,7 +876,7 @@ void Model::draw()
 		}
 	}
 
-	glClear(GL_DEPTH_BUFFER_BIT);
+
 	//Bind VAO and render everything!
 	glBindVertexArray(VAO);
 	glActiveTexture(GL_TEXTURE0);

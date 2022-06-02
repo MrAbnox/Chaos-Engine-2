@@ -23,3 +23,15 @@ glm::mat4* Transform::getModel()
 {
 	return &model;
 }
+
+void Transform::setPos(glm::vec3 pos)
+{
+	position = pos;
+	model = glm::translate(glm::mat4(1), position);
+}
+
+void Transform::translate(glm::vec3 pos)
+{
+	this->position += pos;
+	model = glm::translate(glm::mat4(1), position);
+}

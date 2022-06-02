@@ -12,7 +12,7 @@ void Scene::load()
 	//TODO: Read from file and pass string
 	;
 	addObjectToScene(Renderer::instance()->getObject("Camera"));
-	addObjectToScene(Renderer::instance()->getObject("Floor"));
+	addObjectToScene(Renderer::instance()->getObject("Nintendo"));
 
 	//TEMP
 	//createPrimitive(CUBE);

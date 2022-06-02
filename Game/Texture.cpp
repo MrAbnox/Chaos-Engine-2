@@ -4,9 +4,6 @@
 #include "../Utility/Debug.h"
 #include "../Application/Renderer.h"
 
-//initialize texture map at the very start of the app
-std::map<std::string, Texture>* Texture::s_textureMap = new std::map<std::string, Texture>;
-
 Texture::Texture()
 {
 	
@@ -91,7 +88,7 @@ GLuint Texture::loadTexture(const std::string& fName)
 
 	unsigned int textureID;
 	glGenTextures(1, &textureID);
-	
+	std::cout << "Gen ID: " << textureID << std::endl;
 	//Renderer::instance()->getShader("Default").Use();
 
 	int width, height, nrComponents;

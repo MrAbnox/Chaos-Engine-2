@@ -24,7 +24,7 @@ public:
 	void reset(); //Resets to default
 
 	//unsigned int loadCubemap(std::vector<std::string> faces);
-
+	void loadTexture(const std::string& filename);
 	void setAmbientTexture(std::shared_ptr<Texture> t);
 
 	std::shared_ptr<Shader> getShader();

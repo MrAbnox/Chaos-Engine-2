@@ -37,6 +37,7 @@ void Material::setShader(std::shared_ptr<Shader> shader)
 
 void Material::loadMaterialFile(std::string name)
 {
+
 }
 
 void Material::sendData()
@@ -92,6 +93,11 @@ void Material::sendData()
 
 void Material::reset()
 {
+}
+
+void Material::loadTexture(const std::string& filename)
+{
+	ambientTexture->loadTexture(filename);
 }
 
 void Material::setAmbientTexture(std::shared_ptr<Texture> t)

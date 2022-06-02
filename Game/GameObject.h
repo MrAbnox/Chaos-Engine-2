@@ -35,7 +35,9 @@ public:
 
 	void setIsEnabled(const bool& value);
 	void setShouldDestroy(bool& destroy);
+	void setName(const std::string& name);
 	
+	std::string getName() const;
 	bool getIsEnabled() const;
 	bool getShouldDestroy() const;
 	Transform* getTransform();

@@ -60,6 +60,9 @@ void Renderer::loadShaders()
 
 	std::shared_ptr<Shader> temp2 = std::make_shared<Shader>("shaders/skybox.vert", "shaders/skybox.frag");
 	loadedShaders["Skybox"] = temp2;
+
+	std::shared_ptr<Shader> temp3 = std::make_shared<Shader>("shaders/water.vert", "shaders/water.frag");
+	loadedShaders["Water"] = temp3;
 }
 
 void Renderer::loadMaterials()
@@ -74,6 +77,11 @@ void Renderer::loadMaterials()
 	mat2->setShader(loadedShaders["Default"]);
 	loadedMaterials["Default"] = mat2;
 	loadedMaterials["Default"]->setShader(loadedShaders["Default"]);
+
+	std::shared_ptr<Material> mat3 = std::make_shared<Material>(DEFAULT);
+	mat3->setShader(loadedShaders["Water"]);
+	loadedMaterials["Water"] = mat3;
+	loadedMaterials["Water"]->setShader(loadedShaders["Water"]);
 
 }
 
@@ -91,22 +99,34 @@ void Renderer::loadGameObjects()
 	temp->setMesh(mesh);
 	loadedGameObjects["Cube"] = obj1;
 
-	// Floor
+	// Nintendo Wii
 	//________________________________________________________________________________
 	std::shared_ptr<GameObject> obj2 = std::make_shared<GameObject>();
-	std::shared_ptr<Mesh> model = std::make_shared<Model>("Default", "car/GR_NintendoWii.obj", "car/GR_NintendoWii_Diffuse.png");
-	std::shared_ptr<GameObject> floor = std::make_shared<GameObject>();
+	std::shared_ptr<Mesh> model = std::make_shared<Model>("Default", "car/GR_NintendoWii.obj");
 	std::shared_ptr<MeshRenderer> temp2 = obj2->addComponent<MeshRenderer>();
-	temp2->setMaterial(loadedMaterials["Default"]);
 	temp2->setMesh(model);
+	temp2->setMaterial(loadedMaterials["Default"]);
 	model->setupMaterial(loadedMaterials["Default"]);
-	loadedGameObjects["Floor"] = obj2;
+	model->getMaterial()->loadTexture("car/GR_NintendoWii_Diffuse.png");
+	obj2->setName("Wii");
+	loadedGameObjects["Nintendo"] = obj2;
+
+	//Cube (Water)
+	//________________________________________________________________________________
+	std::shared_ptr<GameObject> obj3 = std::make_shared<GameObject>();
+	std::shared_ptr<Mesh> model2 = std::make_shared<Model>("Water", "car/cube.obj");
+	std::shared_ptr<MeshRenderer> temp3 = obj3->addComponent<MeshRenderer>();
+	temp3->setMaterial(loadedMaterials["Water"]);
+	temp3->setMesh(model2);
+	model2->setupMaterial(loadedMaterials["Water"]);
+	obj3->setName("Water");
+	loadedGameObjects["Water"] = obj3;
 
 	// Camera
 	//________________________________________________________________________________
-	std::shared_ptr<GameObject> obj3 = std::make_shared<GameObject>();
 	std::shared_ptr<GameObject> cam = std::make_shared<GameObject>();
 	cam->addComponent<Camera>();
+	cam->setName("Camera");
 	loadedGameObjects["Camera"] = cam;
 }
 

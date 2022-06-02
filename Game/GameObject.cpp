@@ -60,8 +60,8 @@ void GameObject::render()
 			if (cam != nullptr)
 			{
 				/*auto temp = getComponent<MeshRenderer>()->getMaterial().getShader();*/
-				//cam.get()->sendData(Renderer::instance()->getShader("Default"));
-				//cam.get()->sendData(Renderer::instance()->getShader("Skybox"));
+				cam.get()->sendData(Renderer::instance()->getShader("Water"));
+				cam.get()->sendData(Renderer::instance()->getShader("Skybox"));
 				cam.get()->sendData(Renderer::instance()->getShader("Default"));
 			}
 		}
@@ -87,6 +87,16 @@ void GameObject::setIsEnabled(const bool& value)
 void GameObject::setShouldDestroy(bool& destroy)
 {
 	shouldDestroy = destroy;
+}
+
+void GameObject::setName(const std::string& name)
+{
+	this->name = name;
+}
+
+std::string GameObject::getName() const
+{
+	return name;
 }
 
 bool GameObject::getIsEnabled() const

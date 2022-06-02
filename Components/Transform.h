@@ -21,13 +21,13 @@ public:
 
 	//glm::vec3 getPos();
 	glm::mat4* getModel();
-	void setPos();
+	void setPos(glm::vec3 pos);
 	void setRot();
 	void setScale();
 
 public:
 
-	void translate();
+	void translate(glm::vec3 pos);
 	void rotate();
 	void scale();
 
@@ -48,6 +48,7 @@ private:
 
 	bool isDirty;
 
+	glm::vec3 position;
 	glm::vec3 up;
 	glm::vec3 forward;
 	glm::mat4 model;

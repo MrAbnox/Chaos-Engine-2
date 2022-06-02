@@ -23,7 +23,7 @@ class Model : public Mesh
 public:
 
 	Model();
-	Model(std::string shader, std::string modelPath, std::string texturePath);
+	Model(std::string shader, std::string modelPath);
 
 public:
 
@@ -32,7 +32,6 @@ public:
 
 	bool loadObj(const std::string& filepath);
 	bool loadModel(const std::string& filename);
-	bool loadTexture(const std::string& filename);
 	//void UnloadTexture(const std::string textureID);
 	//void LoadNormalMap(std::string filepath);		  
 	//void LoadHeightMap(std::string filepath);		  
